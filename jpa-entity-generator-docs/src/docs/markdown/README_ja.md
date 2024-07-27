@@ -25,7 +25,7 @@ java -jar jpa-entity-generator-core-0.8-SNAPSHOT-all-deps.jar
 
 `jeg-config.json`の設定内容は以下の通りです。
 
-```json
+```js
 {
   // JDBC connection string to the target DB for generating JPA Entity
   "jdbcUrl": "jdbc:postgresql://localhost:5438/postgres",

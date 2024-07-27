@@ -25,7 +25,7 @@ Now, place a configuration file ` jeg-config. json ` in the directory where you 
 
 The configuration of ` jeg-config. json ` is as follows:
 
-```json
+```js
 {
   // JDBC connection string to the target DB for generating JPA Entity
   "jdbcUrl": "jdbc:postgresql://localhost:5438/postgres",
