@@ -7,7 +7,7 @@ jpa-entity-generator は、DB のテーブル定義を読み取り、それを�
 以下のコマンドを実行し、jpa-entity-generator の実行可能な jar を生成します。
 
 ```sh
-git clone http://sitoolkit-dev.monocrea.co.jp/gitbucket/git/project-au-lait/jpa-entity-generator.git
+git clone https://github.com/project-au-lait/jpa-entity-generator.git
 cd jpa-entity-generator
 
 ./mvnw -f jpa-entity-generator-core clean package -P release
@@ -118,7 +118,7 @@ MAVEN_OPTS=--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-
 以下のコマンドを実行し、開発環境を構築し全てのテストが構築した環境上でパスすることを確認します。
 
 ```sh
-git clone http://sitoolkit-dev.monocrea.co.jp/gitbucket/git/project-au-lait/jpa-entity-generator.git
+git clone https://github.com/project-au-lait/jpa-entity-generator.git
 cd jpa-entity-generator
 
 ./mvnw -N -D ant.target=setup-db
@@ -126,4 +126,4 @@ cd jpa-entity-generator
 ./mvnw -N -D ant.target=test
 ```
 
-開発に際しては[アーキテクチャ仕様書](http://sitoolkit-dev.monocrea.co.jp/gitbucket/project-au-lait/jpa-entity-generator/pages/)を一読してください。
+開発に際しては[アーキテクチャ仕様書](https://project-au-lait.github.io/jpa-entity-generator/)を一読してください。
