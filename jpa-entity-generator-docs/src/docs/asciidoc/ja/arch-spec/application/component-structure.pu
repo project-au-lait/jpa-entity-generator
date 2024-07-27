@@ -1,0 +1,10 @@
+component Main
+component Application
+component Reader
+component Processor
+component Writer
+
+Main -> Application
+Application -up-> Reader : ↓InputModel
+Application -> Processor : InputModel→\n←OutputModel
+Application --> Writer: ↓OutputModel

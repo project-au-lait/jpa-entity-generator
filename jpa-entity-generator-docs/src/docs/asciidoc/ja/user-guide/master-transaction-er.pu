@@ -1,0 +1,14 @@
+hide circle
+
+entity master {
+  id
+  --
+}
+
+
+entity transaction {
+  id
+  --
+  master_id FK (master.id)
+}
+transaction }|-left-|| master

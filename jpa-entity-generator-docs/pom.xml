@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- The Basics -->
+  <artifactId>jpa-entity-generator-docs</artifactId>
+
+  <build>
+    <defaultGoal>clean asciidoctor:process-asciidoc process-resources</defaultGoal>
+
+    <resources>
+      <resource>
+        <directory>${project.build.directory}/generated-docs</directory>
+        <includes>
+          <include>**/index.html</include>
+        </includes>
+        <targetPath>${project.basedir}/../docs</targetPath>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>2.2.4</version>
+
+        <dependencies>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj-diagram</artifactId>
+            <version>2.2.13</version>
+          </dependency>
+        </dependencies>
+
+        <configuration>
+          <attributes>
+            <icons>font</icons>
+            <imagesdir>images</imagesdir>
+            <nofooter>true</nofooter>
+            <source-highlighter>highlight.js</source-highlighter>
+            <toc>left</toc>
+            <tocLevels>4</tocLevels>
+          </attributes>
+          <doctype>book</doctype>
+          <embedAssets>true</embedAssets>
+          <!-- <outputDirectory>../docs</outputDirectory> -->
+          <preserveDirectories>true</preserveDirectories>
+          <requires>
+            <require>asciidoctor-diagram</require>
+          </requires>
+          <relativeBaseDir>true</relativeBaseDir>
+          <sourceDocumentExtensions>
+            <sourceDocumentExtension>adoc</sourceDocumentExtension>
+          </sourceDocumentExtensions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <parent>
+    <groupId>dev.aulait.jeg</groupId>
+    <artifactId>jpa-entity-generator</artifactId>
+    <version>0.8-SNAPSHOT</version>
+  </parent>
+
+</project>

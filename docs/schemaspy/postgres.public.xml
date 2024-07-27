@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?><database name="postgres" schema="public" type="PostgreSQL - 16.3 (Debian 16.3-1.pgdg120+1)">
+   <tables>
+      <table name="child" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <parent column="id" foreignKey="child_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="parent"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="seq_no" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="3" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="4" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="5" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="6" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="7" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <primaryKey column="seq_no" sequenceNumberInPK="2"/>
+         <index name="child_pk" unique="true">
+            <column ascending="true" name="id"/>
+            <column ascending="true" name="seq_no"/>
+         </index>
+      </table>
+      <table name="composite_main" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id_1" nullable="false" remarks="" size="3" type="bpchar" typeCode="1">
+            <child column="composite_main_id_1" foreignKey="composite_one_to_many_composite_main_id_1_composite_main_i_fkey" implied="false" onDeleteCascade="false" schema="public" table="composite_one_to_many"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="id_2" nullable="false" remarks="" size="3" type="bpchar" typeCode="1">
+            <child column="composite_main_id_2" foreignKey="composite_one_to_many_composite_main_id_1_composite_main_i_fkey" implied="false" onDeleteCascade="false" schema="public" table="composite_one_to_many"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="3" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="4" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="5" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="6" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="7" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id_1" sequenceNumberInPK="1"/>
+         <primaryKey column="id_2" sequenceNumberInPK="2"/>
+         <index name="composite_id_pk" unique="true">
+            <column ascending="true" name="id_1"/>
+            <column ascending="true" name="id_2"/>
+         </index>
+      </table>
+      <table name="composite_one_to_many" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="3" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="composite_main_id_1" nullable="true" remarks="" size="3" type="bpchar" typeCode="1">
+            <parent column="id_1" foreignKey="composite_one_to_many_composite_main_id_1_composite_main_i_fkey" implied="false" onDeleteCascade="false" schema="public" table="composite_main"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="composite_main_id_2" nullable="true" remarks="" size="3" type="bpchar" typeCode="1">
+            <parent column="id_2" foreignKey="composite_one_to_many_composite_main_id_1_composite_main_i_fkey" implied="false" onDeleteCascade="false" schema="public" table="composite_main"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="4" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="5" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="6" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="7" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="8" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="composite_one_to_many_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="flyway_schema_history" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="installed_rank" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="version" nullable="true" remarks="" size="50" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="description" nullable="false" remarks="" size="200" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="type" nullable="false" remarks="" size="20" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="script" nullable="false" remarks="" size="1000" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="checksum" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="installed_by" nullable="false" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="7" name="installed_on" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="execution_time" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="success" nullable="false" remarks="" size="1" type="bool" typeCode="-7"/>
+         <primaryKey column="installed_rank" sequenceNumberInPK="1"/>
+         <index name="flyway_schema_history_pk" unique="true">
+            <column ascending="true" name="installed_rank"/>
+         </index>
+         <index name="flyway_schema_history_s_idx" unique="false">
+            <column ascending="true" name="success"/>
+         </index>
+      </table>
+      <table name="left" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <child column="left_id" foreignKey="left_right_rel_left_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="left_right_rel"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="2" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="3" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="4" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="5" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="left_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="left_right_rel" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="left_id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <parent column="id" foreignKey="left_right_rel_left_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="left"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="right_id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <parent column="id" foreignKey="left_right_rel_right_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="right"/>
+         </column>
+         <primaryKey column="left_id" sequenceNumberInPK="1"/>
+         <primaryKey column="right_id" sequenceNumberInPK="2"/>
+         <index name="left_right__rel_pk" unique="true">
+            <column ascending="true" name="left_id"/>
+            <column ascending="true" name="right_id"/>
+         </index>
+      </table>
+      <table name="main" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <child column="id" foreignKey="main_child_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="main_child"/>
+            <child column="main_id" foreignKey="main_many_to_many_rel_main_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="main_many_to_many_rel"/>
+            <child column="main_id" foreignKey="one_to_many_main_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="one_to_many"/>
+            <child column="id" foreignKey="one_to_one_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="one_to_one"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="col_char" nullable="true" remarks="" size="1" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="col_date" nullable="true" remarks="" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="col_time" nullable="true" remarks="" size="15" type="time" typeCode="92"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="col_timestamp" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="col_jsonb" nullable="true" remarks="" size="2147483647" type="jsonb" typeCode="1111"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="sort_key" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="8" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="9" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="10" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="11" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="12" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="main_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="main_child" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <parent column="id" foreignKey="main_child_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="main"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="seq_no" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="2" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="3" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="4" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="5" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <primaryKey column="seq_no" sequenceNumberInPK="2"/>
+         <index name="main_child_pk" unique="true">
+            <column ascending="true" name="id"/>
+            <column ascending="true" name="seq_no"/>
+         </index>
+      </table>
+      <table name="main_many_to_many_rel" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="main_id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <parent column="id" foreignKey="main_many_to_many_rel_main_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="main"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="many_to_many_id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <parent column="id" foreignKey="main_many_to_many_rel_many_to_many_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="many_to_many"/>
+         </column>
+         <primaryKey column="main_id" sequenceNumberInPK="1"/>
+         <primaryKey column="many_to_many_id" sequenceNumberInPK="2"/>
+         <index name="main_many_to_many_rel_pk" unique="true">
+            <column ascending="true" name="main_id"/>
+            <column ascending="true" name="many_to_many_id"/>
+         </index>
+      </table>
+      <table name="many_to_many" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <child column="many_to_many_id" foreignKey="main_many_to_many_rel_many_to_many_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="main_many_to_many_rel"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="2" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="3" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="4" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="5" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="many_to_many_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="master" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <child column="master_id" foreignKey="transaction_master_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="transaction"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="2" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="3" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="4" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="5" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="master_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="one_to_many" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="main_id" nullable="true" remarks="" size="36" type="bpchar" typeCode="1">
+            <parent column="id" foreignKey="one_to_many_main_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="main"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="3" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="4" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="5" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="6" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="7" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="one_to_many_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="one_to_one" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <parent column="id" foreignKey="one_to_one_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="main"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="2" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="3" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="4" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="5" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="one_to_one_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="parent" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <child column="id" foreignKey="child_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="child"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="2" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="3" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="4" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="5" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="parent_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="right" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <child column="right_id" foreignKey="left_right_rel_right_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="left_right_rel"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="2" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="3" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="4" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="5" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="right_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="self_ref" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1">
+            <child column="self_id" foreignKey="self_ref_self_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="self_ref"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="self_id" nullable="true" remarks="" size="36" type="bpchar" typeCode="1">
+            <parent column="id" foreignKey="self_ref_self_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="self_ref"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="3" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="4" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="5" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="6" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="7" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="self_ref_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="transaction" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="master_id" nullable="true" remarks="" size="36" type="bpchar" typeCode="1">
+            <parent column="id" foreignKey="transaction_master_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="master"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="name" nullable="true" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="3" name="created_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="4" name="created_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="5" name="updated_date" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="'system'::bpchar" digits="0" id="6" name="updated_by" nullable="false" remarks="" size="36" type="bpchar" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="7" name="version" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="transaction_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+   </tables>
+</database>

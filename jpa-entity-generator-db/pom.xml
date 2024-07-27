@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- The Basics -->
+  <artifactId>jpa-entity-generator-db</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-maven-plugin</artifactId>
+      <version>10.9.1</version>
+    </dependency>
+  </dependencies>
+
+  <parent>
+    <groupId>dev.aulait.jeg</groupId>
+    <artifactId>jpa-entity-generator</artifactId>
+    <version>0.8-SNAPSHOT</version>
+  </parent>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>.env</include>
+          <include>schemaspy.properties</include>
+        </includes>
+        <targetPath>${project.basedir}</targetPath>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>flyway.conf</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.sql</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>10.9.1</version>
+        <configuration>
+          <configFiles>${project.build.outputDirectory}/flyway.conf</configFiles>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>10.9.0</version>
+          </dependency>
+          <dependency>
+            <groupId>${db.jdbc.groupId}</groupId>
+            <artifactId>${db.jdbc.artifactId}</artifactId>
+            <version>${db.jdbc.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>init</id>
+
+      <properties>
+        <artifact>${db.jdbc.groupId}:${db.jdbc.artifactId}:${db.jdbc.version}</artifact>
+      </properties>
+
+      <build>
+        <defaultGoal>dependency:copy</defaultGoal>
+      </build>
+    </profile>
+  </profiles>
+</project>

@@ -1,0 +1,27 @@
+== データアーキテクチャ
+
+=== 物理データモデル
+
+jpa-entity-generatorプロジェクトはテスト用DBを内包している。
+開発者は動作確認・テストの際にこのテスト用DBをリバースエンジニアリングしてJPA Entityを生成する。
+
+テスト用DBのデータモデルを以下に示す。
+
+.テスト用DBの物理データモデル
+++++
+<img src="../../schemaspy/diagrams/summary/relationships.real.compact.png"/>
+++++
+
+テスト用DBにはJPA Entityの生成仕様を以下の観点でテストするためのテーブルが定義されている。
+
+* データ型
+** カラムのDBのデータ型がどのJavaのデータ型にマッピングされるか
+* 単独主キー
+** テーブルが単独主キーを持つ場合に、IDフィールドを正しく持つJPA Entityが生成されるか
+* 複合主キー
+** テーブルが複合主キーを持つ場合に、EmbeddedIdクラスとそのフィールドを正しく持つJPA Entityが生成されるか
+* リレーション
+** テーブル間のリレーションを正しく持つJPA Entityが生成されるか(OneToOne、OneToMany、ManyToOne、ManyToMany)
+
+
+テスト用DBの詳細な構成は link:../../schemaspy/index.html[テスト用DBの構成,window=datamodel_detail] を参照。

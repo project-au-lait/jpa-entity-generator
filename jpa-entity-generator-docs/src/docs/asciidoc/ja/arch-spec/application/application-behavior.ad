@@ -1,0 +1,25 @@
+=== アプリケーションの挙動
+
+jpa-entity-generatorはバッチアプリケーションである。
+jpa-entity-generatorを実行するとDBからメタデータ(テーブル定義、カラム定義、キー情報等)を読み取り、それらにアクセスするためのJPA Entityのjavaソースファイルを生成する。
+jpa-entity-generatorが提供する実行形態は、javaコマンド(Uber jar)とMaven Pluginである。
+
+jpa-entity-generatorの挙動を以下に示す。
+
+.アプリケーションの挙動
+[plantuml]
+----
+include::application-behavior.pu[]
+----
+
+. 利用者がjpa-entity-generatorを実行する。
+. jpa-entity-generatorは設定ファイルを読み込む。利用者は予め設定ファイルに、DBへの接続情報やJPA Entityの生成に関する挙動を設定を定義する。
+. jpa-entity-generatorはDBからメタデータを読み込む。
+. jpa-entity-generatorはメタデータを元にJPA Entityのjavaソースファイルを出力する。
+
+jpa-entity-generatorが使用する主要なJavaの機能・サードパーティー製ライブラリには以下のものがある。
+
+* https://docs.oracle.com/javase/jp/17/docs/api/java.sql/java/sql/DatabaseMetaData.html[JDBC DatabaseMetaData]
+** DBのメタデータの読み取りにJDBCのAPIを使用している。
+* https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf_ja.html#%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E6%A7%8B%E6%96%87[Thymeleaf]
+** JPA Entityクラスのjavaソースコードを生成するのにテンプレートエンジンとしてThymeleafを使用している。

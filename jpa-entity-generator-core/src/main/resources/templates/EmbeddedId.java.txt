@@ -1,0 +1,15 @@
+package [(${root.pkg})];
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import lombok.Data;
+
+@Data
+@Embeddable
+public class [(${root.name})] implements java.io.Serializable {
+[# th:each="field : ${root.fields}"]
+  [# th:if="${field.isId}"]@Id[/]
+  @Column(name="[(${field.columnName})]")
+  private [(${field.type})] [(${field.name})];
+[/]
+}

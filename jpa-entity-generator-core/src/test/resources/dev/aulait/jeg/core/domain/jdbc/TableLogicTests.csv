@@ -1,0 +1,7 @@
+oneTableName,anotherTableName,oneToManyExpected,manyToOneExpected,oneToOneExpected,relationTableExpected,parentChildExpected,firstTableInRelationExpected
+main,one_to_one,false,false,true,false,false,false
+main,one_to_many,true,false,false,false,false,false
+one_to_many,main,false,true,false,false,false,false
+main,main_child,true,false,false,false,true,false
+left,left_right_rel,false,false,false,true,false,true
+right,left_right_rel,false,false,false,true,false,false

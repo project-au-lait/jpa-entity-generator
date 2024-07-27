@@ -1,0 +1,5 @@
+= アーキテクチャ仕様書
+
+include::application/index.ad[]
+
+include::data/index.ad[]

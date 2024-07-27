@@ -1,0 +1,13 @@
+hide circle
+
+entity parent {
+  id
+  --
+}
+
+entity child {
+  id FK (parent.id)
+  seq_no
+  --
+}
+child }o-left-|| parent

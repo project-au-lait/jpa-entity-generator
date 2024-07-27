@@ -1,0 +1,17 @@
+main
+composite_main
+left
+many_to_many
+master
+parent
+right
+self_ref
+child
+main_child
+one_to_many
+one_to_one
+transaction
+composite_one_to_many
+left_right_rel
+main_many_to_many_rel
+flyway_schema_history

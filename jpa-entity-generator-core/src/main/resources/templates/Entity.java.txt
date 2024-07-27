@@ -1,0 +1,107 @@
+[# th:if="${root.pkg}"]package [(${root.pkg})];[/]
+
+[# th:each="import : ${root.imports}"]
+import [(${import})];
+[/]
+
+@Getter
+@Setter
+@Entity
+@Table(name="[(${root.tableName})]"
+)
+public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.baseClass})][/] implements java.io.Serializable {
+
+[# th:if="${root.embeddedId}"]
+  @EmbeddedId
+  private [(${root.embeddedId.name})] id;
+[/]
+
+[# th:each="field : ${root.fields}"]
+  [# th:if="${field.isId}"]@Id[/]
+  @Column(name="[(${field.columnName})]")
+  [# th:each="annotation : ${field.annotations}"]
+  @[(${annotation.type})]([# th:each="attribute : ${annotation.attributes.entrySet()}"][(${attribute.key})] = [(${attribute.value})][/])
+  [/]
+  private [(${field.type})] [(${field.name})];
+[/]
+
+[# th:each="oneToOne : ${root.oneToOnes}"]
+  @OneToOne(fetch=FetchType.LAZY[# th:if="${oneToOne.mappedBy}"], mappedBy="[(${oneToOne.mappedBy})]"[/]
+    [# th:each="cascade, stat : ${oneToOne.cascades}"]
+      [# th:if="${stat.first}"], cascade={[/]
+      CascadeType.[(${cascade})]
+      [# th:unless="${stat.last}"],[/]
+      [# th:if="${stat.last}"]}[/]
+    [/]
+  )
+  [# th:unless="${oneToOne.mappedBy}"]@PrimaryKeyJoinColumn[/]
+  [# th:each="annotation : ${oneToOne.annotations}"]
+  @[(${annotation.type})]([# th:each="attribute : ${annotation.attributes.entrySet()}"][(${attribute.key})] = [(${attribute.value})][/])
+  [/]
+  private [(${oneToOne.type})] [(${oneToOne.fieldName})];
+[/]
+
+[# th:each="oneToMany : ${root.oneToManies}"]
+  @OneToMany(fetch=FetchType.LAZY
+    [# th:each="cascade, stat : ${oneToMany.cascades}"]
+      [# th:if="${stat.first}"], cascade={[/]
+      CascadeType.[(${cascade})]
+      [# th:unless="${stat.last}"],[/]
+      [# th:if="${stat.last}"]}[/]
+    [/]
+  )
+  [# th:if="${oneToMany.joinColumns.size() == 1}"]
+      /*[- TODO 暫定的にOneToManyのinsertable、updatableをfalseに固定 -]*/
+      @JoinColumn(name="[(${oneToMany.joinColumns.get(0).name})]", insertable = false, updatable = false)
+  [/]
+  [# th:if="${oneToMany.joinColumns.size() > 1}"]
+    @JoinColumns({
+      [# th:each="joinColumn, stat : ${oneToMany.joinColumns}"]
+        @JoinColumn(name="[(${joinColumn.name})]")[# th:unless="${stat.last}"],[/]
+      [/]
+    })
+  [/]
+  [# th:each="annotation : ${oneToMany.annotations}"]
+  @[(${annotation.type})]([# th:each="attribute : ${annotation.attributes.entrySet()}"][(${attribute.key})] = [(${attribute.value})][/])
+  [/]
+  private Set<[(${oneToMany.type})]> [(${oneToMany.fieldName})] = new HashSet<>();
+[/]
+
+[# th:each="manyToOne : ${root.manyToOnes}"]
+  @ManyToOne(fetch=FetchType.LAZY)
+  [# th:if="${manyToOne.joinColumns.size() == 1}"]
+      @JoinColumn(name="[(${manyToOne.joinColumns.get(0).name})]")
+  [/]
+  [# th:if="${manyToOne.joinColumns.size() > 1}"]
+    @JoinColumns({
+      [# th:each="joinColumn, stat : ${manyToOne.joinColumns}"]
+        @JoinColumn(name="[(${joinColumn.name})]")[# th:unless="${stat.last}"],[/]
+      [/]
+    })
+  [/]
+  [# th:each="annotation : ${manyToOne.annotations}"]
+  @[(${annotation.type})]([# th:each="attribute : ${annotation.attributes.entrySet()}"][(${attribute.key})] = [(${attribute.value})][/])
+  [/]
+  private [(${manyToOne.type})] [(${manyToOne.fieldName})];
+[/]
+
+[# th:each="manyToMany : ${root.manyToManies}"]
+  @ManyToMany(fetch=FetchType.LAZY)
+      @JoinTable(name="[(${manyToMany.joinTable})]",
+         joinColumns = { 
+          [# th:each="joinColumn : ${manyToMany.joinColumns}"]
+            @JoinColumn(name="[(${joinColumn.name})]", nullable=false, updatable=false)
+          [/]
+        },
+        inverseJoinColumns = { 
+          [# th:each="inverseJoinColumn : ${manyToMany.inverseJoinColumns}"]
+            @JoinColumn(name="[(${inverseJoinColumn.name})]", nullable=false, updatable=false)
+          [/]
+        })
+  [# th:each="annotation : ${manyToMany.annotations}"]
+  @[(${annotation.type})]([# th:each="attribute : ${annotation.attributes.entrySet()}"][(${attribute.key})] = [(${attribute.value})][/])
+  [/]
+  private Set<[(${manyToMany.type})]> [(${manyToMany.fieldName})] = new HashSet<>();;
+[/]
+
+}

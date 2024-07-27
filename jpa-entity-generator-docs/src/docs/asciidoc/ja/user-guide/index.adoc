@@ -1,0 +1,131 @@
+= User Guide
+
+== リレーションの自動生成
+
+JPAでは、@OneToMany、@ManyToMany等のアノテーションを使用することでEntity間の関連を自動的に解決する事ができます。
+jpa-entity-generatorは、Entity間のリレーションをDBのテーブル間の外部キー情報から自動的に生成します。
+ここではその仕様を説明します。
+
+JPAは単方向・双方向の関連をサポートしますが、jpa-entity-generatorが生成する関連は単方向のみです。
+
+=== マスター・トランザクション関係
+
+2つのテーブルがマスターとトランザクションの
+
+- 1つのテーブル(transaction)が別のテーブル(master)に対し外部キーを持つ
+- 外部キーの参照元のカラム(transaction.master_id)はテーブルの主キーではない
+
+.マスター・トランザクション関係のテーブル
+[plantuml]
+----
+include::master-transaction-er.pu[]
+----
+
+
+.マスター・トランザクション関係のテーブルから生成されるEntity
+[source,java]
+----
+@Entity
+@Table(name = "master")
+public class MasterEntity {
+
+  @Id
+  private String id;
+
+}
+
+@Entity
+@Table(name = "transaction")
+public class TransactionEntity {
+
+  @Id
+  private String id;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "id", insertable = false, updatable = false)
+  private MasterEntity master;
+
+}
+
+----
+
+=== 親子関係
+
+
+- 1つのテーブル(child)が別のテーブル(parent)に対し外部キーを持つ
+- 外部キーを持つカラム(child.id)はテーブルの主キーの一部である
+
+
+.親子関係のテーブル
+[plantuml]
+----
+include::parent-child-er.pu[]
+----
+
+
+.親子関係のテーブルから生成されるEntity
+[source,java]
+----
+@Entity
+@Table(name = "parent")
+public class ParentEntity {
+
+  @Id
+  private String id;
+
+  @OneToMany(fetch = FetchType.LAZY)
+  @JoinColumn(name = "id", insertable = false, updatable = false)
+  private Set<ChildEntity> children = new HashSet<>();
+}
+
+@Entity
+@Table(name = "child")
+public class ChildEntity {
+
+  @Id
+  private String id;
+
+  @Column(name = "seq_no")
+  private int seqNo;
+}
+----
+
+=== 多対多
+
+
+
+[plantuml]
+----
+include::many-to-many-er.pu[]
+----
+
+
+[source,java]
+----
+@Entity
+@Table(name = "left")
+public class LeftEntity {
+
+  @Id
+  private String id;
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+      name = "left_right_rel",
+      joinColumns = {@JoinColumn(name = "left_id", nullable = false, updatable = false)},
+      inverseJoinColumns = {
+        @JoinColumn(name = "right_id", nullable = false, updatable = false)
+  })
+  private Set<RightEntity> rights = new HashSet<>();
+}
+
+
+@Entity
+@Table(name = "right")
+public class RightEntity {
+
+  @Id
+  private String id;
+
+}
+----

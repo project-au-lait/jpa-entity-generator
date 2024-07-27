@@ -1,0 +1,6 @@
+
+class TableModel {
+ List<ColumnModel> columns
+
+ ColumnModel findColumnByName(String columnName)
+}

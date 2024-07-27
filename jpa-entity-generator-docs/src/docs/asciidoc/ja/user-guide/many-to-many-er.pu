@@ -1,0 +1,21 @@
+hide circle
+
+entity left {
+  id
+  --
+}
+
+
+entity right {
+  id
+  --
+}
+
+
+entity left_right_rel {
+  left_id
+  right_id
+  --
+}
+left_right_rel }|-left-|| left
+left_right_rel }|-right-|| right

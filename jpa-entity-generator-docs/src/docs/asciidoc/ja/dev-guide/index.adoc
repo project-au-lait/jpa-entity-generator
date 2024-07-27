@@ -1,0 +1,39 @@
+= 開発ガイド
+
+== 開発環境構築手順
+
+=== Windows
+
+// TODO 記載
+
+=== macOS
+
+以下のコマンドを実行し、必要なソフトウェアをインストールします。
+
+[source,sh]
+----
+brew install --cask openjdk@17
+brew install --cask docker
+brew install --cask visual-studio-code
+----
+
+=== VSCode
+
+以下のコマンドを実行し、必要な拡張機能をインストールします。
+
+[source,sh]
+----
+# Java Development
+code --install-extension vscjava.vscode-java-pack
+code --install-extension vscjava.vscode-lombok
+
+# Lint and Format
+code --install-extension sonarsource.code sonarlint-vscode
+code --install-extension JoseVSeb.google-java-format-for-vs-code
+code --install-extension redhat.vscode-xml
+code --install-extension mtxr.sqltools
+
+# Document Writing
+code --install-extension asciidoctor.asciidoctor-vscode
+code --install-extension jebbs.plantuml
+----

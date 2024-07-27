@@ -1,0 +1,5 @@
+== アプリケーションアーキテクチャ
+
+include::application-behavior.ad[]
+
+include::component-structure.ad[]

@@ -1,0 +1,5 @@
+= JPA-ENTITY-GENERATOR
+
+- link:en/index.html[English]
+- link:ja/index.html[日本語]
+
