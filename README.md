@@ -13,17 +13,17 @@ cd jpa-entity-generator
 ./mvnw -f jpa-entity-generator-core clean package -P release
 ```
 
-The above command will generate ` jpa-entity-generator-core-0. 8-SNAPSHOT-all-deps. jar ` under the ` jpa-entity-generator-core/target ` directory.
+The above command will generate ` jpa-entity-generator-core-0.8-all-deps.jar ` under the ` jpa-entity-generator-core/target ` directory.
 
-` jpa-entity-generator-core-0. 8-SNAPSHOT-all-deps. jar ` can be run with the following java command:
+` jpa-entity-generator-core-0.8-all-deps.jar ` can be run with the following java command:
 
 ```sh
-java -jar jpa-entity-generator-core-0.8-SNAPSHOT-all-deps.jar
+java -jar jpa-entity-generator-core-0.8-all-deps.jar
 ```
 
-Now, place a configuration file ` jeg-config. json ` in the directory where you want to run the java command to control the reverse engineering behavior.
+Now, place a configuration file ` jeg-config.json ` in the directory where you want to run the java command to control the reverse engineering behavior.
 
-The configuration of ` jeg-config. json ` is as follows:
+The configuration of ` jeg-config.json ` is as follows:
 
 ```js
 {
@@ -80,7 +80,7 @@ The configuration of ` jeg-config. json ` is as follows:
 If you want to apply [google-java-format](https://github.com/google/google-java-format) to the java source files of the JPA Entity you want to generate, run jpa-entity-generator with the following command:
 
 ```sh
-java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar ../jpa-entity-generator-core-0.8-SNAPSHOT-all-deps.jar 
+java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar ../jpa-entity-generator-core-0.8-all-deps.jar 
 ```
 
 Reference: https://github.com/google/google-java-format?tab=readme-ov-file#as-a-library
@@ -96,7 +96,7 @@ pom.xml
   <plugin>
     <groupId>dev.aulait.jeg</groupId>
     <artifactId>jpa-entity-generator-maven-plugin</artifactId>
-    <version>0.8-SNAPSHOT</version>
+    <version>0.8</version>
   </plugin>
 </plugins>
 ```
