@@ -73,6 +73,7 @@
   <modules>
     <module>jpa-entity-generator-core</module>
     <module>jpa-entity-generator-db</module>
+    <module>jpa-entity-generator-docs</module>
     <module>jpa-entity-generator-maven-plugin</module>
   </modules>
 
