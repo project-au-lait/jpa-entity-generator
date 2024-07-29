@@ -7,7 +7,7 @@
   <!-- The Basics -->
   <groupId>dev.aulait.jeg</groupId>
   <artifactId>jpa-entity-generator</artifactId>
-  <version>0.8-SNAPSHOT</version>
+  <version>0.8</version>
   <packaging>pom</packaging>
 
   <dependencies>
@@ -73,6 +73,7 @@
   <modules>
     <module>jpa-entity-generator-core</module>
     <module>jpa-entity-generator-db</module>
+    <module>jpa-entity-generator-docs</module>
     <module>jpa-entity-generator-maven-plugin</module>
   </modules>
 
@@ -175,7 +176,7 @@
   <!-- More Project Information -->
   <name>jpa-entity-generator</name>
   <description>JPA Entity Generator</description>
-  <url>https://project-au-lait.dev</url>
+  <url>https://aulait.dev</url>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -220,6 +221,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
+            <version>3.3.1</version>
             <executions>
               <execution>
                 <id>attach-sources</id>
@@ -233,6 +235,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.8.0</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -256,6 +259,12 @@
                 </goals>
               </execution>
             </executions>
+            <configuration>
+              <gpgArguments>
+                <arg>--pinentry-mode</arg>
+                <arg>loopback</arg>
+              </gpgArguments>
+            </configuration>
           </plugin>
         </plugins>
       </build>
@@ -274,6 +283,7 @@
             <configuration>
               <publishingServerId>central</publishingServerId>
               <autoPublish>true</autoPublish>
+              <excludeArtifacts>jpa-entity-generator-docs,jpa-entity-generator-db</excludeArtifacts>
             </configuration>
           </plugin>
         </plugins>

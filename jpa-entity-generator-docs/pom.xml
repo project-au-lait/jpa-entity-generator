@@ -6,6 +6,10 @@
   <!-- The Basics -->
   <artifactId>jpa-entity-generator-docs</artifactId>
 
+  <properties>
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
+
   <build>
     <defaultGoal>clean asciidoctor:process-asciidoc process-resources</defaultGoal>
 
@@ -61,7 +65,7 @@
   <parent>
     <groupId>dev.aulait.jeg</groupId>
     <artifactId>jpa-entity-generator</artifactId>
-    <version>0.8-SNAPSHOT</version>
+    <version>0.8</version>
   </parent>
 
 </project>

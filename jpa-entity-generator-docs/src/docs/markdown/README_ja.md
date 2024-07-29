@@ -13,12 +13,12 @@ cd jpa-entity-generator
 ./mvnw -f jpa-entity-generator-core clean package -P release
 ```
 
-以上のコマンドを実行すると、`jpa-entity-generator-core/target`ディレクトリ以下に`jpa-entity-generator-core-0.8-SNAPSHOT-all-deps.jar`が生成されます。
+以上のコマンドを実行すると、`jpa-entity-generator-core/target`ディレクトリ以下に`jpa-entity-generator-core-0.8-all-deps.jar`が生成されます。
 
-`jpa-entity-generator-core-0.8-SNAPSHOT-all-deps.jar`は以下の java コマンドで実行可能です。
+`jpa-entity-generator-core-0.8-all-deps.jar`は以下の java コマンドで実行可能です。
 
 ```sh
-java -jar jpa-entity-generator-core-0.8-SNAPSHOT-all-deps.jar
+java -jar jpa-entity-generator-core-0.8-all-deps.jar
 ```
 
 ここで、java コマンドを実行するディレクトリにはリバースエンジニアリングの挙動を制御する設定ファイル`jeg-config.json`を配置します。
@@ -80,7 +80,7 @@ java -jar jpa-entity-generator-core-0.8-SNAPSHOT-all-deps.jar
 生成するJPA Entityのjavaソースファイルに　[google-java-format](https://github.com/google/google-java-format) を適用する場合は、以下のコマンドでjpa-entity-generatorを実行します。
 
 ```sh
-java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar ../jpa-entity-generator-core-0.8-SNAPSHOT-all-deps.jar 
+java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar ../jpa-entity-generator-core-0.8-all-deps.jar 
 ```
 
 参考: https://github.com/google/google-java-format?tab=readme-ov-file#as-a-library
@@ -96,7 +96,7 @@ pom.xml
   <plugin>
     <groupId>dev.aulait.jeg</groupId>
     <artifactId>jpa-entity-generator-maven-plugin</artifactId>
-    <version>0.8-SNAPSHOT</version>
+    <version>0.8</version>
   </plugin>
 </plugins>
 ```

@@ -154,4 +154,33 @@
       </exec>
   </target>
 
+
+  <target name="set-version">
+    <property name="version" value="" />
+    <fail
+      if:blank="${version}" 
+      message="Please specify version in the system properties. (e.g. mvnw -Dant.target=set-version -Dversion=1.x.x"
+    />
+
+    <exec executable="${mvn.cmd}" dir="${basedir}">
+      <arg line="versions:set -DnewVersion=${version} -DgenerateBackupPoms=false" />
+    </exec>
+
+    <if>
+      <not>
+        <matches string="${version}" pattern="^.*-SNAPSHOT$" />
+      </not>
+      <then>
+        <replaceregexp flags="g">
+          <regexp pattern="((?&lt;=jpa-entity-generator-core.*)|(?&lt;=version&gt;.*))(\d+[\.\d]+\d+)" />
+          <substitution expression="${version}" />
+          <fileset dir="${basedir}">
+            <include name="README.md" />
+            <include name="**/README_ja.md" />
+          </fileset>
+        </replaceregexp>
+      </then>
+    </if>
+  </target>
+
 </project>
