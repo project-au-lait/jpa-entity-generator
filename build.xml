@@ -134,7 +134,7 @@
         -Dbt.source=jpa-entity-generator-docs/src/docs/markdown/README_ja.md
         -Dbt.target=README.md
         -Dbt.mode=ja2en
-        -Dbt.engine=aws" />
+        -Dbt.engine=minhon" />
     </exec>
 
     <exec executable="${mvn.cmd}" failonerror="true">
