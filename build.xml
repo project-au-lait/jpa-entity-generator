@@ -176,7 +176,7 @@
           <substitution expression="${version}" />
           <fileset dir="${basedir}">
             <include name="README.md" />
-            <include name="jpa-entity-generator-docs/src/docs/markdown/README_ja.md" />
+            <include name="**/README_ja.md" />
           </fileset>
         </replaceregexp>
       </then>
