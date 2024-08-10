@@ -21,60 +21,50 @@ cd jpa-entity-generator
 java -jar jpa-entity-generator-core-0.8-all-deps.jar
 ```
 
-ここで、java コマンドを実行するディレクトリにはリバースエンジニアリングの挙動を制御する設定ファイル`jeg-config.json`を配置します。
+ここで、java コマンドを実行するディレクトリにはリバースエンジニアリングの挙動を制御する設定ファイル`jeg-config.yml`を配置します。
 
-`jeg-config.json`の設定内容は以下の通りです。
+`jeg-config.yml`の設定内容は以下の通りです。
 
-```js
-{
-  // JDBC connection string to the target DB for generating JPA Entity
-  "jdbcUrl": "jdbc:postgresql://localhost:5438/postgres",
-  // Username used to authenticate DB connection
-  "jdbcUsername": "postgres",
-  // Password used to authenticate DB connection
-  "jdbcPassword": "postgres",
-  // Root directory to which JPA Entity java files are output
-  "outputDir": "target",
-  // Packages of JPA Entity
-  "packages": {
-    "dev.aulait.jeg.core.domain": [
-      // Name of the table from which the JPA Entity to be generated under the package
-      "TABLE_1",
-      "TABLE_2"
-    ]
-  },
-  // Base class for JPA Entity
-  "baseClass": "dev.aulait.jeg.core.domain.BaseEntity",
-  // Definition of Annotaion
-  "annotationDefs": {
-    "uuid": {
-      "type": "jakarta.persistence.GeneratedValue",
-      "attributes": {
-        "strategy": "jakarta.persistence.GenerationType.UUID"
-      }
-    }
-  },
-  // Columns declaring the annotation defined in annotationDefs
-  "annotatedCols": {
-    "main.id": ["uuid"]
-  },
-  // Table name not generated JPA Entity
-  "excludedTables": [
-    "flyway_schema_history"
-  ],
-  // Column names that will not be generated fields in JPA Entity
-  "excludedColmuns": [
-    "version",
-    "created_by",
-    "created_date",
-    "updated_by",
-    "updated_date"
-  ],
-  // Formatter to be applied to JPA Entity java source files
-  // If you use google formatter, 
-  // you need to specify JVM options when running jpa-entity-generator (described below)
-  "formatter": "google"
-}
+```yml
+# JDBC connection string to the target DB for generating JPA Entity
+jdbcUrl: jdbc:postgresql://localhost:5438/postgres
+# Username used to authenticate DB connection
+jdbcUsername: postgres
+# Password used to authenticate DB connection
+jdbcPassword: postgres
+# Root directory to which JPA Entity java files are output
+outputDir: target
+# Packages of JPA Entity
+packages:
+  dev.aulait.jeg.core.domain:
+    # Name of the table from which the JPA Entity to be generated under the package
+    - TABLE_1
+    - TABLE_2
+baseClass: dev.aulait.jeg.core.domain.BaseEntity
+# Definition of Annotaion
+annotationDefs:
+  uuid:
+    type: jakarta.persistence.GeneratedValue
+    attributes:
+      strategy: jakarta.persistence.GenerationType.UUID
+# Columns declaring the annotation defined in annotationDefs
+annotatedCols:
+  main.id:
+    - uuid
+# Table names not generated JPA Entity
+excludedTables:
+  - flyway_schema_history
+# Column names that will not be generated fields in JPA Entity
+excludedColmuns:
+  - version
+  - created_by
+  - created_date
+  - updated_by
+  - updated_date
+# Formatter to be applied to JPA Entity java source files
+# If you use google formatter,
+# you need to specify JVM options when running jpa-entity-generator (described below)
+formatter: google
 ```
 
 生成するJPA Entityのjavaソースファイルに　[google-java-format](https://github.com/google/google-java-format) を適用する場合は、以下のコマンドでjpa-entity-generatorを実行します。

@@ -1,6 +1,7 @@
 package dev.aulait.jeg.core.infra.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
@@ -13,9 +14,9 @@ import org.apache.commons.lang3.exception.UncheckedException;
 @Slf4j
 public class ConfigLoader {
 
-  private static final String CONFIG_FILE = "jeg-config.json";
+  private static final String CONFIG_FILE = "jeg-config.yml";
 
-  static ObjectMapper mapper = new ObjectMapper();
+  static ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
   public static Config load() {
     return load("");
@@ -27,8 +28,8 @@ public class ConfigLoader {
    *
    * <ol>
    *   <li>Path specified in the method argument.
-   *   <li>jeg-config.json directly under the current directory.
-   *   <li>jeg-config.json directly under classpath.
+   *   <li>jeg-config.yml directly under the current directory.
+   *   <li>jeg-config.yml directly under classpath.
    * </ol>
    *
    * @param configFilePath Path of the configuration file to be loaded.

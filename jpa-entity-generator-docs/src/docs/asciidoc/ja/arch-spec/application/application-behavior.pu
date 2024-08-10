@@ -2,7 +2,7 @@
 actor User
 component "jpa-entity-generator" as JEG
 database DB
-file "jeg-config.json" as config
+file "jeg-config.yml" as config
 file "JpaEntitiy.java" as src
 
 User -> JEG : 1. java -jar jpa-entity-generator-core.jar\n./mvnw jpa-entity-generator:reverse
