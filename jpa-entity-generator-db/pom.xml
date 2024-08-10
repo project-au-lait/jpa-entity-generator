@@ -38,13 +38,6 @@
       </resource>
       <resource>
         <directory>src/main/resources</directory>
-        <filtering>true</filtering>
-        <includes>
-          <include>flyway.conf</include>
-        </includes>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
         <includes>
           <include>**/*.sql</include>
         </includes>
@@ -57,7 +50,13 @@
         <artifactId>flyway-maven-plugin</artifactId>
         <version>10.9.1</version>
         <configuration>
-          <configFiles>${project.build.outputDirectory}/flyway.conf</configFiles>
+          <configFiles>src/main/resources/flyway.conf</configFiles>
+          <cleanDisabled>false</cleanDisabled>
+          <password>${db.password}</password>
+          <schemas>${db.schema}</schemas>
+          <user>${db.username}</user>
+          <url>${db.jdbc.url}</url>
+          <validateOnMigrate>false</validateOnMigrate>
         </configuration>
         <dependencies>
           <dependency>
