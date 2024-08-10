@@ -7,7 +7,7 @@
   <!-- The Basics -->
   <groupId>dev.aulait.jeg</groupId>
   <artifactId>jpa-entity-generator</artifactId>
-  <version>0.8</version>
+  <version>0.9-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <dependencies>
