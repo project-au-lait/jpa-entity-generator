@@ -87,5 +87,59 @@
         <defaultGoal>dependency:copy</defaultGoal>
       </build>
     </profile>
+
+    <profile>
+      <id>setup-db</id>
+
+      <build>
+        <defaultGoal>compile</defaultGoal>
+
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.4.0</version>
+            <configuration>
+              <executable>docker</executable>
+              <commandlineArgs>compose up -d --wait</commandlineArgs>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>compile</phase>
+              </execution>
+            </executions>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>migrate-db</id>
+
+      <build>
+        <defaultGoal>compile</defaultGoal>
+
+        <plugins>
+          <plugin>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>clean</goal>
+                  <goal>migrate</goal>
+                  <goal>info</goal>
+                </goals>
+                <phase>compile</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>

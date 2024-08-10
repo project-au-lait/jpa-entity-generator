@@ -121,7 +121,9 @@ Run the following command to build the development environment and verify that a
 git clone https://github.com/project-au-lait/jpa-entity-generator.git
 cd jpa-entity-generator
 
-./mvnw -N -D ant.target=setup-db
+./mvnw -f jpa-entity-generator-db -P setup-db
+
+./mvnw -f jpa-entity-generator-db -P migrate-db
 
 ./mvnw -N -D ant.target=test
 ```

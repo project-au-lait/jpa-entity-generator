@@ -11,34 +11,9 @@
   </condition>
 
 
-  <target name="setup-db">
-    <exec executable="${mvn.cmd}" failonerror="true">
-      <arg line="-f jpa-entity-generator-db process-resources" />
-    </exec>
-
-    <exec executable="docker" failonerror="true" dir="jpa-entity-generator-db">
-      <arg line="compose up -d dbms" />
-    </exec>
-
-    <exec executable="docker" failonerror="true" dir="jpa-entity-generator-db">
-      <arg
-        line="compose run --rm -T dockerize dockerize -wait tcp://host.docker.internal:${db.port} -timeout 300s" />
-    </exec>
-
-    <antcall target="migrate" />
-  </target>
-
-
   <target name="down-db">
     <exec executable="docker" failonerror="true" dir="jpa-entity-generator-db">
       <arg line="compose down --rmi local -v" />
-    </exec>
-  </target>
-
-
-  <target name="migrate">
-    <exec executable="${mvn.cmd}" failonerror="true">
-      <arg line="-f jpa-entity-generator-db flyway:clean flyway:migrate flyway:info" />
     </exec>
   </target>
 
@@ -62,7 +37,8 @@
       <arg line="-f jpa-entity-generator-core process-resources " />
     </exec>
 
-    <java jar="jpa-entity-generator-core/target/jpa-entity-generator-core-${project.version}-all-deps.jar"
+    <java
+      jar="jpa-entity-generator-core/target/jpa-entity-generator-core-${project.version}-all-deps.jar"
       fork="true" failonerror="true">
       <arg value="jpa-entity-generator-core/target/classes/jeg-config.json" />
       <jvmarg value="--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" />
@@ -78,7 +54,8 @@
   <target name="exec-maven-plugin">
     <exec executable="${mvn.cmd}" failonerror="true">
       <arg line="-f jpa-entity-generator-core process-resources " />
-      <arg line="-Djeg.outputDir=jpa-entity-generator-maven-plugin/target/generated-test-resources/jeg" />
+      <arg
+        line="-Djeg.outputDir=jpa-entity-generator-maven-plugin/target/generated-test-resources/jeg" />
     </exec>
 
     <exec executable="${mvn.cmd}" failonerror="true">
@@ -90,7 +67,8 @@
       --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
       --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" />
       <arg line="-f jpa-entity-generator-maven-plugin/src/test/resources" />
-      <arg line="jpa-entity-generator:reverse -D configFilePath=jpa-entity-generator-core/target/classes/jeg-config.json" />
+      <arg
+        line="jpa-entity-generator:reverse -D configFilePath=jpa-entity-generator-core/target/classes/jeg-config.json" />
     </exec>
   </target>
 
@@ -130,7 +108,8 @@
 
   <target name="trans-docs">
     <exec executable="${mvn.cmd}" failonerror="true">
-      <arg line="-N batch-translator:translate
+      <arg
+        line="-N batch-translator:translate
         -Dbt.source=jpa-entity-generator-docs/src/docs/markdown/README_ja.md
         -Dbt.target=README.md
         -Dbt.mode=ja2en
@@ -138,7 +117,8 @@
     </exec>
 
     <exec executable="${mvn.cmd}" failonerror="true">
-      <arg line="-N batch-translator:translate
+      <arg
+        line="-N batch-translator:translate
         -Dbt.source=docs/ja/
         -Dbt.target=docs/en/
         -Dbt.filePattern=*.html
@@ -149,16 +129,16 @@
 
 
   <target name="sonar">
-      <exec executable="${mvn.cmd}" failonerror="true">
-        <arg line="clean jacoco:prepare-agent test jacoco:report sonar:sonar" />
-      </exec>
+    <exec executable="${mvn.cmd}" failonerror="true">
+      <arg line="clean jacoco:prepare-agent test jacoco:report sonar:sonar" />
+    </exec>
   </target>
 
 
   <target name="set-version">
     <property name="version" value="" />
     <fail
-      if:blank="${version}" 
+      if:blank="${version}"
       message="Please specify version in the system properties. (e.g. mvnw -Dant.target=set-version -Dversion=1.x.x"
     />
 
@@ -172,7 +152,8 @@
       </not>
       <then>
         <replaceregexp flags="g">
-          <regexp pattern="((?&lt;=jpa-entity-generator-core.*)|(?&lt;=version&gt;.*))(\d+[\.\d]+\d+)" />
+          <regexp
+            pattern="((?&lt;=jpa-entity-generator-core.*)|(?&lt;=version&gt;.*))(\d+[\.\d]+\d+)" />
           <substitution expression="${version}" />
           <fileset dir="${basedir}">
             <include name="README.md" />

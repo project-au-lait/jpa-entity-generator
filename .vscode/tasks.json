@@ -4,6 +4,33 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "setup-db",
+      "type": "shell",
+      "osx": {
+        "command": "./mvnw"
+      },
+      "windows": {
+        "command": ".\\mvnw"
+      },
+      "args": ["-f", "jpa-entity-generator-db", "-P", "setup-db"],
+      "problemMatcher": [],
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "migrate-db",
+      "type": "shell",
+      "osx": {
+        "command": "./mvnw"
+      },
+      "windows": {
+        "command": ".\\mvnw"
+      },
+      "args": ["-f", "jpa-entity-generator-db", "-P", "migrate-db"],
+      "problemMatcher": []
+    },
+    {
       "label": "exec-ant-task",
       "type": "shell",
       "osx": {
@@ -33,7 +60,7 @@
       "id": "ant.target",
       "type": "pickString",
       "description": "Select ant task name",
-      "options": ["setup-db", "test", "gen-docs", "migrate", "reverse"]
+      "options": ["test", "gen-docs", "reverse"]
     }
   ]
 }
