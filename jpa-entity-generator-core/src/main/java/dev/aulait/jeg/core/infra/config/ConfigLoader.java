@@ -55,9 +55,11 @@ public class ConfigLoader {
     Path configFile;
 
     if (StringUtils.isNoneEmpty(configFilePath)) {
-      configFile = Path.of(configFilePath);
+      configFile = Path.of(configFilePath).toAbsolutePath();
       if (configFile.toFile().exists()) {
         return path2url(configFile);
+      } else {
+        log.warn("Config file path is specified but does not exist. {}", configFile);
       }
     }
 

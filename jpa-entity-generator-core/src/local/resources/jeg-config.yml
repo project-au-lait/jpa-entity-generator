@@ -1,38 +1,39 @@
-jdbcUrl: "${db.jdbc.url}"
-jdbcUsername: "${db.username}"
-jdbcPassword: "${db.password}"
+runtime:
+  jdbcUrl: "${db.jdbc.url}"
+  jdbcUsername: "${db.username}"
+  jdbcPassword: "${db.password}"
+  outputDir: "${jeg.outputDir}"
 schemaPattern: public
-outputDir: "${jeg.outputDir}"
 packages:
   dev.aulait.jeg.core.domain.mastertran:
-  - master
-  - transaction
+    - master
+    - transaction
   dev.aulait.jeg.core.domain.parentchild:
-  - parent
-  - child
+    - parent
+    - child
   dev.aulait.jeg.core.domain.manytomany:
-  - left
-  - right
+    - left
+    - right
   dev.aulait.jeg.core.domain.main:
-  - main
-  - composite_main
-  - self_ref
+    - main
+    - composite_main
+    - self_ref
   dev.aulait.jeg.core.domain.rel:
-  - one_to_one
-  - one_to_many
-  - main_child
-  - many_to_one
-  - many_to_many
-  - main_many_to_many_rel
-  - composite_one_to_many
+    - one_to_one
+    - one_to_many
+    - main_child
+    - many_to_one
+    - many_to_many
+    - main_many_to_many_rel
+    - composite_one_to_many
 baseClassDefs:
-- tables:
-  - main_child
-  - composite_main
-  baseClass: dev.aulait.jeg.core.domain.CompositeBaseEntity
-- tables:
-  - "*"
-  baseClass: dev.aulait.jeg.core.domain.BaseEntity
+  - tables:
+      - main_child
+      - composite_main
+    baseClass: dev.aulait.jeg.core.domain.CompositeBaseEntity
+  - tables:
+      - "*"
+    baseClass: dev.aulait.jeg.core.domain.BaseEntity
 annotationDefs:
   uuid:
     type: jakarta.persistence.GeneratedValue
@@ -42,27 +43,27 @@ annotationDefs:
     type: lombok.Setter
 annotatedCols:
   main.id:
-  - uuid
+    - uuid
   MainEntity.oneToOne:
-  - noEffect
+    - noEffect
   MainEntity.oneToManies:
-  - noEffect
+    - noEffect
   ManyToManyEntity.mains:
-  - noEffect
+    - noEffect
   OneToManyEntity.main:
-  - noEffect
+    - noEffect
 cascades:
   main:
     one_to_many.main_id:
-    - ALL
+      - ALL
     one_to_one.id:
-    - ALL
+      - ALL
 excludedTables:
-- flyway_schema_history
+  - flyway_schema_history
 excludedColmuns:
-- version
-- created_by
-- created_date
-- updated_by
-- updated_date
+  - version
+  - created_by
+  - created_date
+  - updated_by
+  - updated_date
 formatter: google

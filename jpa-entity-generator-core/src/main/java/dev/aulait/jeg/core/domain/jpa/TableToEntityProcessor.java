@@ -53,7 +53,7 @@ public class TableToEntityProcessor {
 
     String fileName = entity.getName() + ".java";
     String pkgDir = entity.getPkg() == null ? "" : entity.getPkg().replace(".", "/");
-    Path filePath = Path.of(config.getOutputDir(), pkgDir, fileName).toAbsolutePath();
+    Path filePath = Path.of(config.getRuntime().getOutputDir(), pkgDir, fileName).toAbsolutePath();
     entity.setFilePath(filePath);
 
     processColumns(table.getColumns(), entity);
@@ -130,7 +130,7 @@ public class TableToEntityProcessor {
       case Types.BOOLEAN:
         return "Boolean";
 
-        // numeric
+      // numeric
       case Types.INTEGER:
         return "Integer";
       case Types.BIGINT:
@@ -138,7 +138,7 @@ public class TableToEntityProcessor {
       case Types.NUMERIC:
         return "java.math.BigDecimal";
 
-        // date
+      // date
       case Types.DATE:
         return "java.time.LocalDate";
       case Types.TIME:
@@ -149,7 +149,7 @@ public class TableToEntityProcessor {
       case Types.BLOB:
         return "byte[]";
 
-        // string
+      // string
       default:
         return "String";
     }

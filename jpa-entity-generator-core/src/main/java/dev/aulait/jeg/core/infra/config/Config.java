@@ -18,15 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Config {
 
-  private String jdbcUrl;
-  private String jdbcUsername;
-  private String jdbcPassword;
+  private RuntimeConfig runtime = new RuntimeConfig();
   private String catalog;
   private String schemaPattern;
   private String tableNamePattern;
   private Map<String, List<String>> packages = new HashMap<>();
   private List<BaseClassDef> baseClassDefs = new ArrayList<>();
-  private String outputDir;
   private String entitySuffix = "Entity";
   private List<String> excludedTables = new ArrayList<>();
   private List<String> excludedColmuns = new ArrayList<>();

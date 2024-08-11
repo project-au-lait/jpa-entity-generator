@@ -23,12 +23,14 @@ public class DatabaseMetaDataReader {
 
     log.info(
         "Extracting dtabase metadata using jdbc url: {}, username: {}",
-        config.getJdbcUrl(),
-        config.getJdbcUsername());
+        config.getRuntime().getJdbcUrl(),
+        config.getRuntime().getJdbcUsername());
 
     try (Connection conn =
         DriverManager.getConnection(
-            config.getJdbcUrl(), config.getJdbcUsername(), config.getJdbcPassword())) {
+            config.getRuntime().getJdbcUrl(),
+            config.getRuntime().getJdbcUsername(),
+            config.getRuntime().getJdbcPassword())) {
 
       DatabaseMetaData meta = conn.getMetaData();
 
@@ -65,9 +67,10 @@ public class DatabaseMetaDataReader {
             config.getSchemaPattern(),
             config.getTableNamePattern(),
             new String[] {"TABLE"})) {
-      List<TableModel> tables = MetaDataUtils.extract(rs, TableModel.class).stream()
-          .filter(tbs -> !config.getExcludedTables().contains(tbs.getTABLE_NAME()))
-          .toList();
+      List<TableModel> tables =
+          MetaDataUtils.extract(rs, TableModel.class).stream()
+              .filter(tbs -> !config.getExcludedTables().contains(tbs.getTABLE_NAME()))
+              .toList();
 
       log.info("Extracted {} tables", tables.size());
 
