@@ -14,7 +14,7 @@
       "type": "java",
       "name": "Main",
       "request": "launch",
-      "mainClass": "dev.aulait.jeg.interfaces.Main",
+      "mainClass": "dev.aulait.jeg.core.interfaces.Main",
       "projectName": "jpa-entity-generator-core",
       "vmArgs": [
         "-Djeg.log.level=INFO",
