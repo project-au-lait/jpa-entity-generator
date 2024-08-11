@@ -40,7 +40,7 @@
     <java
       jar="jpa-entity-generator-core/target/jpa-entity-generator-core-${project.version}-all-deps.jar"
       fork="true" failonerror="true">
-      <arg value="jpa-entity-generator-core/target/classes/jeg-config.yml" />
+      <arg value="-c=jpa-entity-generator-core/target/classes/jeg-config.yml" />
       <jvmarg value="--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" />
       <jvmarg value="--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" />
       <jvmarg value="--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED" />
