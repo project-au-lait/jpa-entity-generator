@@ -60,7 +60,7 @@
       "id": "ant.target",
       "type": "pickString",
       "description": "Select ant task name",
-      "options": ["test", "gen-docs", "reverse"]
+      "options": ["test", "gen-docs"]
     }
   ]
 }

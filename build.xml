@@ -10,6 +10,10 @@
     <os family="windows" />
   </condition>
 
+  <property name="jeg-config" location="jpa-entity-generator-core/target/classes/jeg-config.yml" />
+  <property name="jdk-opts"
+    value="--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" />
+
 
   <target name="down-db">
     <exec executable="docker" failonerror="true" dir="jpa-entity-generator-db">
@@ -40,13 +44,8 @@
     <java
       jar="jpa-entity-generator-core/target/jpa-entity-generator-core-${project.version}-all-deps.jar"
       fork="true" failonerror="true">
-      <arg value="-c=jpa-entity-generator-core/target/classes/jeg-config.yml" />
-      <jvmarg value="--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" />
-      <jvmarg value="--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" />
-      <jvmarg value="--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED" />
-      <jvmarg value="--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED" />
-      <jvmarg value="--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED" />
-      <jvmarg value="--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" />
+      <arg value="-c=${jeg-config}" />
+      <jvmarg line="${jdk-opts}" />
     </java>
   </target>
 
@@ -60,30 +59,10 @@
 
     <exec executable="${mvn.cmd}" failonerror="true">
       <env key="MAVEN_OPTS"
-        value="--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
-      --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
-      --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED
-      --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED
-      --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
-      --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" />
+        value="${jdk-opts}" />
       <arg line="-f jpa-entity-generator-maven-plugin/src/test/resources" />
       <arg
-        line="jpa-entity-generator:reverse -D configFilePath=jpa-entity-generator-core/target/classes/jeg-config.yml" />
-    </exec>
-  </target>
-
-
-  <target name="reverse">
-    <exec executable="${mvn.cmd}" failonerror="true">
-      <env key="MAVEN_OPTS"
-        value="--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
-      --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
-      --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED
-      --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED
-      --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
-      --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" />
-      <arg line="-pl jpa-entity-generator-core process-resources exec:java" />
-      <arg line="-Djeg.outputDir=jpa-entity-generator-core/src/gen/java" />
+        line="jpa-entity-generator:reverse -D configFilePath=${jeg-config}" />
     </exec>
   </target>
 
