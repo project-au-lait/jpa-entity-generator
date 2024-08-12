@@ -13,6 +13,7 @@ import lombok.Setter;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import picocli.CommandLine;
 import picocli.CommandLine.ArgGroup;
+import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 /** Main */
@@ -20,6 +21,7 @@ import picocli.CommandLine.Option;
 @NoArgsConstructor
 @Getter
 @Setter
+@Command(name = "", mixinStandardHelpOptions = true)
 public class Main implements Callable<Integer> {
 
   @Option(names = {"-c", "--config-file"})
