@@ -81,6 +81,8 @@
     <ant.file>build.xml</ant.file>
     <ant.target>setup-db</ant.target>
 
+    <core.mainClass>dev.aulait.jeg.core.interfaces.Main</core.mainClass>
+
     <db.jdbc.groupId>org.postgresql</db.jdbc.groupId>
     <db.jdbc.artifactId>postgresql</db.jdbc.artifactId>
     <db.jdbc.version>42.7.2</db.jdbc.version>

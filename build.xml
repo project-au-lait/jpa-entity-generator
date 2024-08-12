@@ -37,13 +37,22 @@
 
 
   <target name="exec-jar">
+    <property name="lib" value="target/lib" />
+
+    <exec executable="${mvn.cmd}" failonerror="true">
+      <arg line="-N dependency:copy " />
+      <arg line="-D artifact=${db.jdbc.groupId}:${db.jdbc.artifactId}:${db.jdbc.version} " />
+      <arg line="-D outputDirectory=${lib} " />
+    </exec>
+
+    <copy todir="${lib}"
+      file="jpa-entity-generator-core/target/jpa-entity-generator-core-${project.version}-all-deps.jar" />
+
     <exec executable="${mvn.cmd}" failonerror="true">
       <arg line="-f jpa-entity-generator-core process-resources " />
     </exec>
 
-    <java
-      jar="jpa-entity-generator-core/target/jpa-entity-generator-core-${project.version}-all-deps.jar"
-      fork="true" failonerror="true">
+    <java classname="${core.mainClass}" classpath="${lib}/*" fork="true" failonerror="true">
       <arg value="-c=${jeg-config}" />
       <jvmarg line="${jdk-opts}" />
     </java>
@@ -58,9 +67,13 @@
     </exec>
 
     <exec executable="${mvn.cmd}" failonerror="true">
+      <arg line="-f jpa-entity-generator-maven-plugin resources:testResources" />
+    </exec>
+
+    <exec executable="${mvn.cmd}" failonerror="true">
       <env key="MAVEN_OPTS"
         value="${jdk-opts}" />
-      <arg line="-f jpa-entity-generator-maven-plugin/src/test/resources" />
+      <arg line="-f jpa-entity-generator-maven-plugin/target/test-classes" />
       <arg
         line="jpa-entity-generator:reverse -D configFilePath=${jeg-config}" />
     </exec>

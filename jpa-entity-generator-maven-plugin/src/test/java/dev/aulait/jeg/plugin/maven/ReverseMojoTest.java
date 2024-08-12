@@ -12,7 +12,7 @@ class ReverseMojoTest extends AbstractMojoTestCase {
   @Test
   void execute() throws Exception {
     super.setUp();
-    Path path = Paths.get("src/test/resources/pom.xml");
+    Path path = Paths.get("target/test-classes/pom.xml");
 
     ReverseMojo mojo = (ReverseMojo) super.lookupMojo("reverse", path.toAbsolutePath().toFile());
     assertNotNull(mojo);
