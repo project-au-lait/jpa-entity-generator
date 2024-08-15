@@ -111,7 +111,11 @@ Run the following command to build the development environment and verify that a
 git clone https://github.com/project-au-lait/jpa-entity-generator.git
 cd jpa-entity-generator
 
+# use docker
 ./mvnw -f jpa-entity-generator-db -P setup-db
+
+# use podman(with compose-extention)
+./mvnw -f jpa-entity-generator-db -P setup-db -P podman
 
 ./mvnw -f jpa-entity-generator-db -P migrate-db
 

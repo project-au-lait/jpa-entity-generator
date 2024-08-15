@@ -12,11 +12,35 @@
       "windows": {
         "command": ".\\mvnw"
       },
-      "args": ["-f", "jpa-entity-generator-db", "-P", "setup-db"],
+      "args": [
+        "-f",
+        "jpa-entity-generator-db",
+        "-P",
+        "setup-db"
+      ],
       "problemMatcher": [],
       "runOptions": {
         "runOn": "folderOpen"
       }
+    },
+    {
+      "label": "setup-db-with-podman",
+      "type": "shell",
+      "osx": {
+        "command": "./mvnw"
+      },
+      "windows": {
+        "command": ".\\mvnw"
+      },
+      "args": [
+        "-f",
+        "jpa-entity-generator-db",
+        "-P",
+        "setup-db",
+        "-P",
+        "podman"
+      ],
+      "problemMatcher": []
     },
     {
       "label": "migrate-db",
@@ -27,7 +51,12 @@
       "windows": {
         "command": ".\\mvnw"
       },
-      "args": ["-f", "jpa-entity-generator-db", "-P", "migrate-db"],
+      "args": [
+        "-f",
+        "jpa-entity-generator-db",
+        "-P",
+        "migrate-db"
+      ],
       "problemMatcher": []
     },
     {
@@ -39,7 +68,11 @@
       "windows": {
         "command": ".\\mvnw"
       },
-      "args": ["-N", "-D", "ant.target=${input:ant.target}"],
+      "args": [
+        "-N",
+        "-D",
+        "ant.target=${input:ant.target}"
+      ],
       "problemMatcher": []
     },
     {
@@ -51,7 +84,10 @@
       "windows": {
         "command": ".\\mvnw"
       },
-      "args": ["-f", "jpa-entity-generator-docs"],
+      "args": [
+        "-f",
+        "jpa-entity-generator-docs"
+      ],
       "problemMatcher": []
     }
   ],
@@ -60,7 +96,10 @@
       "id": "ant.target",
       "type": "pickString",
       "description": "Select ant task name",
-      "options": ["test", "gen-docs"]
+      "options": [
+        "test",
+        "gen-docs"
+      ]
     }
   ]
 }

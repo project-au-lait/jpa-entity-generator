@@ -99,7 +99,7 @@
             <artifactId>exec-maven-plugin</artifactId>
             <version>3.4.0</version>
             <configuration>
-              <executable>docker</executable>
+              <executable>${container.engine}</executable>
               <commandlineArgs>compose up -d --wait</commandlineArgs>
             </configuration>
             <executions>
