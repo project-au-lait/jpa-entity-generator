@@ -1,29 +1,80 @@
-# JPA Reverse Engineering Tool
+# JPA Entity Generator
 
-jpa-entity-generator は、DB のテーブル定義を読み取り、それをもとに JPA の Entity クラスの java ファイルを生成するツールです。
+jpa-entity-generator (jeg) は、DB のテーブル定義を読み取り、それをもとに JPA の Entity クラスの java ファイルを生成するツールです。
 
-## 利用者ガイド
+## 必要なソフトウェア
 
-以下のコマンドを実行し、jpa-entity-generator の実行可能な jar を生成します。
+jegを使用するには以下のソフトウェアが必要です。
+
+- Java 17+
+- Maven (Maven Pluginとして使用する場合)
+
+## 使用方法
+
+jegは実行可能jar、及びMaven Pluginとして使用できます。
+
+### 実行可能jarとして使用する
+
+jegを実行可能jarとして実行するには、Maven Centralからjegのjarファイルを取得し、javaコマンドで実行します。
 
 ```sh
-git clone https://github.com/project-au-lait/jpa-entity-generator.git
-cd jpa-entity-generator
+curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.9/jpa-entity-generator-core-0.9-all-deps.jar
 
-./mvnw -f jpa-entity-generator-core clean package -P release
+java -jar jpa-entity-generator-core-0.9-all-deps.jar -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
 ```
 
-以上のコマンドを実行すると、`jpa-entity-generator-core/target`ディレクトリ以下に`jpa-entity-generator-core-0.8-all-deps.jar`が生成されます。
+上記javaコマンド末尾の引数の仕様は[設定](#jeg-config)を参照してください。
 
-`jpa-entity-generator-core-0.8-all-deps.jar`は以下の java コマンドで実行可能です。
+### Maven Pluginとして使用する
+
+jegをMaven Pluginとして実行するには、pom.xmlにjpa-entity-generator-maven-plugin設定を追加します。
+
+```xml
+<plugins>
+  <plugin>
+    <groupId>dev.aulait.jeg</groupId>
+    <artifactId>jpa-entity-generator-maven-plugin</artifactId>
+    <version>0.9</version>
+    <configuration>
+      <configFilePath>./jeg-config.yml</configFilePath>
+      <jdbcUrl>jdbc:postgresql://localhost:5432/postgres</jdbcUrl>
+      <jdbcUsername>postgres</jdbcUsername>
+      </jdbcPassword>postgres</jdbcPassword>
+      </outputDir>target</outputDir>
+    </configuration>
+  </plugin>
+</plugins>
+```
+
+configurationの設定項目は[設定](#jeg-config)を参照してください。
+pom.xmlにPluginの設定後、以下のコマンドでjegを実行します。
 
 ```sh
-java -jar jpa-entity-generator-core-0.8-all-deps.jar
+mvn jpa-entity-generator:reverse
 ```
 
-ここで、java コマンドを実行するディレクトリにはリバースエンジニアリングの挙動を制御する設定ファイル`jeg-config.yml`を配置します。
 
-`jeg-config.yml`の設定内容は以下の通りです。
+### 設定
+<a name="jeg-config"></a>
+
+jegを実行する際のjavaコマンドの引数、またはMaven Plugnのconfiguraion項目の仕様は以下の通りです。
+
+- configFilePath : jeg設定ファイルのパス
+- outputDir : JPA Entityのjavaファイルを出力するルートディレクトリ
+- jdbcUrl : JPA Entityの生成対象となるDBへのJDBC接続文字列
+- jdbcUsername : DB接続の認証に使用するユーザー名
+- jdbcPassword : DB接続の認証に使用するパスワード
+
+jeg設定ファイルは、JPA Entityの生成対象テーブルや出力先パッケージなど、生成の挙動を設定します。
+
+jeg設定ファイルの指定方法、配置先は以下の順に決定されます。(番号が小さい方から優先)
+
+1. javaコマンドの引数、またはMaven Pluginのconfigurationで指定されたファイル
+2. javaコマンド、またはMavenコマンドを実行するディレクトリ直下の`jeg-config.yml`
+3. javaコマンド、またはMavenコマンドのクラスパス以下の`jeg-config.yml`
+
+jeg設定ファイルはYAML形式で作成します。
+設定項目の仕様は以下の通りです。
 
 ```yml
 # JDBC connection string to the target DB for generating JPA Entity
@@ -69,51 +120,17 @@ formatter: google
 
 生成するJPA Entityのjavaソースファイルに　[google-java-format](https://github.com/google/google-java-format) を適用する場合は、以下のコマンドでjpa-entity-generatorを実行します。
 
-```sh
-java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar ../jpa-entity-generator-core-0.8-all-deps.jar 
-```
-
-参考: https://github.com/google/google-java-format?tab=readme-ov-file#as-a-library
-
-### jpa-entity-generator-maven-plugin導入手順
-
-プロジェクトルートのpom.xmlにjpa-entity-generator-maven-pluginを追加します。
-
-pom.xml
-
-```xml
-<plugins>
-  <plugin>
-    <groupId>dev.aulait.jeg</groupId>
-    <artifactId>jpa-entity-generator-maven-plugin</artifactId>
-    <version>0.8</version>
-  </plugin>
-</plugins>
-```
-
-以下のコマンドを実行します。
+- javaコマンドで実行する場合
 
 ```sh
-./mvnw jpa-entity-generator:reverse
+java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar jpa-entity-generator-core-0.9-all-deps.jar 
 ```
 
-google-java-formatを適用する場合は、以下のコマンドで環境変数MAVEN_OPTSにJVM引数をしていします。
+- Maven Pluginで実行する場合
 
 ```sh
 MAVEN_OPTS=--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
 ```
 
-## 開発者ガイド
 
-以下のコマンドを実行し、開発環境を構築し全てのテストが構築した環境上でパスすることを確認します。
-
-```sh
-git clone https://github.com/project-au-lait/jpa-entity-generator.git
-cd jpa-entity-generator
-
-./mvnw -N -D ant.target=setup-db
-
-./mvnw -N -D ant.target=test
-```
-
-開発に際しては[アーキテクチャ仕様書](https://project-au-lait.github.io/jpa-entity-generator/)を一読してください。
+参考: https://github.com/google/google-java-format?tab=readme-ov-file#as-a-library
