@@ -1,29 +1,80 @@
-# JPA Reverse Engineering Tool
+# JPA Entity Generator
 
-Jpa-entity-generator is a tool that reads DB table definitions and generates JPA Entity class java files from them.
+JPA Entity Generator (jeg) is a tool that reads DB table definitions and generates JPA Entity class java files from them.
 
-## User's Guide
+## Required Software
 
-Run the following command to generate an executable jar for the jpa-entity-generator:
+The following software is required to use jeg.
+
+- Java 17+
+- Maven (when used as the Maven Plugin)
+
+## Usage
+
+You can use jeg as an executable jar and as a Maven Plugin.
+
+### Use as an executable jar
+
+To run jeg as an executable jar, get the jeg jar file from Maven Central and run it with the java command.
 
 ```sh
-git clone https://github.com/project-au-lait/jpa-entity-generator.git
-cd jpa-entity-generator
+curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.9/jpa-entity-generator-core-0.9-all-deps.jar
 
-./mvnw -f jpa-entity-generator-core clean package -P release
+java -jar jpa-entity-generator-core-0.9-all-deps.jar -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
 ```
 
-The above command will generate ` jpa-entity-generator-core-0.8-all-deps.jar ` under the ` jpa-entity-generator-core/target ` directory.
+See Configuration (#jeg-config) for the specification of the arguments at the end of the above java command.
 
-` jpa-entity-generator-core-0.8-all-deps.jar ` can be run with the following java command:
+### Using as a Maven Plugin
+
+To run jeg as the Maven Plugin, add the jpa-entity-generator-maven-plugin setting to pom. xml.
+
+```xml
+<plugins>
+  <plugin>
+    <groupId>dev.aulait.jeg</groupId>
+    <artifactId>jpa-entity-generator-maven-plugin</artifactId>
+    <version>0.9</version>
+    <configuration>
+      <configFilePath>./jeg-config.yml</configFilePath>
+      <jdbcUrl>jdbc:postgresql://localhost:5432/postgres</jdbcUrl>
+      <jdbcUsername>postgres</jdbcUsername>
+      </jdbcPassword>postgres</jdbcPassword>
+      </outputDir>target</outputDir>
+    </configuration>
+  </plugin>
+</plugins>
+```
+
+See Configuration (#jeg-config) for configuration settings.
+After setting the Plugin in pom. xml, run jeg with the following command:
 
 ```sh
-java -jar jpa-entity-generator-core-0.8-all-deps.jar
+mvn jpa-entity-generator:reverse
 ```
 
-Now, place a configuration file ` jeg-config.yml ` in the directory where you want to run the java command to control the reverse engineering behavior.
 
-The configuration of ` jeg-config.yml ` is as follows:
+### Settings
+<a name="jeg-config"></a>
+
+The java command argument or Maven Plugn configuration item specification for running jeg is as follows:
+
+- configFilePath - Path of the jeg configuration file
+- outputDir: The root directory where JPA Entity java files are output.
+- jdbcUrl: JDBC connection string to the DB for which the JPA Entity is to be generated
+- jdbcUsername: User name used to authenticate the DB connection
+- jdbcPassword-Password used to authenticate the DB connection
+
+The jeg configuration file configures the generation behavior of the JPA Entity, including which tables to generate and which packages to output to.
+
+How and where the jeg configuration file is specified is determined in the following order (lower number first):
+
+1.  The java command argument or the file specified in the Maven Plugin configuration.
+2.  ` jeg-config. yml ` directly under the directory where you want to run the java or Maven command
+3.  java command, or ` jeg-config. yml ` under the classpath of the Maven command
+
+The jeg configuration file is created in YAML format.
+The specifications of the setting items are as follows.
 
 ```yml
 # JDBC connection string to the target DB for generating JPA Entity
@@ -67,55 +118,19 @@ excludedColmuns:
 formatter: google
 ```
 
-If you want to apply [google-java-format](https://github.com/google/google-java-format) to the java source files of the JPA Entity you want to generate, run jpa-entity-generator with the following command:
+If you want to apply [google-java-format](https://github.com/google/google-java-format) to the JPA Entity java source file you want to generate, run jpa-entity-generator with the following command:
+
+- When executed with the java command
 
 ```sh
-java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar ../jpa-entity-generator-core-0.8-all-deps.jar 
+java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar jpa-entity-generator-core-0.9-all-deps.jar 
 ```
 
-Reference: https://github.com/google/google-java-format?tab=readme-ov-file#as-a-library
-
-### jpa-entity-generator-maven-plugin Deployment Instructions
-
-Add jpa-entity-generator-maven-plugin to pom. xml in the project root.
-
-pom.xml
-
-```xml
-<plugins>
-  <plugin>
-    <groupId>dev.aulait.jeg</groupId>
-    <artifactId>jpa-entity-generator-maven-plugin</artifactId>
-    <version>0.8</version>
-  </plugin>
-</plugins>
-```
-
-Run the following command:
-
-```sh
-./mvnw jpa-entity-generator:reverse
-```
-
-To apply google-java-format, use the JVM argument to the environment variable MAVEN _ OPTS in the following command:
+- When running with the Maven Plugin
 
 ```sh
 MAVEN_OPTS=--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
 ```
 
-## Developer's Guide
 
-Run the following command to build the development environment and verify that all tests pass on the build environment:
-
-```sh
-git clone https://github.com/project-au-lait/jpa-entity-generator.git
-cd jpa-entity-generator
-
-./mvnw -f jpa-entity-generator-db -P setup-db
-
-./mvnw -f jpa-entity-generator-db -P migrate-db
-
-./mvnw -N -D ant.target=test
-```
-
-Read the [Architecture Specification](https://project-au-lait.github.io/jpa-entity-generator/).
+Source: https://github.com/google/google-java-format?tab=readme-ov-file#as-a-library

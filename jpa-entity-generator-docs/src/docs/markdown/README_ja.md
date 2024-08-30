@@ -1,6 +1,6 @@
 # JPA Entity Generator
 
-jpa-entity-generator (jeg) は、DB のテーブル定義を読み取り、それをもとに JPA の Entity クラスの java ファイルを生成するツールです。
+JPA Entity Generator (jeg) は、DB のテーブル定義を読み取り、それをもとに JPA の Entity クラスの java ファイルを生成するツールです。
 
 ## 必要なソフトウェア
 
