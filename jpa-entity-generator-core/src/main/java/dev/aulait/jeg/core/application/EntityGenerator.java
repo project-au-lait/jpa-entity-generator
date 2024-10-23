@@ -7,7 +7,8 @@ import dev.aulait.jeg.core.domain.jdbc.TableModel;
 import dev.aulait.jeg.core.domain.jpa.EmbeddedIdModel;
 import dev.aulait.jeg.core.domain.jpa.EntityImportProcessor;
 import dev.aulait.jeg.core.domain.jpa.EntityModel;
-import dev.aulait.jeg.core.domain.jpa.EntityToRelationProcessor;
+import dev.aulait.jeg.core.domain.jpa.RelationProcessor;
+import dev.aulait.jeg.core.domain.jpa.RelationProcessorOneDirectionalImpl;
 import dev.aulait.jeg.core.domain.jpa.TableToEntityProcessor;
 import dev.aulait.jeg.core.infra.config.Config;
 import dev.aulait.jeg.core.infra.formatter.FormatterFactory;
@@ -23,7 +24,7 @@ public class EntityGenerator {
   DatabaseMetaDataReader reader;
   TableToEntityProcessor tableToEntityProcessor;
   DatabaseMetaDataProcessor databaseMetaDataProcessor = new DatabaseMetaDataProcessor();
-  EntityToRelationProcessor entityToRelationProcessor;
+  RelationProcessor relationProcessor;
   EntityImportProcessor entityImportProcessor = new EntityImportProcessor();
   TemplateProcessor templateProcessor = new TemplateProcessor();
   TextFileWriter writer = new TextFileWriter();
@@ -31,7 +32,7 @@ public class EntityGenerator {
   public EntityGenerator(Config config) {
     reader = new DatabaseMetaDataReader(config);
     tableToEntityProcessor = new TableToEntityProcessor(config);
-    entityToRelationProcessor = new EntityToRelationProcessor(config);
+    relationProcessor = new RelationProcessorOneDirectionalImpl(config);
     templateProcessor.setFormatter(FormatterFactory.create(config.getFormatter()));
   }
 
@@ -41,7 +42,7 @@ public class EntityGenerator {
 
     List<EntityModel> entities = tableToEntityProcessor.process(tables);
 
-    entityToRelationProcessor.process(entities);
+    relationProcessor.process(tables, entities);
 
     entityImportProcessor.process(entities);
 

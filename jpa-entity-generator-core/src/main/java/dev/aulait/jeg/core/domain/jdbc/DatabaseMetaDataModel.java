@@ -36,16 +36,6 @@ public class DatabaseMetaDataModel {
     return columnMap.get(tableName);
   }
 
-  public boolean isPk(ColumnModel column) {
-    List<ColumnModel> columns = primaryKeyMap.get(column.getTABLE_NAME());
-
-    if (columns == null) {
-      return false;
-    }
-
-    return columns.contains(column);
-  }
-
   public List<KeyModel> getExportedKeys(String tableName) {
     return exportedKeyMap.get(tableName);
   }

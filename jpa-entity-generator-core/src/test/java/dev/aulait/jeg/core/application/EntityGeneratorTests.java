@@ -43,6 +43,9 @@ public class EntityGeneratorTests {
         "/dev/aulait/jeg/core/domain/parentchild/ParentEntity.java",
         "/dev/aulait/jeg/core/domain/parentchild/ChildEntity.java",
         "/dev/aulait/jeg/core/domain/parentchild/ChildEntityId.java",
+        "/dev/aulait/jeg/core/domain/multifk/MultifkChildEntity.java",
+        "/dev/aulait/jeg/core/domain/multifk/MultifkChildEntityId.java",
+        "/dev/aulait/jeg/core/domain/multifk/MultifkParentEntity.java",
       })
   void testExecute(String path) {
     Path fileName = Path.of(path).getFileName();

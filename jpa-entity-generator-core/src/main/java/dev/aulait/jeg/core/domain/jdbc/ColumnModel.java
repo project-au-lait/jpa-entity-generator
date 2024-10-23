@@ -2,6 +2,7 @@ package dev.aulait.jeg.core.domain.jdbc;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -16,6 +17,10 @@ public class ColumnModel {
   private int DECIMAL_DIGITS;
   private String COLUMN_DEF;
   private int NULLABLE;
-  private boolean pk;
+  private Integer KEY_SEQ;
+
+  @Getter(lazy = true)
+  private final boolean pk = KEY_SEQ != null;
+
   private TableModel table;
 }

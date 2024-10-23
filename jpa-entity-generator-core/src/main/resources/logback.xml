@@ -5,9 +5,6 @@
   </contextListener>
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-      <level>INFO</level>
-    </filter>
     <encoder>
       <pattern>%d{HH:mm:ss.SSS} %-5.5level [%-5.5thread] %-50.50logger{36} - %msg%n</pattern>
     </encoder>

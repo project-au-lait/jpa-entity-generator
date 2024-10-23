@@ -53,9 +53,7 @@ public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @Column(name = "sort_key")
   private Integer sortKey;
 
-  @OneToOne(
-      fetch = FetchType.LAZY,
-      cascade = {CascadeType.ALL})
+  @OneToOne(fetch = FetchType.LAZY)
   @PrimaryKeyJoinColumn
   @lombok.Setter()
   private OneToOneEntity oneToOne;

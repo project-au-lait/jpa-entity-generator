@@ -1,8 +1,10 @@
 package dev.aulait.jeg.core.domain.jdbc;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,6 +32,8 @@ public class TableModel {
 
   /** The foreign key to which this table refers. */
   private List<KeyModel> referencingKeys = new ArrayList<>();
+
+  private Set<ForeignKeyModel> foreignKeys = new HashSet<>();
 
   /** */
   @Getter(lazy = true)

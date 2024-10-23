@@ -11,6 +11,9 @@ packages:
   dev.aulait.jeg.core.domain.parentchild:
     - parent
     - child
+  dev.aulait.jeg.core.domain.multifk:
+    - multifk_parent
+    - multifk_child
   dev.aulait.jeg.core.domain.manytomany:
     - left
     - right
