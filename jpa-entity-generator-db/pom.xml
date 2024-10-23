@@ -100,7 +100,7 @@
             <version>3.4.0</version>
             <configuration>
               <executable>docker</executable>
-              <commandlineArgs>compose up -d --wait</commandlineArgs>
+              <commandlineArgs>compose up -d --wait dbms</commandlineArgs>
             </configuration>
             <executions>
               <execution>
