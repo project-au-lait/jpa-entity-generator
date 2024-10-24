@@ -15,14 +15,11 @@
     value="--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" />
 
 
-  <target name="down-db">
-    <exec executable="docker" failonerror="true" dir="jpa-entity-generator-db">
-      <arg line="compose down --rmi local -v" />
-    </exec>
-  </target>
-
-
   <target name="test">
+    <condition property="analyze.profile" value="-P analyze" else="">
+      <equals arg1="${analyze}" arg2="true" />
+    </condition>
+
     <exec executable="${mvn.cmd}" failonerror="true">
       <arg line="clean install -D maven.test.skip=true" />
     </exec>
@@ -31,7 +28,28 @@
     <antcall target="exec-maven-plugin" />
 
     <exec executable="${mvn.cmd}" failonerror="true">
-      <arg line="verify -P !release" />
+      <arg line="verify ${analyze.profile}" />
+    </exec>
+
+    <if>
+      <equals arg1="${analyze}" arg2="true" />
+      <then>
+        <exec executable="${mvn.cmd}" failonerror="true">
+          <arg line="sonar:sonar --fail-at-end" />
+        </exec>
+      </then>
+    </if>
+  </target>
+
+  <target name="deploy" depends="test">
+    <condition property="maven-central" value=",maven-central" else="">
+      <not>
+        <matches pattern="-SNAPSHOT$" string="${project.version}" />
+      </not>
+    </condition>
+
+    <exec executable="${mvn.cmd}" failonerror="true">
+      <arg line="deploy -P release${maven-central}" />
     </exec>
   </target>
 
@@ -116,13 +134,6 @@
         -Dbt.filePattern=*.html
         -Dbt.mode=ja2en
         -Dbt.engine=aws" />
-    </exec>
-  </target>
-
-
-  <target name="sonar">
-    <exec executable="${mvn.cmd}" failonerror="true">
-      <arg line="clean jacoco:prepare-agent test jacoco:report sonar:sonar" />
     </exec>
   </target>
 
