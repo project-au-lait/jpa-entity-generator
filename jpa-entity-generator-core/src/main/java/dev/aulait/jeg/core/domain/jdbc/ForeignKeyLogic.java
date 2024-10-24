@@ -101,9 +101,8 @@ public class ForeignKeyLogic {
    * );
    * }</pre>
    *
-   * @param parentTable Tables to be determined
-   * @param childTable Tables to be determined
-   * @return True if oneTable and anotherTable are in a 1:1 relationship
+   * @param fk
+   * @return
    */
   public boolean isParentChild(ForeignKeyModel fk) {
     if (isInRelationTable(fk)) {
@@ -150,7 +149,7 @@ public class ForeignKeyLogic {
    *
    * }</pre>
    *
-   * @param fk
+   * @param table
    * @return
    */
   public boolean isRelationTable(TableModel table) {
