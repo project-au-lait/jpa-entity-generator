@@ -140,5 +140,34 @@
         </plugins>
       </build>
     </profile>
+
+    <profile>
+      <id>down-db</id>
+
+      <build>
+        <defaultGoal>compile</defaultGoal>
+
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.4.0</version>
+            <configuration>
+              <executable>docker</executable>
+              <commandlineArgs>compose down --rmi local -v</commandlineArgs>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>compile</phase>
+              </execution>
+            </executions>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>
