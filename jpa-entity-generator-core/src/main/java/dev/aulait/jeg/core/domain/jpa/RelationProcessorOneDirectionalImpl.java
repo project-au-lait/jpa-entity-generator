@@ -51,7 +51,7 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
 
     } else if (isOneToManyRequired(fk)) {
       log.trace("FK: {} requires OneToMany", fk.getName());
-      buildOneToMany(fk.getPkTable(), fk.getFkTable(), fk);
+      buildOneToMany(fk);
 
     } else if (isManyToOneRequired(fk)) {
       log.trace("FK: {} requires ManyToOne", fk.getName());
@@ -81,7 +81,8 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
 
   /**
    *
-   * <pre><code>
+   *
+   * <pre>{@code
    * public class fk.pkTable.entity {
    *
    *   &#64;OneToOne(
@@ -90,11 +91,9 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
    *   private fk.fkTable.entity one;
    *
    * }
-   * </code><pre>
+   * }</pre>
    *
-   * @param oneTable
-   * @param toOneTable
-   * @return
+   * @param fk
    */
   protected void buildOneToOne(ForeignKeyModel fk) {
     EntityModel fkEntity = entityMap.get(fk.getFkTable().getTABLE_NAME());
@@ -115,21 +114,20 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
   /**
    *
    *
-   * <pre><code>
+   * <pre>{@code
    * public class OneEntity {
    *
    *   &#64;OneToMany(fetch = FetchType.LAZY)
    *   &#64;JoinColumn(name = "one_id", insertable = false, updatable = false)
    *   private Set&lt;ManyEntity&gt; manies = new HashSet<>();
    * }
-   * </code></pre>
+   * }</pre>
    *
-   * @param oneTable
-   * @param manyTable
-   * @param entityMap
-   * @return
+   * @param fk
    */
-  protected void buildOneToMany(TableModel oneTable, TableModel manyTable, ForeignKeyModel fk) {
+  protected void buildOneToMany(ForeignKeyModel fk) {
+    TableModel oneTable = fk.getPkTable();
+    TableModel manyTable = fk.getFkTable();
     EntityModel oneEntity = entityMap.get(oneTable.getTABLE_NAME());
     EntityModel manyEntity = entityMap.get(manyTable.getTABLE_NAME());
 
