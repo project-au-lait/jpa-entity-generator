@@ -11,6 +11,17 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Implementation of the RelationProcessor interface for handling one-directional relationships
+ * between JPA entities.
+ *
+ * <p>This class processes foreign key relationships between tables and builds the appropriate JPA
+ * entity relationships (OneToOne, OneToMany, ManyToOne, ManyToMany) based on the foreign key
+ * constraints.
+ *
+ * <p>It uses the provided configuration and logic classes to determine the type of relationship and
+ * to generate the necessary annotations and join columns for the entities.
+ */
 @Slf4j
 public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
 
@@ -55,7 +66,7 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
 
     } else if (isManyToOneRequired(fk)) {
       log.trace("FK: {} requires ManyToOne", fk.getName());
-      buildManyToOne(fk.getFkTable(), fk.getPkTable(), fk);
+      buildManyToOne(fk);
 
     } else if (isManyToManyRequired(fk)) {
       log.trace("FK: {} requires ManyToMany", fk.getName());
@@ -80,20 +91,9 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
   }
 
   /**
+   * Builds a one-to-one relationship between two entities based on the provided foreign key model.
    *
-   *
-   * <pre>{@code
-   * public class fk.pkTable.entity {
-   *
-   *   &#64;OneToOne(
-   *       fetch = FetchType.LAZY)
-   *   &#64;PrimaryKeyJoinColumn
-   *   private fk.fkTable.entity one;
-   *
-   * }
-   * }</pre>
-   *
-   * @param fk
+   * @param fk the foreign key model containing information about the foreign key relationship
    */
   protected void buildOneToOne(ForeignKeyModel fk) {
     EntityModel fkEntity = entityMap.get(fk.getFkTable().getTABLE_NAME());
@@ -112,18 +112,9 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
   }
 
   /**
+   * Builds a one-to-many relationship between two entities based on the provided foreign key model.
    *
-   *
-   * <pre>{@code
-   * public class OneEntity {
-   *
-   *   &#64;OneToMany(fetch = FetchType.LAZY)
-   *   &#64;JoinColumn(name = "one_id", insertable = false, updatable = false)
-   *   private Set&lt;ManyEntity&gt; manies = new HashSet<>();
-   * }
-   * }</pre>
-   *
-   * @param fk
+   * @param fk the foreign key model containing information about the relationship
    */
   protected void buildOneToMany(ForeignKeyModel fk) {
     TableModel oneTable = fk.getPkTable();
@@ -150,7 +141,14 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
     oneEntity.getOneToManies().add(oneToMany);
   }
 
-  protected void buildManyToOne(TableModel manyTable, TableModel oneTable, ForeignKeyModel fk) {
+  /**
+   * Builds a Many-to-One relationship between two entities based on the provided ForeignKeyModel.
+   *
+   * @param fk the ForeignKeyModel containing information about the foreign key relationship
+   */
+  protected void buildManyToOne(ForeignKeyModel fk) {
+    TableModel manyTable = fk.getFkTable();
+    TableModel oneTable = fk.getPkTable();
     EntityModel manyEntity = entityMap.get(manyTable.getTABLE_NAME());
     EntityModel oneEntity = entityMap.get(oneTable.getTABLE_NAME());
     ManyToOneModel manyToOne = new ManyToOneModel();
@@ -177,7 +175,11 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
     }
   }
 
-  // Tables that are the right-hand side of ManyToMany
+  /**
+   * Builds a ManyToMany relationship between entities based on the provided ForeignKeyModel.
+   *
+   * @param fk the ForeignKeyModel representing the foreign key relationship between tables
+   */
   protected void buildManyToMany(ForeignKeyModel fk) {
     TableModel leftTable = fk.getPkTable();
     TableModel relTable = fk.getFkTable();
