@@ -18,9 +18,9 @@ You can use jeg as an executable jar and as a Maven Plugin.
 To run jeg as an executable jar, get the jeg jar file from Maven Central and run it with the java command.
 
 ```sh
-curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.9/jpa-entity-generator-core-0.9-all-deps.jar
+curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.9.1/jpa-entity-generator-core-0.9.1-all-deps.jar
 
-java -jar jpa-entity-generator-core-0.9-all-deps.jar -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
+java -jar jpa-entity-generator-core-0.9.1-all-deps.jar -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
 ```
 
 See Configuration (#jeg-config) for the specification of the arguments at the end of the above java command.
@@ -34,7 +34,7 @@ To run jeg as the Maven Plugin, add the jpa-entity-generator-maven-plugin settin
   <plugin>
     <groupId>dev.aulait.jeg</groupId>
     <artifactId>jpa-entity-generator-maven-plugin</artifactId>
-    <version>0.9</version>
+    <version>0.9.1</version>
     <configuration>
       <configFilePath>./jeg-config.yml</configFilePath>
       <jdbcUrl>jdbc:postgresql://localhost:5432/postgres</jdbcUrl>
@@ -131,7 +131,7 @@ If you want to apply [google-java-format](https://github.com/google/google-java-
 - When executed with the java command
 
 ```sh
-java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar jpa-entity-generator-core-0.9-all-deps.jar 
+java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar jpa-entity-generator-core-0.9.1-all-deps.jar 
 ```
 
 - When running with the Maven Plugin
