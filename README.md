@@ -91,14 +91,22 @@ packages:
     # Name of the table from which the JPA Entity to be generated under the package
     - TABLE_1
     - TABLE_2
-baseClass: dev.aulait.jeg.core.domain.BaseEntity
+# Definition of base classes extended by generated entities
+baseClassDefs:
+  - tables:
+      - TABLE_1
+      - TABLE_2
+    baseClass: dev.aulait.jeg.core.domain.CompositeBaseEntity
+  - tables:
+      - "*"
+    baseClass: dev.aulait.jeg.core.domain.BaseEntity
 # Definition of Annotaion
 annotationDefs:
   uuid:
     type: jakarta.persistence.GeneratedValue
     attributes:
       strategy: jakarta.persistence.GenerationType.UUID
-# Columns declaring the annotation defined in annotationDefs
+# Columns for entity fields declaring the annotation defined in annotationDefs
 annotatedCols:
   main.id:
     - uuid
