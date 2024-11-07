@@ -49,7 +49,7 @@
     </condition>
 
     <exec executable="${mvn.cmd}" failonerror="true">
-      <arg line="deploy -P release${maven-central}" />
+      <arg line="clean deploy -P !local-dev,release${maven-central}" />
     </exec>
   </target>
 
