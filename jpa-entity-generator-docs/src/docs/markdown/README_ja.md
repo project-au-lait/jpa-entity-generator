@@ -61,6 +61,7 @@ jegを実行する際のjavaコマンドの引数、またはMaven Plugnのconfi
 
 - configFilePath : jeg設定ファイルのパス
 - outputDir : JPA Entityのjavaファイルを出力するルートディレクトリ
+- metadataOutputDir: JPA Entityのメタデータファイル(`jeg-metadata.json`)を出力するディレクトリ
 - jdbcUrl : JPA Entityの生成対象となるDBへのJDBC接続文字列
 - jdbcUsername : DB接続の認証に使用するユーザー名
 - jdbcPassword : DB接続の認証に使用するパスワード
@@ -77,14 +78,17 @@ jeg設定ファイルはYAML形式で作成します。
 設定項目の仕様は以下の通りです。
 
 ```yml
-# JDBC connection string to the target DB for generating JPA Entity
-jdbcUrl: jdbc:postgresql://localhost:5438/postgres
-# Username used to authenticate DB connection
-jdbcUsername: postgres
-# Password used to authenticate DB connection
-jdbcPassword: postgres
-# Root directory to which JPA Entity java files are output
-outputDir: target
+runtime:
+  # JDBC connection string to the target DB for generating JPA Entity
+  jdbcUrl: jdbc:postgresql://localhost:5432/postgres
+  # Username used to authenticate DB connection
+  jdbcUsername: postgres
+  # Password used to authenticate DB connection
+  jdbcPassword: postgres
+  # Root directory to which JPA Entity java files are output
+  outputDir: target
+  # Directory to which JPA Entity metadata file is output
+  metadataOutputDir: target
 # Packages of JPA Entity
 packages:
   dev.aulait.jeg.core.domain:

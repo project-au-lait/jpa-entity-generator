@@ -61,6 +61,7 @@ The java command argument or Maven Plugn configuration item specification for ru
 
 - configFilePath - Path of the jeg configuration file
 - outputDir: The root directory where JPA Entity java files are output.
+- metadataOutputDir: The directory where JPA Entity metadata file (`jeg-metadata.json`) is output.
 - jdbcUrl: JDBC connection string to the DB for which the JPA Entity is to be generated
 - jdbcUsername: User name used to authenticate the DB connection
 - jdbcPassword-Password used to authenticate the DB connection
@@ -77,14 +78,17 @@ The jeg configuration file is created in YAML format.
 The specifications of the setting items are as follows.
 
 ```yml
-# JDBC connection string to the target DB for generating JPA Entity
-jdbcUrl: jdbc:postgresql://localhost:5438/postgres
-# Username used to authenticate DB connection
-jdbcUsername: postgres
-# Password used to authenticate DB connection
-jdbcPassword: postgres
-# Root directory to which JPA Entity java files are output
-outputDir: target
+runtime:
+  # JDBC connection string to the target DB for generating JPA Entity
+  jdbcUrl: jdbc:postgresql://localhost:5432/postgres
+  # Username used to authenticate DB connection
+  jdbcUsername: postgres
+  # Password used to authenticate DB connection
+  jdbcPassword: postgres
+  # Root directory to which JPA Entity java files are output
+  outputDir: target
+  # Directory to which JPA Entity metadata file is output
+  metadataOutputDir: target
 # Packages of JPA Entity
 packages:
   dev.aulait.jeg.core.domain:
