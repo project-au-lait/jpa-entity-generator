@@ -9,6 +9,8 @@ public class RuntimeConfig {
   @Option(names = {"-o", "--output-dir"})
   private String outputDir;
 
+  private String metadataOutputDir;
+
   @Option(names = "--jdbc-url")
   private String jdbcUrl;
 

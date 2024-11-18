@@ -1,0 +1,22 @@
+{
+  "packageName": "dev.aulait.jeg.core.domain.parentchild",
+  "className": "ChildEntity",
+  "fields": [
+    {
+      "fieldName": "id",
+      "javaType": "ChildEntityId",
+      "multiple": false,
+      "id": true,
+      "required": false
+    },
+    {
+      "fieldName": "name",
+      "javaType": "String",
+      "multiple": false,
+      "dbType": "varchar",
+      "dbTypeSize": 100,
+      "id": false,
+      "required": false
+    }
+  ]
+}

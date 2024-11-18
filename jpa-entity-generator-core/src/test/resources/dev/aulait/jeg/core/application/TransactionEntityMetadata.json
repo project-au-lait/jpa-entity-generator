@@ -1,0 +1,31 @@
+{
+  "packageName": "dev.aulait.jeg.core.domain.mastertran",
+  "className": "TransactionEntity",
+  "fields": [
+    {
+      "fieldName": "id",
+      "javaType": "String",
+      "multiple": false,
+      "dbType": "bpchar",
+      "dbTypeSize": 36,
+      "id": true,
+      "required": true
+    },
+    {
+      "fieldName": "name",
+      "javaType": "String",
+      "multiple": false,
+      "dbType": "varchar",
+      "dbTypeSize": 100,
+      "id": false,
+      "required": false
+    },
+    {
+      "fieldName": "master",
+      "javaType": "dev.aulait.jeg.core.domain.mastertran.MasterEntity",
+      "multiple": false,
+      "id": false,
+      "required": false
+    }
+  ]
+}

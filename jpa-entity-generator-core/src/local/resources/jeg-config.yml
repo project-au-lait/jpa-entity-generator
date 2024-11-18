@@ -3,6 +3,7 @@ runtime:
   jdbcUsername: "${db.username}"
   jdbcPassword: "${db.password}"
   outputDir: "${jeg.outputDir}"
+  metadataOutputDir: "${jeg.outputDir}"
 schemaPattern: public
 packages:
   dev.aulait.jeg.core.domain.mastertran:

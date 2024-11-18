@@ -96,7 +96,7 @@ public class TableToEntityProcessor {
       }
     }
     field.setName(WordUtils.snakeToLowerCamel(column.getCOLUMN_NAME()));
-    field.setColumnName(column.getCOLUMN_NAME());
+    field.setColumn(column);
 
     field.setType(dbtype2javatype(column.getDATA_TYPE()));
 

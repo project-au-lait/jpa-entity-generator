@@ -28,15 +28,34 @@ public class EntityGenerator {
   EntityImportProcessor entityImportProcessor = new EntityImportProcessor();
   TemplateProcessor templateProcessor = new TemplateProcessor();
   TextFileWriter writer = new TextFileWriter();
+  EntityMetadataGenerator entityMetadataGenerator;
 
   public EntityGenerator(Config config) {
     reader = new DatabaseMetaDataReader(config);
     tableToEntityProcessor = new TableToEntityProcessor(config);
     relationProcessor = new RelationProcessorOneDirectionalImpl(config);
     templateProcessor.setFormatter(FormatterFactory.create(config.getFormatter()));
+    entityMetadataGenerator = new EntityMetadataGenerator(config);
   }
 
   public List<Path> execute() {
+    List<EntityModel> entities = generateEntities();
+
+    List<TextFileModel> files = templateProcessor.process(entities);
+
+    List<EmbeddedIdModel> embeddedIds =
+        entities.stream().map(EntityModel::getEmbeddedId).filter(Objects::nonNull).toList();
+
+    files.addAll(templateProcessor.process(embeddedIds));
+
+    List<Path> outputFiles = writer.write(files);
+
+    entityMetadataGenerator.generate(entities).ifPresent(outputFiles::add);
+
+    return outputFiles;
+  }
+
+  List<EntityModel> generateEntities() {
     DatabaseMetaDataModel meta = reader.read();
     List<TableModel> tables = databaseMetaDataProcessor.process(meta);
 
@@ -46,13 +65,6 @@ public class EntityGenerator {
 
     entityImportProcessor.process(entities);
 
-    List<TextFileModel> files = templateProcessor.process(entities);
-
-    List<EmbeddedIdModel> embeddedIds =
-        entities.stream().map(EntityModel::getEmbeddedId).filter(Objects::nonNull).toList();
-
-    files.addAll(templateProcessor.process(embeddedIds));
-
-    return writer.write(files);
+    return entities;
   }
 }
