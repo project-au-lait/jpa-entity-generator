@@ -25,10 +25,13 @@ public class EntityMetadataProcessor {
     if (entity.getEmbeddedId() != null) {
       fields.add(process(entity.getEmbeddedId()));
     }
+
     fields.addAll(entity.getFields().stream().map(this::process).toList());
+    fields.addAll(entity.getOneToOnes().stream().map(this::process).toList());
     fields.addAll(entity.getOneToManies().stream().map(this::process).toList());
     fields.addAll(entity.getManyToOnes().stream().map(this::process).toList());
     fields.addAll(entity.getManyToManies().stream().map(this::process).toList());
+
     metadata.setFields(fields);
 
     return metadata;
@@ -53,6 +56,14 @@ public class EntityMetadataProcessor {
     metadata.setFieldName("id");
     metadata.setJavaType(embeddedId.getName());
     metadata.setId(true);
+
+    return metadata;
+  }
+
+  FieldMetadataModel process(OneToOneModel oneToOne) {
+    FieldMetadataModel metadata = new FieldMetadataModel();
+    metadata.setFieldName(oneToOne.getFieldName());
+    metadata.setJavaType(oneToOne.getEntity().getFqdn());
 
     return metadata;
   }

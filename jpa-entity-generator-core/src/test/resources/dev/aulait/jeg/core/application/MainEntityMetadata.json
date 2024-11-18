@@ -75,6 +75,13 @@
       "required": false
     },
     {
+      "fieldName": "oneToOne",
+      "javaType": "dev.aulait.jeg.core.domain.rel.OneToOneEntity",
+      "multiple": false,
+      "id": false,
+      "required": false
+    },
+    {
       "fieldName": "mainChildren",
       "javaType": "dev.aulait.jeg.core.domain.rel.MainChildEntity",
       "multiple": true,
