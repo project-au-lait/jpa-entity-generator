@@ -29,5 +29,5 @@ public class ParentEntity extends dev.aulait.jeg.core.domain.BaseEntity
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "id", insertable = false, updatable = false)
-  private Set<ChildEntity> childs = new HashSet<>();
+  private Set<ChildEntity> children = new HashSet<>();
 }

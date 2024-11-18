@@ -29,5 +29,5 @@ public class MultifkParentEntity extends dev.aulait.jeg.core.domain.BaseEntity
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "id", insertable = false, updatable = false)
-  private Set<MultifkChildEntity> multifkChilds = new HashSet<>();
+  private Set<MultifkChildEntity> multifkChildren = new HashSet<>();
 }

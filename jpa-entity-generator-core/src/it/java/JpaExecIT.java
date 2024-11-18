@@ -16,7 +16,7 @@ class JpaExecIT {
             "SELECT m FROM MainEntity m "
                 + "JOIN FETCH m.oneToOne "
                 + "JOIN FETCH m.manyToManies "
-                + "JOIN FETCH m.mainChilds ",
+                + "JOIN FETCH m.mainChildren ",
             Object.class);
 
     query.getResultList();
