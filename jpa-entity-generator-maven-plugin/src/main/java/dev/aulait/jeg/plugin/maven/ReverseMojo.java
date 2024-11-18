@@ -33,6 +33,9 @@ public class ReverseMojo extends AbstractMojo {
   @Parameter(property = "outputDir")
   private String outputDir;
 
+  @Parameter(property = "metadataOutputDir")
+  private String metadataOutputDir;
+
   @Component private MavenProject project;
 
   @Override
