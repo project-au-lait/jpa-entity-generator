@@ -23,18 +23,18 @@ public class OneToManyModel {
   }
 
   private List<Type> buildImports() {
-    List<Type> imports = new ArrayList<>();
-    imports.add(Types.OneToMany);
-    imports.add(Types.FetchType);
-    imports.add(Types.Set);
-    imports.add(entity);
-    imports.add(Types.HashSet);
-    imports.add(Types.JoinColumn);
+    List<Type> imps = new ArrayList<>();
+    imps.add(Types.OneToMany);
+    imps.add(Types.FetchType);
+    imps.add(Types.Set);
+    imps.add(entity);
+    imps.add(Types.HashSet);
+    imps.add(Types.JoinColumn);
 
     if (CollectionUtils.isNotEmpty(cascades)) {
-      imports.add(Types.CascadeType);
+      imps.add(Types.CascadeType);
     }
 
-    return imports;
+    return imps;
   }
 }

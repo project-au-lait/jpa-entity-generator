@@ -20,15 +20,15 @@ public class ManyToOneModel {
   }
 
   private List<Type> buildImports() {
-    List<Type> imports = new ArrayList<>();
-    imports.add(Types.ManyToOne);
-    imports.add(Types.FetchType);
-    imports.add(Types.JoinColumn);
+    List<Type> imps = new ArrayList<>();
+    imps.add(Types.ManyToOne);
+    imps.add(Types.FetchType);
+    imps.add(Types.JoinColumn);
     if (joinColumns.size() > 1) {
-      imports.add(Types.JoinColumns);
+      imps.add(Types.JoinColumns);
     }
-    imports.add(entity);
+    imps.add(entity);
 
-    return imports;
+    return imps;
   }
 }

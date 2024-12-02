@@ -22,16 +22,16 @@ public class OneToOneModel {
   }
 
   private List<Type> buildImports() {
-    List<Type> imports = new ArrayList<>();
-    imports.add(Types.OneToOne);
-    imports.add(Types.FetchType);
-    imports.add(Types.PrimaryKeyJoinColumn);
-    imports.add(entity);
+    List<Type> imps = new ArrayList<>();
+    imps.add(Types.OneToOne);
+    imps.add(Types.FetchType);
+    imps.add(Types.PrimaryKeyJoinColumn);
+    imps.add(entity);
 
     if (CollectionUtils.isNotEmpty(cascades)) {
-      imports.add(Types.CascadeType);
+      imps.add(Types.CascadeType);
     }
 
-    return imports;
+    return imps;
   }
 }
