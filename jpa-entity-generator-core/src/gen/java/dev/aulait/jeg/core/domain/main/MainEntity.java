@@ -3,7 +3,6 @@ package dev.aulait.jeg.core.domain.main;
 import dev.aulait.jeg.core.domain.rel.MainChildEntity;
 import dev.aulait.jeg.core.domain.rel.ManyToManyEntity;
 import dev.aulait.jeg.core.domain.rel.OneToOneEntity;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

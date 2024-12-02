@@ -1,6 +1,5 @@
 package dev.aulait.jeg.core.domain.parentchild;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
