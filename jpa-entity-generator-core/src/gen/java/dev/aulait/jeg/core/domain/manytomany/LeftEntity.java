@@ -30,8 +30,8 @@ public class LeftEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "left_right_rel",
-      joinColumns = {@JoinColumn(name = "left_id", nullable = false, updatable = false)},
-      inverseJoinColumns = {@JoinColumn(name = "right_id", nullable = false, updatable = false)})
+      joinColumns = {@JoinColumn(name = "left_id", nullable = false)},
+      inverseJoinColumns = {@JoinColumn(name = "right_id", nullable = false)})
   private Set<RightEntity> rights = new HashSet<>();
 
   ;
