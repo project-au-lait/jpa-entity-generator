@@ -51,8 +51,7 @@ public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.base
     [/]
   )
   [# th:if="${oneToMany.joinColumns.size() == 1}"]
-      /*[- TODO 暫定的にOneToManyのinsertable、updatableをfalseに固定 -]*/
-      @JoinColumn(name="[(${oneToMany.joinColumns.get(0).name})]", insertable = false, updatable = false)
+      @JoinColumn(name="[(${oneToMany.joinColumns.get(0).name})]")
   [/]
   [# th:if="${oneToMany.joinColumns.size() > 1}"]
     @JoinColumns({
@@ -90,12 +89,12 @@ public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.base
       @JoinTable(name="[(${manyToMany.joinTable})]",
          joinColumns = { 
           [# th:each="joinColumn : ${manyToMany.joinColumns}"]
-            @JoinColumn(name="[(${joinColumn.name})]", nullable=false, updatable=false)
+            @JoinColumn(name="[(${joinColumn.name})]", nullable=false)
           [/]
         },
         inverseJoinColumns = { 
           [# th:each="inverseJoinColumn : ${manyToMany.inverseJoinColumns}"]
-            @JoinColumn(name="[(${inverseJoinColumn.name})]", nullable=false, updatable=false)
+            @JoinColumn(name="[(${inverseJoinColumn.name})]", nullable=false)
           [/]
         })
   [# th:each="annotation : ${manyToMany.annotations}"]
