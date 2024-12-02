@@ -9,10 +9,9 @@ public class JpaUtils {
 
   private static final EntityManagerFactory emf =
       Persistence.createEntityManagerFactory("PERSISTENCE");
-  private static final EntityManager em = emf.createEntityManager();
 
   public static EntityManager em() {
-    return em;
+    return emf.createEntityManager();
   }
 
   public static EntityManagerFactory emf() {
