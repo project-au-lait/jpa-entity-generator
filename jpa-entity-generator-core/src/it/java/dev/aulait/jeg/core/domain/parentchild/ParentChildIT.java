@@ -24,6 +24,7 @@ class ParentChildIT {
     ChildEntity child = new ChildEntity();
     child.setId(childId);
     child.setName(RandomStringUtils.randomAlphanumeric(5));
+    parent.getChildren().add(child);
 
     EntityTransaction tran = em.getTransaction();
     tran.begin();
@@ -35,7 +36,13 @@ class ParentChildIT {
     em.clear();
 
     ParentEntity savedParent = em.find(ParentEntity.class, parent.getId());
+    ChildEntity savedChild = savedParent.getChildren().iterator().next();
 
-    assertEquals(child.getName(), savedParent.getChildren().iterator().next().getName());
+    assertEquals(child.getName(), savedChild.getName());
+
+    em.remove(savedChild);
+    savedParent.getChildren().remove(savedChild);
+
+    em.flush();
   }
 }

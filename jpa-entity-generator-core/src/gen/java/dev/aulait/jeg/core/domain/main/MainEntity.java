@@ -58,7 +58,7 @@ public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
   private OneToOneEntity oneToOne;
 
   @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
+  @JoinColumn(name = "id", insertable = false, updatable = false)
   private Set<MainChildEntity> mainChildren = new HashSet<>();
 
   @ManyToMany(fetch = FetchType.LAZY)

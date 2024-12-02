@@ -51,12 +51,12 @@ public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.base
     [/]
   )
   [# th:if="${oneToMany.joinColumns.size() == 1}"]
-      @JoinColumn(name="[(${oneToMany.joinColumns.get(0).name})]")
+      @JoinColumn(name="[(${oneToMany.joinColumns.get(0).name})]", insertable = false, updatable = false)
   [/]
   [# th:if="${oneToMany.joinColumns.size() > 1}"]
     @JoinColumns({
       [# th:each="joinColumn, stat : ${oneToMany.joinColumns}"]
-        @JoinColumn(name="[(${joinColumn.name})]")[# th:unless="${stat.last}"],[/]
+        @JoinColumn(name="[(${joinColumn.name})]", insertable = false, updatable = false)[# th:unless="${stat.last}"],[/]
       [/]
     })
   [/]
