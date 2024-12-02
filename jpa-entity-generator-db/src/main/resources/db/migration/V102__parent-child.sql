@@ -6,9 +6,9 @@ CREATE TABLE parent (
 
 
 CREATE TABLE child (
-  id CHAR(36) REFERENCES parent,
+  parent_id CHAR(36) REFERENCES parent,
   seq_no int,
   name VARCHAR(100),
   --${commonColumns},
-  CONSTRAINT child_pk PRIMARY KEY (id, seq_no)
+  CONSTRAINT child_pk PRIMARY KEY (parent_id, seq_no)
 );

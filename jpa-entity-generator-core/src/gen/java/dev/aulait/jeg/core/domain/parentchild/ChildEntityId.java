@@ -8,8 +8,8 @@ import lombok.Data;
 @Embeddable
 public class ChildEntityId implements java.io.Serializable {
 
-  @Column(name = "id")
-  private String id;
+  @Column(name = "parent_id")
+  private String parentId;
 
   @Column(name = "seq_no")
   private Integer seqNo;
