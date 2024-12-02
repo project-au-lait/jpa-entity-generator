@@ -7,7 +7,10 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JsonUtils {
 
   private static final ObjectMapper mapper = new ObjectMapper();
