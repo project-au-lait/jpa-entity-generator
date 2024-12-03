@@ -14,6 +14,9 @@ public class EntityImportProcessor {
     entity.addImport(Types.Column);
     entity.addImport(Types.Getter);
     entity.addImport(Types.Setter);
+    entity.addImport(Types.Builder);
+    entity.addImport(Types.AllArgsConstructor);
+    entity.addImport(Types.NoArgsConstructor);
 
     if (entity.getEmbeddedId() == null) {
       entity.addImport(Types.Id);

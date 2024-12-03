@@ -6,6 +6,9 @@ import [(${import})];
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="[(${root.tableName})]"
 )
