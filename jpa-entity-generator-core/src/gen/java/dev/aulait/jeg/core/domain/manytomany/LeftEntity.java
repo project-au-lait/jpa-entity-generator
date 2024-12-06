@@ -10,11 +10,17 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "left")
 public class LeftEntity extends dev.aulait.jeg.core.domain.BaseEntity
@@ -27,6 +33,7 @@ public class LeftEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @Column(name = "name")
   private String name;
 
+  @Builder.Default
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "left_right_rel",

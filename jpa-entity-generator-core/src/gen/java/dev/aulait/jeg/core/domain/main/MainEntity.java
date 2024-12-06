@@ -16,11 +16,17 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "main")
 public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
@@ -57,10 +63,12 @@ public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @lombok.Setter()
   private OneToOneEntity oneToOne;
 
+  @Builder.Default
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "id", insertable = false, updatable = false)
   private Set<MainChildEntity> mainChildren = new HashSet<>();
 
+  @Builder.Default
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "main_many_to_many_rel",
