@@ -33,6 +33,7 @@ public class LeftEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @Column(name = "name")
   private String name;
 
+  @Builder.Default
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "left_right_rel",

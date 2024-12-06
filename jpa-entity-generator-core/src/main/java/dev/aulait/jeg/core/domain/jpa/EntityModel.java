@@ -54,4 +54,8 @@ public class EntityModel extends TemplateModel implements Type {
 
     imports.add(type.getFqdn());
   }
+
+  public boolean isEmbeddedIdOnly() {
+    return fields.stream().allMatch(FieldModel::isEmbeddedId);
+  }
 }

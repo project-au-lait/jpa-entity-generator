@@ -45,6 +45,7 @@ public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.base
 [/]
 
 [# th:each="oneToMany : ${root.oneToManies}"]
+  @Builder.Default
   @OneToMany(fetch=FetchType.LAZY
     [# th:each="cascade, stat : ${oneToMany.cascades}"]
       [# th:if="${stat.first}"], cascade={[/]
@@ -88,6 +89,7 @@ public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.base
 [/]
 
 [# th:each="manyToMany : ${root.manyToManies}"]
+  @Builder.Default
   @ManyToMany(fetch=FetchType.LAZY)
       @JoinTable(name="[(${manyToMany.joinTable})]",
          joinColumns = { 

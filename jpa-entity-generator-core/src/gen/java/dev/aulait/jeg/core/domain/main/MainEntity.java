@@ -63,10 +63,12 @@ public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @lombok.Setter()
   private OneToOneEntity oneToOne;
 
+  @Builder.Default
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "id", insertable = false, updatable = false)
   private Set<MainChildEntity> mainChildren = new HashSet<>();
 
+  @Builder.Default
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "main_many_to_many_rel",
