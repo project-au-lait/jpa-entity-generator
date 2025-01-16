@@ -99,6 +99,11 @@ public class TableToEntityProcessor {
     field.setColumn(column);
 
     field.setType(dbtype2javatype(column.getDATA_TYPE()));
+    log.info(
+        "column: {}, dbType: {}, javaType: {}",
+        column.getCOLUMN_NAME(),
+        column.getDATA_TYPE(),
+        field.getType());
 
     List<AnnotationModel> annotations =
         config.findAnnotations(column.getTABLE_NAME(), column.getCOLUMN_NAME()).stream()
@@ -128,6 +133,7 @@ public class TableToEntityProcessor {
   String dbtype2javatype(int dataType) {
     switch (dataType) {
       case Types.BOOLEAN:
+      case Types.BIT:
         return "Boolean";
 
       // numeric

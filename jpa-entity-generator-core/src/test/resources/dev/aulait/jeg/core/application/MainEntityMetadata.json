@@ -57,6 +57,15 @@
       "required": false
     },
     {
+      "fieldName": "colBoolean",
+      "javaType": "Boolean",
+      "multiple": false,
+      "dbType": "bool",
+      "dbTypeSize": 1,
+      "id": false,
+      "required": false
+    },
+    {
       "fieldName": "colJsonb",
       "javaType": "String",
       "multiple": false,

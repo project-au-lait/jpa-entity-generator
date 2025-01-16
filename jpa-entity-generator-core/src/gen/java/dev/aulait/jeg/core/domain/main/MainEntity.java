@@ -52,6 +52,9 @@ public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @Column(name = "col_timestamp")
   private java.time.LocalDateTime colTimestamp;
 
+  @Column(name = "col_boolean")
+  private Boolean colBoolean;
+
   @Column(name = "col_jsonb")
   private String colJsonb;
 
