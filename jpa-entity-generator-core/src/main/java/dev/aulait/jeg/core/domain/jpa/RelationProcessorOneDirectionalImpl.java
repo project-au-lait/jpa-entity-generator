@@ -131,6 +131,7 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
     for (KeyModel key : fk.getKeys()) {
       JoinColumnModel joinColumn = new JoinColumnModel();
       joinColumn.setName(key.getFKCOLUMN_NAME());
+      joinColumn.setReferencedColumnName(key.getPKCOLUMN_NAME());
       oneToMany.getJoinColumns().add(joinColumn);
     }
 
@@ -160,6 +161,7 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
     for (KeyModel key : fk.getKeys()) {
       JoinColumnModel joinColumn = new JoinColumnModel();
       joinColumn.setName(key.getFKCOLUMN_NAME());
+      joinColumn.setReferencedColumnName(key.getPKCOLUMN_NAME());
       manyToOne.getJoinColumns().add(joinColumn);
     }
 
@@ -204,6 +206,7 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
       for (KeyModel key : fkInRel.getKeys()) {
         JoinColumnModel joinColumn = new JoinColumnModel();
         joinColumn.setName(key.getFKCOLUMN_NAME());
+        joinColumn.setReferencedColumnName(key.getPKCOLUMN_NAME());
         if (fkInRel.getPkTable().equals(leftTable)) {
           manyToMany.getJoinColumns().add(joinColumn);
         } else {

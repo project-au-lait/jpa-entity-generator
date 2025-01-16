@@ -65,15 +65,17 @@ public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
 
   @Builder.Default
   @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id", insertable = false, updatable = false)
+  @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
   private Set<MainChildEntity> mainChildren = new HashSet<>();
 
   @Builder.Default
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "main_many_to_many_rel",
-      joinColumns = {@JoinColumn(name = "main_id", nullable = false)},
-      inverseJoinColumns = {@JoinColumn(name = "many_to_many_id", nullable = false)})
+      joinColumns = {@JoinColumn(name = "main_id", referencedColumnName = "id", nullable = false)},
+      inverseJoinColumns = {
+        @JoinColumn(name = "many_to_many_id", referencedColumnName = "id", nullable = false)
+      })
   private Set<ManyToManyEntity> manyToManies = new HashSet<>();
 
   ;

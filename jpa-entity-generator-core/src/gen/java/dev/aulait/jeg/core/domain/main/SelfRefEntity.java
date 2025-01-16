@@ -31,6 +31,6 @@ public class SelfRefEntity extends dev.aulait.jeg.core.domain.BaseEntity
   private String name;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "self_id")
+  @JoinColumn(name = "self_id", referencedColumnName = "id")
   private SelfRefEntity selfRef;
 }

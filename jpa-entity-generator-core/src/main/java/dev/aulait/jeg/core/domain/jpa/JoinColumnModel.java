@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class JoinColumnModel {
   private String name;
+  private String referencedColumnName;
 }

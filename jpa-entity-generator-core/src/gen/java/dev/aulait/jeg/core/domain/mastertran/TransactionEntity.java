@@ -31,6 +31,6 @@ public class TransactionEntity extends dev.aulait.jeg.core.domain.BaseEntity
   private String name;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "master_id")
+  @JoinColumn(name = "master_id", referencedColumnName = "id")
   private MasterEntity master;
 }

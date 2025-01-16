@@ -34,8 +34,8 @@ public class CompositeOneToManyEntity extends dev.aulait.jeg.core.domain.BaseEnt
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumns({
-    @JoinColumn(name = "composite_main_id_1"),
-    @JoinColumn(name = "composite_main_id_2")
+    @JoinColumn(name = "composite_main_id_1", referencedColumnName = "id_1"),
+    @JoinColumn(name = "composite_main_id_2", referencedColumnName = "id_2")
   })
   private CompositeMainEntity compositeMain;
 }

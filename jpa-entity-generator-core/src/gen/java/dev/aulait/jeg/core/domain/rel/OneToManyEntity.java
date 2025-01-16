@@ -32,7 +32,7 @@ public class OneToManyEntity extends dev.aulait.jeg.core.domain.BaseEntity
   private String name;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "main_id")
+  @JoinColumn(name = "main_id", referencedColumnName = "id")
   @lombok.Setter()
   private MainEntity main;
 }

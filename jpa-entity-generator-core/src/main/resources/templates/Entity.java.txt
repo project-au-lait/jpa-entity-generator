@@ -55,12 +55,12 @@ public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.base
     [/]
   )
   [# th:if="${oneToMany.joinColumns.size() == 1}"]
-      @JoinColumn(name="[(${oneToMany.joinColumns.get(0).name})]", insertable = false, updatable = false)
+      @JoinColumn(name="[(${oneToMany.joinColumns.get(0).name})]", referencedColumnName="[(${oneToMany.joinColumns.get(0).referencedColumnName})]", insertable = false, updatable = false)
   [/]
   [# th:if="${oneToMany.joinColumns.size() > 1}"]
     @JoinColumns({
       [# th:each="joinColumn, stat : ${oneToMany.joinColumns}"]
-        @JoinColumn(name="[(${joinColumn.name})]", insertable = false, updatable = false)[# th:unless="${stat.last}"],[/]
+        @JoinColumn(name="[(${joinColumn.name})]", referencedColumnName="[(${joinColumn.referencedColumnName})]", insertable = false, updatable = false)[# th:unless="${stat.last}"],[/]
       [/]
     })
   [/]
@@ -73,12 +73,12 @@ public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.base
 [# th:each="manyToOne : ${root.manyToOnes}"]
   @ManyToOne(fetch=FetchType.LAZY)
   [# th:if="${manyToOne.joinColumns.size() == 1}"]
-      @JoinColumn(name="[(${manyToOne.joinColumns.get(0).name})]")
+      @JoinColumn(name="[(${manyToOne.joinColumns.get(0).name})]", referencedColumnName="[(${manyToOne.joinColumns.get(0).referencedColumnName})]")
   [/]
   [# th:if="${manyToOne.joinColumns.size() > 1}"]
     @JoinColumns({
       [# th:each="joinColumn, stat : ${manyToOne.joinColumns}"]
-        @JoinColumn(name="[(${joinColumn.name})]")[# th:unless="${stat.last}"],[/]
+        @JoinColumn(name="[(${joinColumn.name})]", referencedColumnName="[(${joinColumn.referencedColumnName})]")[# th:unless="${stat.last}"],[/]
       [/]
     })
   [/]
@@ -94,12 +94,12 @@ public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.base
       @JoinTable(name="[(${manyToMany.joinTable})]",
          joinColumns = { 
           [# th:each="joinColumn : ${manyToMany.joinColumns}"]
-            @JoinColumn(name="[(${joinColumn.name})]", nullable=false)
+            @JoinColumn(name="[(${joinColumn.name})]", referencedColumnName="[(${joinColumn.referencedColumnName})]", nullable=false)
           [/]
         },
         inverseJoinColumns = { 
           [# th:each="inverseJoinColumn : ${manyToMany.inverseJoinColumns}"]
-            @JoinColumn(name="[(${inverseJoinColumn.name})]", nullable=false)
+            @JoinColumn(name="[(${inverseJoinColumn.name})]", referencedColumnName="[(${inverseJoinColumn.referencedColumnName})]", nullable=false)
           [/]
         })
   [# th:each="annotation : ${manyToMany.annotations}"]

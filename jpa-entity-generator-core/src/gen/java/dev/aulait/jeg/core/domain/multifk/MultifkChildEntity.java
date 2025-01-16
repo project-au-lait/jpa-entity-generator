@@ -29,6 +29,6 @@ public class MultifkChildEntity extends dev.aulait.jeg.core.domain.BaseEntity
   private String name;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "multifk_parent_id")
+  @JoinColumn(name = "multifk_parent_id", referencedColumnName = "id")
   private MultifkParentEntity multifkParent;
 }
