@@ -22,13 +22,18 @@ public class ManyToManyModel {
   }
 
   private List<Type> buildImports() {
-    return List.of(
-        Types.ManyToMany,
-        Types.FetchType,
-        Types.JoinTable,
-        Types.JoinColumn,
-        entity,
-        Types.Set,
-        Types.HashSet);
+    List<Type> imps = new ArrayList<>();
+    imps.add(Types.ManyToMany);
+    imps.add(Types.FetchType);
+    imps.add(Types.JoinTable);
+    imps.add(Types.JoinColumn);
+    if (joinColumns.size() > 1) {
+      imps.add(Types.JoinColumns);
+    }
+    imps.add(entity);
+    imps.add(Types.Set);
+    imps.add(Types.HashSet);
+
+    return imps;
   }
 }

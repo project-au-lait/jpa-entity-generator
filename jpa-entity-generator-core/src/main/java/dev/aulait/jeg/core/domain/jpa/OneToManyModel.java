@@ -30,6 +30,9 @@ public class OneToManyModel {
     imps.add(entity);
     imps.add(Types.HashSet);
     imps.add(Types.JoinColumn);
+    if (joinColumns.size() > 1) {
+      imps.add(Types.JoinColumns);
+    }
 
     if (CollectionUtils.isNotEmpty(cascades)) {
       imps.add(Types.CascadeType);
