@@ -1,16 +1,15 @@
 services:
   dbms:
-    image: postgres
+    image: ${DB_IMAGE}
     environment:
       TZ: ${OS_TIMEZONE}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d postgres -U postgres"]
+      test: ["CMD-SHELL", "${DB_HEALTHCHECK}"]
       interval: 10s
       timeout: 10s
       retries: 5
     ports:
-      - ${DB_PORT}:5432
+      - ${DB_PORT_HOST}:${DB_PORT_CONTAINER}
 
   schemaspy:
     image: schemaspy/schemaspy

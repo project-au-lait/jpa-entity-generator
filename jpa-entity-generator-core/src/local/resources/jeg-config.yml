@@ -4,7 +4,7 @@ runtime:
   jdbcPassword: "${db.password}"
   outputDir: "${jeg.outputDir}"
   metadataOutputDir: "${jeg.outputDir}"
-schemaPattern: public
+schemaPattern: ${db.schema}
 packages:
   dev.aulait.jeg.core.domain.mastertran:
     - master

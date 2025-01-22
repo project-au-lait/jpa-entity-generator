@@ -1,3 +1,4 @@
+.dbms-h2
 jeg.log
 jpa-entity-generator-db/.env
 jpa-entity-generator-db/schemaspy.properties

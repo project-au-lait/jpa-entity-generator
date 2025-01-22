@@ -83,17 +83,19 @@
 
     <core.mainClass>dev.aulait.jeg.core.interfaces.Main</core.mainClass>
 
+    <db.healthcheck>pg_isready -d postgres -U postgres</db.healthcheck>
+    <db.image>postgres</db.image>
     <db.jdbc.groupId>org.postgresql</db.jdbc.groupId>
     <db.jdbc.artifactId>postgresql</db.jdbc.artifactId>
     <db.jdbc.version>42.7.2</db.jdbc.version>
-    <db.jdbc.driver>org.postgresql.Driver</db.jdbc.driver>
-    <db.jdbc.url>jdbc:postgresql://${db.host}:${db.port}/${db.name}</db.jdbc.url>
-    <db.password>postgres</db.password>
+    <db.jdbc.url>jdbc:postgresql://${db.host}:${db.port.host}/${db.name}?currentSchema=${db.schema}</db.jdbc.url>
+    <db.password>jeg</db.password>
     <db.host>localhost</db.host>
-    <db.name>postgres</db.name>
-    <db.port>5438</db.port>
-    <db.schema>public</db.schema>
-    <db.username>postgres</db.username>
+    <db.name>jeg</db.name>
+    <db.port.host>5438</db.port.host>
+    <db.port.container>5432</db.port.container>
+    <db.schema>jeg</db.schema>
+    <db.username>jeg</db.username>
 
     <jeg.outputDir>${project.build.directory}/generated-test-resources/jeg</jeg.outputDir>
 
@@ -311,6 +313,31 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+
+
+    <profile>
+      <id>dbms-h2</id>
+
+      <activation>
+        <file>
+          <exists>../.dbms-h2</exists>
+        </file>
+      </activation>
+
+      <properties>
+        <db.healthcheck>echo ok</db.healthcheck>
+        <db.image>oscarfonts/h2</db.image>
+        <db.jdbc.groupId>com.h2database</db.jdbc.groupId>
+        <db.jdbc.artifactId>h2</db.jdbc.artifactId>
+        <db.jdbc.version>2.3.232</db.jdbc.version>
+        <db.jdbc.url>jdbc:h2:tcp://${db.host}:${db.port.host}/${db.name}</db.jdbc.url>
+        <db.password></db.password>
+        <db.port.host>1521</db.port.host>
+        <db.port.container>1521</db.port.container>
+        <db.name>test</db.name>
+        <db.username>sa</db.username>
+      </properties>
     </profile>
   </profiles>
 </project>
