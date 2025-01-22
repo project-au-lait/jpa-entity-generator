@@ -321,12 +321,14 @@
       <id>dbms-h2</id>
 
       <activation>
-        <file>
-          <exists>../.dbms-h2</exists>
-        </file>
+        <property>
+          <name>env.JEG_DBMS</name>
+          <value>h2</value>
+        </property>
       </activation>
 
       <properties>
+        <db.dbms>h2</db.dbms>
         <db.healthcheck>echo ok</db.healthcheck>
         <db.image>oscarfonts/h2</db.image>
         <db.jdbc.groupId>com.h2database</db.jdbc.groupId>

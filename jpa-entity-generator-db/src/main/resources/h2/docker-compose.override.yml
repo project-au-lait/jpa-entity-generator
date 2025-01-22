@@ -1,0 +1,4 @@
+services:
+  dbms:
+    environment:
+      H2_OPTIONS: -ifNotExists
