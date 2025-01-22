@@ -2,4 +2,5 @@
 jeg.log
 jpa-entity-generator-db/.env
 jpa-entity-generator-db/schemaspy.properties
+jpa-entity-generator-db/docker-compose.override.yml
 target

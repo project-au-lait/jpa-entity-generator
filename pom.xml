@@ -83,6 +83,7 @@
 
     <core.mainClass>dev.aulait.jeg.core.interfaces.Main</core.mainClass>
 
+    <db.dbms>postgres</db.dbms>
     <db.healthcheck>pg_isready -d postgres -U postgres</db.healthcheck>
     <db.image>postgres</db.image>
     <db.jdbc.groupId>org.postgresql</db.jdbc.groupId>

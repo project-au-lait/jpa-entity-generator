@@ -37,6 +37,14 @@
         <targetPath>${project.basedir}</targetPath>
       </resource>
       <resource>
+        <directory>src/main/resources/${db.dbms}</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>docker-compose.override.yml</include>
+        </includes>
+        <targetPath>${project.basedir}</targetPath>
+      </resource>
+      <resource>
         <directory>src/main/resources</directory>
         <includes>
           <include>**/*.sql</include>
