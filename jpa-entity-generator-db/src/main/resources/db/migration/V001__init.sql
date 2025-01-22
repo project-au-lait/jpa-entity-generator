@@ -6,7 +6,7 @@ CREATE TABLE main (
   col_time TIME,
   col_timestamp TIMESTAMP,
   col_boolean BOOLEAN,
-  col_jsonb JSONB,
+  col_json JSON,
   sort_key INT,
   created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   created_by CHAR(36) NOT NULL DEFAULT 'system',

@@ -66,10 +66,10 @@
       "required": false
     },
     {
-      "fieldName": "colJsonb",
+      "fieldName": "colJson",
       "javaType": "String",
       "multiple": false,
-      "dbType": "jsonb",
+      "dbType": "json",
       "dbTypeSize": 2147483647,
       "id": false,
       "required": false

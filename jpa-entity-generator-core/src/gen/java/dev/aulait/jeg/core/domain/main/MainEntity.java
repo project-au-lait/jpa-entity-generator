@@ -55,8 +55,8 @@ public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @Column(name = "col_boolean")
   private Boolean colBoolean;
 
-  @Column(name = "col_jsonb")
-  private String colJsonb;
+  @Column(name = "col_json")
+  private String colJson;
 
   @Column(name = "sort_key")
   private Integer sortKey;
