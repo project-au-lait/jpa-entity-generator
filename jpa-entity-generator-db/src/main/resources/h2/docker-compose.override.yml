@@ -2,3 +2,5 @@ services:
   dbms:
     environment:
       H2_OPTIONS: -ifNotExists
+    ports:
+      - 81:81
