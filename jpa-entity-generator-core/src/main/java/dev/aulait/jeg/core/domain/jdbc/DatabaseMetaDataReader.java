@@ -6,6 +6,8 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,17 +36,16 @@ public class DatabaseMetaDataReader {
 
       DatabaseMetaData meta = conn.getMetaData();
 
-      databaseMetaData.setTables(extractTables(meta));
+      List<TableModel> tables = extractTables(meta);
 
-      databaseMetaData.setColumnMap(extractColumns(meta));
+      databaseMetaData.setColumnMap(toLowerCase(extractColumns(meta)));
 
-      databaseMetaData.setPrimaryKeyMap(extractPrimaryKeys(meta));
+      databaseMetaData.setPrimaryKeyMap(toLowerCase(extractPrimaryKeys(meta, tables)));
 
-      databaseMetaData.setExportedKeys(extractExportedKeys(meta));
+      databaseMetaData.setExportedKeys(
+          extractExportedKeys(meta, tables).stream().peek(this::toLowerCase).toList());
 
-      // databaseMetaData.setExportedKeyMap(extractExportedKeys(meta));
-
-      // databaseMetaData.setImportedKeyMap(extractImportedKeys(meta));
+      databaseMetaData.setTables(tables.stream().peek(this::toLowerCase).toList());
 
     } catch (SQLException e) {
       throw new IllegalArgumentException(e);
@@ -81,7 +82,7 @@ public class DatabaseMetaDataReader {
   Map<String, List<ColumnModel>> extractColumns(DatabaseMetaData meta) throws SQLException {
     try (ResultSet rs =
         meta.getColumns(config.getCatalog(), config.getSchemaPattern(), null, null)) {
-      List<ColumnModel> columns = MetaDataUtils.extract(rs, ColumnModel.class);
+      List<ColumnModel> columns = MetaDataUtils.extract(rs, ColumnModel.class).stream().toList();
 
       log.info("Extracted {} columns", columns.size());
 
@@ -89,44 +90,75 @@ public class DatabaseMetaDataReader {
     }
   }
 
-  Map<String, List<ColumnModel>> extractPrimaryKeys(DatabaseMetaData meta) throws SQLException {
-    try (ResultSet rs = meta.getPrimaryKeys(config.getCatalog(), config.getSchemaPattern(), null)) {
-      return MetaDataUtils.extract(rs, ColumnModel.class).stream()
-          .collect(Collectors.groupingBy(ColumnModel::getTABLE_NAME));
+  Map<String, List<ColumnModel>> extractPrimaryKeys(DatabaseMetaData meta, List<TableModel> tables)
+      throws SQLException {
+
+    // key: table name, value: list of primary keys
+    Map<String, List<ColumnModel>> primaryKeyMap = new HashMap<>();
+
+    for (TableModel table : tables) {
+      try (ResultSet rs =
+          meta.getPrimaryKeys(
+              config.getCatalog(), config.getSchemaPattern(), table.getTABLE_NAME())) {
+        List<ColumnModel> primaryKeys =
+            MetaDataUtils.extract(rs, ColumnModel.class).stream().toList();
+
+        log.info(
+            "Extracted {} primary keys for table {}", primaryKeys.size(), table.getTABLE_NAME());
+
+        primaryKeyMap.put(table.getTABLE_NAME(), primaryKeys);
+      }
     }
+
+    return primaryKeyMap;
   }
 
-  // Map<String, List<KeyModel>> extractExportedKeys(DatabaseMetaData meta) throws SQLException {
-  //   try (ResultSet rs = meta.getExportedKeys(null, null, null)) {
+  List<KeyModel> extractExportedKeys(DatabaseMetaData meta, List<TableModel> tables)
+      throws SQLException {
 
-  //     List<KeyModel> keys = MetaDataUtils.extract(rs, KeyModel.class);
+    List<KeyModel> keys = new ArrayList<>();
 
-  //     log.info("Extracted exported {} keys", keys.size());
+    for (TableModel table : tables) {
+      try (ResultSet rs =
+          meta.getExportedKeys(
+              config.getCatalog(), config.getSchemaPattern(), table.getTABLE_NAME())) {
 
-  //     return keys.stream().collect(Collectors.groupingBy(KeyModel::getPKTABLE_NAME));
-  //   }
-  // }
+        List<KeyModel> extractedKeys = MetaDataUtils.extract(rs, KeyModel.class).stream().toList();
 
-  List<KeyModel> extractExportedKeys(DatabaseMetaData meta) throws SQLException {
-    try (ResultSet rs =
-        meta.getExportedKeys(config.getCatalog(), config.getSchemaPattern(), null)) {
+        log.info(
+            "Extracted exported {} keys for table {}", extractedKeys.size(), table.getTABLE_NAME());
 
-      List<KeyModel> keys = MetaDataUtils.extract(rs, KeyModel.class);
-
-      log.info("Extracted exported {} keys", keys.size());
-
-      return keys;
+        keys.addAll(extractedKeys);
+      }
     }
+    return keys;
   }
 
-  // Map<String, List<KeyModel>> extractImportedKeys(DatabaseMetaData meta) throws SQLException {
-  //   try (ResultSet rs = meta.getImportedKeys(null, null, null)) {
+  Map<String, List<ColumnModel>> toLowerCase(Map<String, List<ColumnModel>> columnMap) {
+    return columnMap.entrySet().stream()
+        .collect(
+            Collectors.toMap(
+                e -> e.getKey().toLowerCase(),
+                e -> e.getValue().stream().map(this::toLowerCase).toList()));
+  }
 
-  //     List<KeyModel> keys = MetaDataUtils.extract(rs, KeyModel.class);
+  TableModel toLowerCase(TableModel table) {
+    table.setTABLE_NAME(table.getTABLE_NAME().toLowerCase());
+    return table;
+  }
 
-  //     log.info("Extracted imported {} keys", keys.size());
+  ColumnModel toLowerCase(ColumnModel column) {
+    column.setTABLE_NAME(column.getTABLE_NAME().toLowerCase());
+    column.setCOLUMN_NAME(column.getCOLUMN_NAME().toLowerCase());
+    return column;
+  }
 
-  //     return keys.stream().collect(Collectors.groupingBy(KeyModel::getPKTABLE_NAME));
-  //   }
-  // }
+  KeyModel toLowerCase(KeyModel key) {
+    key.setFK_NAME(key.getFK_NAME().toLowerCase());
+    key.setPKTABLE_NAME(key.getPKTABLE_NAME().toLowerCase());
+    key.setPKCOLUMN_NAME(key.getPKCOLUMN_NAME().toLowerCase());
+    key.setFKTABLE_NAME(key.getFKTABLE_NAME().toLowerCase());
+    key.setFKCOLUMN_NAME(key.getFKCOLUMN_NAME().toLowerCase());
+    return key;
+  }
 }

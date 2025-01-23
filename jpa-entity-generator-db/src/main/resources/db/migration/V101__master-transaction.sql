@@ -7,7 +7,8 @@ CREATE TABLE master (
 
 CREATE TABLE transaction (
   id CHAR(36) PRIMARY KEY,
-  master_id CHAR(36) REFERENCES master,
+  master_id CHAR(36),
   name VARCHAR(100),
-  --${commonColumns}
+  --${commonColumns},
+  CONSTRAINT transaction_master_id_fkey FOREIGN KEY (master_id) REFERENCES master (id)
 );

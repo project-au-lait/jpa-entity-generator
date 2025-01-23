@@ -329,17 +329,16 @@
 
       <properties>
         <db.dbms>h2</db.dbms>
-        <db.healthcheck>echo ok</db.healthcheck>
+        <db.healthcheck>curl --fail http://localhost:81</db.healthcheck>
         <db.image>oscarfonts/h2</db.image>
         <db.jdbc.groupId>com.h2database</db.jdbc.groupId>
         <db.jdbc.artifactId>h2</db.jdbc.artifactId>
         <db.jdbc.version>2.3.232</db.jdbc.version>
-        <db.jdbc.url>jdbc:h2:tcp://${db.host}:${db.port.host}/${db.name}</db.jdbc.url>
-        <db.password></db.password>
+        <db.jdbc.url>
+          jdbc:h2:tcp://${db.host}:${db.port.host}/${db.name};CASE_INSENSITIVE_IDENTIFIERS=TRUE</db.jdbc.url>
         <db.port.host>1521</db.port.host>
         <db.port.container>1521</db.port.container>
-        <db.name>test</db.name>
-        <db.username>sa</db.username>
+        <db.schema>PUBLIC</db.schema>
       </properties>
     </profile>
   </profiles>

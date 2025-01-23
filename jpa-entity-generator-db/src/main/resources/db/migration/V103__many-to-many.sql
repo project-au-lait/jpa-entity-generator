@@ -13,7 +13,9 @@ CREATE TABLE "right" (
 
 
 CREATE TABLE left_right_rel (
-  left_id CHAR(36) REFERENCES "left",
-  right_id CHAR(36) REFERENCES "right",
-  CONSTRAINT left_right__rel_pk PRIMARY KEY (left_id, right_id)
+  left_id CHAR(36),
+  right_id CHAR(36),
+  CONSTRAINT left_right__rel_pk PRIMARY KEY (left_id, right_id),
+  CONSTRAINT left_right_rel_left_id_fkey FOREIGN KEY (left_id) REFERENCES "left" (id),
+  CONSTRAINT left_right_rel_right_id_fkey FOREIGN KEY (right_id) REFERENCES "right" (id)
 );
