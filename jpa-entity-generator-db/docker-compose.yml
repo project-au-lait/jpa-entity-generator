@@ -5,6 +5,8 @@ services:
       TZ: ${OS_TIMEZONE}
     healthcheck:
       test: ["CMD-SHELL", "${DB_HEALTHCHECK}"]
+      start_period: 5s
+      start_interval: 1s
       interval: 10s
       timeout: 10s
       retries: 5
