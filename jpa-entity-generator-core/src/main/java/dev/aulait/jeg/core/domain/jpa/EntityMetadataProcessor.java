@@ -2,6 +2,7 @@ package dev.aulait.jeg.core.domain.jpa;
 
 import dev.aulait.jeg.core.domain.jdbc.ColumnModel;
 import java.sql.DatabaseMetaData;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +44,9 @@ public class EntityMetadataProcessor {
     metadata.setJavaType(field.getType());
 
     ColumnModel column = field.getColumn();
-    metadata.setDbType(column.getTYPE_NAME());
-    metadata.setDbTypeSize(column.getCOLUMN_SIZE());
+    if (column.getDATA_TYPE() == Types.VARCHAR || column.getDATA_TYPE() == Types.CHAR) {
+      metadata.setStringLength(column.getCOLUMN_SIZE());
+    }
     metadata.setRequired(column.getNULLABLE() == DatabaseMetaData.columnNoNulls);
     metadata.setId(field.isId());
 

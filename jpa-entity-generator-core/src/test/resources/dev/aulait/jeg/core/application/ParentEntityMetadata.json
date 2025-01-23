@@ -6,8 +6,7 @@
       "fieldName": "id",
       "javaType": "String",
       "multiple": false,
-      "dbType": "bpchar",
-      "dbTypeSize": 36,
+      "stringLength": 36,
       "id": true,
       "required": true
     },
@@ -15,8 +14,7 @@
       "fieldName": "name",
       "javaType": "String",
       "multiple": false,
-      "dbType": "varchar",
-      "dbTypeSize": 100,
+      "stringLength": 100,
       "id": false,
       "required": false
     },

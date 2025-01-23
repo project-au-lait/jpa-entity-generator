@@ -13,8 +13,7 @@
       "fieldName": "name",
       "javaType": "String",
       "multiple": false,
-      "dbType": "varchar",
-      "dbTypeSize": 100,
+      "stringLength": 100,
       "id": false,
       "required": false
     }

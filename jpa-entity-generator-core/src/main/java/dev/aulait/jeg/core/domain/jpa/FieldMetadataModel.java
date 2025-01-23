@@ -9,8 +9,7 @@ public class FieldMetadataModel {
   private String fieldName;
   private String javaType;
   private boolean multiple;
-  private String dbType;
-  private Integer dbTypeSize;
+  private Integer stringLength;
   private boolean id;
   private boolean required;
 }
