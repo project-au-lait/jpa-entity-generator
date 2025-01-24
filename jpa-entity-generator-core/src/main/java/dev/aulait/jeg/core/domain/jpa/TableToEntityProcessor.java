@@ -97,13 +97,7 @@ public class TableToEntityProcessor {
     }
     field.setName(WordUtils.snakeToLowerCamel(column.getCOLUMN_NAME()));
     field.setColumn(column);
-
     field.setType(dbtype2javatype(column.getDATA_TYPE()));
-    log.info(
-        "column: {}, dbType: {}, javaType: {}",
-        column.getCOLUMN_NAME(),
-        column.getDATA_TYPE(),
-        field.getType());
 
     List<AnnotationModel> annotations =
         config.findAnnotations(column.getTABLE_NAME(), column.getCOLUMN_NAME()).stream()
