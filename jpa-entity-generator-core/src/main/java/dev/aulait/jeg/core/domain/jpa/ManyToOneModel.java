@@ -1,5 +1,6 @@
 package dev.aulait.jeg.core.domain.jpa;
 
+import dev.aulait.jeg.core.domain.jdbc.ForeignKeyModel;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
@@ -11,6 +12,7 @@ public class ManyToOneModel {
   private EntityModel entity;
   private List<JoinColumnModel> joinColumns = new ArrayList<>();
   private List<AnnotationModel> annotations = new ArrayList<>();
+  private ForeignKeyModel foreignKey;
 
   @Getter(lazy = true)
   private final List<Type> imports = buildImports();

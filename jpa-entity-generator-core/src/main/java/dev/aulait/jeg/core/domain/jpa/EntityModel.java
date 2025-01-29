@@ -4,6 +4,7 @@ import dev.aulait.jeg.core.domain.jdbc.TableModel;
 import dev.aulait.jeg.core.infra.template.TemplateModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import lombok.Data;
@@ -57,5 +58,9 @@ public class EntityModel extends TemplateModel implements Type {
 
   public boolean isEmbeddedIdOnly() {
     return fields.stream().allMatch(FieldModel::isEmbeddedId);
+  }
+
+  public Optional<ManyToOneModel> findManyToOneByFieldName(String fieldName) {
+    return manyToOnes.stream().filter(m -> m.getFieldName().equals(fieldName)).findFirst();
   }
 }

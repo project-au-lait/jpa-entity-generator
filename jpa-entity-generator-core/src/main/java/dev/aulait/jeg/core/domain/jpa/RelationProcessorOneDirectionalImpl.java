@@ -169,6 +169,8 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
         .getAnnotations()
         .addAll(annotationLogic.find(manyEntity.getName(), manyToOne.getFieldName()));
 
+    manyToOne.setForeignKey(fk);
+
     manyEntity.getManyToOnes().add(manyToOne);
 
     for (JoinColumnModel joinColumn : manyToOne.getJoinColumns()) {

@@ -5,6 +5,7 @@ import dev.aulait.jeg.core.domain.jdbc.DatabaseMetaDataProcessor;
 import dev.aulait.jeg.core.domain.jdbc.DatabaseMetaDataReader;
 import dev.aulait.jeg.core.domain.jdbc.TableModel;
 import dev.aulait.jeg.core.domain.jpa.EmbeddedIdModel;
+import dev.aulait.jeg.core.domain.jpa.EntityAdjustProcessor;
 import dev.aulait.jeg.core.domain.jpa.EntityImportProcessor;
 import dev.aulait.jeg.core.domain.jpa.EntityModel;
 import dev.aulait.jeg.core.domain.jpa.RelationProcessor;
@@ -26,6 +27,7 @@ public class EntityGenerator {
   DatabaseMetaDataProcessor databaseMetaDataProcessor = new DatabaseMetaDataProcessor();
   RelationProcessor relationProcessor;
   EntityImportProcessor entityImportProcessor = new EntityImportProcessor();
+  EntityAdjustProcessor entityAdjustProcessor = new EntityAdjustProcessor();
   TemplateProcessor templateProcessor = new TemplateProcessor();
   TextFileWriter writer = new TextFileWriter();
   EntityMetadataGenerator entityMetadataGenerator;
@@ -62,6 +64,8 @@ public class EntityGenerator {
     List<EntityModel> entities = tableToEntityProcessor.process(tables);
 
     relationProcessor.process(tables, entities);
+
+    entityAdjustProcessor.process(entities);
 
     entityImportProcessor.process(entities);
 
