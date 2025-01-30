@@ -93,19 +93,19 @@ public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.base
   @ManyToMany(fetch=FetchType.LAZY)
       @JoinTable(name="[(${manyToMany.joinTable})]",
          joinColumns = { 
-          [# th:each="joinColumn : ${manyToMany.joinColumns}"]
-            @JoinColumn(name="[(${joinColumn.name})]", referencedColumnName="[(${joinColumn.referencedColumnName})]", nullable=false)
+          [# th:each="joinColumn, stat : ${manyToMany.joinColumns}"]
+            @JoinColumn(name="[(${joinColumn.name})]", referencedColumnName="[(${joinColumn.referencedColumnName})]", nullable=false)[# th:unless="${stat.last}"],[/]
           [/]
         },
         inverseJoinColumns = { 
-          [# th:each="inverseJoinColumn : ${manyToMany.inverseJoinColumns}"]
-            @JoinColumn(name="[(${inverseJoinColumn.name})]", referencedColumnName="[(${inverseJoinColumn.referencedColumnName})]", nullable=false)
+          [# th:each="inverseJoinColumn, stat : ${manyToMany.inverseJoinColumns}"]
+            @JoinColumn(name="[(${inverseJoinColumn.name})]", referencedColumnName="[(${inverseJoinColumn.referencedColumnName})]", nullable=false)[# th:unless="${stat.last}"],[/]
           [/]
         })
   [# th:each="annotation : ${manyToMany.annotations}"]
   @[(${annotation.type})]([# th:each="attribute : ${annotation.attributes.entrySet()}"][(${attribute.key})] = [(${attribute.value})][/])
   [/]
-  private Set<[(${manyToMany.type})]> [(${manyToMany.fieldName})] = new HashSet<>();;
+  private Set<[(${manyToMany.type})]> [(${manyToMany.fieldName})] = new HashSet<>();
 [/]
 
 }

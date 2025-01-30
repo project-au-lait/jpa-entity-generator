@@ -80,6 +80,4 @@ public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
         @JoinColumn(name = "many_to_many_id", referencedColumnName = "id", nullable = false)
       })
   private Set<ManyToManyEntity> manyToManies = new HashSet<>();
-
-  ;
 }
