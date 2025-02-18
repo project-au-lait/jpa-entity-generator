@@ -11,11 +11,12 @@ public class EntityImportProcessor {
   void process(EntityModel entity) {
     entity.addImport(Types.Entity);
     entity.addImport(Types.Table);
-    entity.addImport(Types.Getter);
-    entity.addImport(Types.Setter);
+    entity.addImport(Types.Data);
     entity.addImport(Types.Builder);
+    entity.addImport(Types.EqualsAndHashCode);
     entity.addImport(Types.AllArgsConstructor);
     entity.addImport(Types.NoArgsConstructor);
+    entity.addImport(Types.Generated);
 
     if (!entity.isEmbeddedIdOnly()) {
       entity.addImport(Types.Column);

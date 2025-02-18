@@ -7,9 +7,9 @@ import lombok.Getter;
 public enum Types implements Type {
   Set("java.util"),
   HashSet("java.util"),
-  Getter("lombok"),
-  Setter("lombok"),
+  Data("lombok"),
   Builder("lombok"),
+  EqualsAndHashCode("lombok"),
   AllArgsConstructor("lombok"),
   NoArgsConstructor("lombok"),
   CascadeType("jakarta.persistence"),
@@ -26,7 +26,8 @@ public enum Types implements Type {
   OneToMany("jakarta.persistence"),
   OneToOne("jakarta.persistence"),
   PrimaryKeyJoinColumn("jakarta.persistence"),
-  Table("jakarta.persistence");
+  Table("jakarta.persistence"),
+  Generated("javax.annotation.processing");
 
   @Getter private String pkg;
 
