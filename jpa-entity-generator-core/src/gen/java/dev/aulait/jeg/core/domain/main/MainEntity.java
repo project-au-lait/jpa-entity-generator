@@ -16,22 +16,25 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
+import javax.annotation.processing.Generated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Generated("dev.aulait.jeg:jpa-entity-generator")
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
 @Table(name = "main")
 public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
     implements java.io.Serializable {
 
+  @EqualsAndHashCode.Include
   @Id
   @Column(name = "id")
   @jakarta.persistence.GeneratedValue(strategy = jakarta.persistence.GenerationType.UUID)

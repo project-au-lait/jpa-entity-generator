@@ -4,23 +4,28 @@
 import [(${import})];
 [/]
 
-@Getter
-@Setter
+@Generated("dev.aulait.jeg:jpa-entity-generator")
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
 @Table(name="[(${root.tableName})]"
 )
 public class [(${root.name})][# th:if="${root.baseClass}"] extends [(${root.baseClass})][/] implements java.io.Serializable {
 
 [# th:if="${root.embeddedId}"]
+  @EqualsAndHashCode.Include
   @EmbeddedId
   private [(${root.embeddedId.name})] id;
 [/]
 
 [# th:each="field : ${root.fields}"]
-  [# th:if="${field.isId}"]@Id[/]
+  [# th:if="${field.isId}"]
+  @EqualsAndHashCode.Include
+  @Id
+  [/]
   @Column(name="[(${field.columnName})]")
   [# th:each="annotation : ${field.annotations}"]
   @[(${annotation.type})]([# th:each="attribute : ${annotation.attributes.entrySet()}"][(${attribute.key})] = [(${attribute.value})][/])

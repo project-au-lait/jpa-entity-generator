@@ -7,22 +7,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import javax.annotation.processing.Generated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Generated("dev.aulait.jeg:jpa-entity-generator")
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
 @Table(name = "self_ref")
 public class SelfRefEntity extends dev.aulait.jeg.core.domain.BaseEntity
     implements java.io.Serializable {
 
+  @EqualsAndHashCode.Include
   @Id
   @Column(name = "id")
   private String id;
