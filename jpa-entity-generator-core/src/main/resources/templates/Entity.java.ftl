@@ -12,16 +12,16 @@ import ${import};
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
 @Table(name = "${root.tableName}")
-public class ${root.name}<#if root.baseClass?has_content > extends ${root.baseClass}</#if>
+public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseClass}</#if>
     implements java.io.Serializable {
-<#if root.embeddedId?has_content >
+<#if root.embeddedId?has_content>
 
   @EqualsAndHashCode.Include @EmbeddedId private ${root.embeddedId.name} id;
 </#if>
 <#-- -->
 <#list root.fields as field>
 
-  <#if field.id >
+  <#if field.id>
   @EqualsAndHashCode.Include
   @Id
   </#if>
@@ -49,7 +49,7 @@ public class ${root.name}<#if root.baseClass?has_content > extends ${root.baseCl
       -->
     </#list>
   )<#lt>
-  <#if !oneToOne.mappedBy?has_content >@PrimaryKeyJoinColumn</#if>
+  <#if !oneToOne.mappedBy?has_content>@PrimaryKeyJoinColumn</#if>
   <#list oneToOne.annotations as annotation>
   @${annotation.type}(<#list annotation.attributes?keys as key>${key} = ${annotation.attributes[key]}</#list>)
   </#list>
