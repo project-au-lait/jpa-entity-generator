@@ -70,4 +70,3 @@ excludedColmuns:
   - created_date
   - updated_by
   - updated_date
-formatter: google
