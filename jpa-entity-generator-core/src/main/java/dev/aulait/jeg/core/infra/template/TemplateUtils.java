@@ -20,16 +20,15 @@ public class TemplateUtils {
   }
 
   public static String process(String template, Object param) {
-    Writer out = new StringWriter();
-
-    try {
+    try (Writer out = new StringWriter(); ) {
       Template temp = cfg.getTemplate(resolve(template));
       temp.process(Map.of("root", param), out);
+
+      return out.toString();
+
     } catch (TemplateException | IOException e) {
       throw new UncheckedException(e);
     }
-
-    return out.toString();
   }
 
   private static String resolve(String template) {
