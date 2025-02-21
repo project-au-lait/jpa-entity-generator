@@ -1,3 +1,5 @@
+<#import "lib/common.ftl" as common>
+<#-- -->
 <#if root.pkg?has_content>package ${root.pkg};</#if>
 
 <#list root.imports as import>
@@ -34,21 +36,16 @@ public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseCla
 <#-- -->
 <#list root.oneToOnes as oneToOne>
 
-  @OneToOne(fetch = FetchType.LAZY<#--
-  -->
-    <#if oneToOne.mappedBy?has_content>
-    , mappedBy = ${oneToOne.mappedBy}<#lt><#--
-    -->
-    </#if>
+  <@common.compress_single_line>
+  @OneToOne(fetch = FetchType.LAZY
+    <#if oneToOne.mappedBy?has_content>, mappedBy = ${oneToOne.mappedBy}</#if>
     <#list oneToOne.cascades as cascade>
-      <#if cascade?is_first>, cascade = {</#if><#lt><#--
-      -->
-      CascadeType.${cascade}<#lt><#--
-      -->
-      <#if cascade?is_last>}<#else>, </#if><#lt><#--
-      -->
+      <#if cascade?is_first>, cascade = {</#if>
+      CascadeType.${cascade}
+      <#if cascade?is_last>}<#else>, </#if>
     </#list>
-  )<#lt>
+  )
+  </@common.compress_single_line>
   <#if !oneToOne.mappedBy?has_content>@PrimaryKeyJoinColumn</#if>
   <#list oneToOne.annotations as annotation>
   @${annotation.type}(<#list annotation.attributes?keys as key>${key} = ${annotation.attributes[key]}</#list>)
@@ -59,17 +56,15 @@ public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseCla
 <#list root.oneToManies as oneToMany>
 
   @Builder.Default
-  @OneToMany(fetch = FetchType.LAZY<#--
-  -->
+  <@common.compress_single_line>
+  @OneToMany(fetch = FetchType.LAZY
     <#list oneToMany.cascades as cascade>
-      <#if cascade?is_first>, cascade = {</#if><#lt><#--
-      -->
-      CascadeType.${cascade}<#lt><#--
-      -->
-      <#if cascade?is_last>}<#else>, </#if><#lt><#--
-      -->
+      <#if cascade?is_first>, cascade = {</#if>
+      CascadeType.${cascade}
+      <#if cascade?is_last>}<#else>, </#if>
     </#list>
-  )<#lt>
+  )
+  </@common.compress_single_line>
   <#if oneToMany.joinColumns?size == 1>
   @JoinColumn(name = "${oneToMany.joinColumns[0].name}", referencedColumnName = "${oneToMany.joinColumns[0].referencedColumnName}", insertable = false, updatable = false)
   <#elseif oneToMany.joinColumns?size gt 1>
