@@ -40,7 +40,9 @@ public class LeftEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "left_right_rel",
-      joinColumns = {@JoinColumn(name = "left_id", referencedColumnName = "id", nullable = false)},
+      joinColumns = {
+        @JoinColumn(name = "left_id", referencedColumnName = "id", nullable = false)
+      },
       inverseJoinColumns = {
         @JoinColumn(name = "right_id", referencedColumnName = "id", nullable = false)
       })

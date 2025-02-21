@@ -58,11 +58,6 @@
       <artifactId>modelmapper</artifactId>
       <version>3.1.1</version>
     </dependency>
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf</artifactId>
-      <version>3.1.1.RELEASE</version>
-    </dependency>
 
     <dependency>
       <groupId>${db.jdbc.groupId}</groupId>
@@ -90,6 +85,12 @@
       <artifactId>hibernate-core</artifactId>
       <version>6.6.3.Final</version>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>2.3.34</version>
     </dependency>
 
   </dependencies>

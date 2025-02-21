@@ -1,29 +1,37 @@
 package dev.aulait.jeg.core.infra.template;
 
-import java.util.Locale;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Map;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.apache.commons.lang3.exception.UncheckedException;
 
 public class TemplateUtils {
 
-  private static TemplateEngine engine;
+  private static Configuration cfg;
 
   static {
-    engine = new TemplateEngine();
-    ClassLoaderTemplateResolver resolver = new ClassLoaderTemplateResolver();
-    resolver.setTemplateMode(TemplateMode.TEXT);
-    engine.addTemplateResolver(resolver);
+    cfg = new Configuration(Configuration.VERSION_2_3_34);
+    cfg.setClassForTemplateLoading(TemplateUtils.class, "/");
+    cfg.setDefaultEncoding("UTF-8");
   }
 
   public static String process(String template, Object param) {
-    Context ctx = new Context(Locale.getDefault(), Map.of("root", param));
-    return engine.process(resolve(template), ctx);
+    try (Writer out = new StringWriter(); ) {
+      Template temp = cfg.getTemplate(resolve(template));
+      temp.process(Map.of("root", param), out);
+
+      return out.toString();
+
+    } catch (TemplateException | IOException e) {
+      throw new UncheckedException(e);
+    }
   }
 
   private static String resolve(String template) {
-    return "/templates/" + template + ".txt";
+    return "templates/" + template + ".ftl";
   }
 }

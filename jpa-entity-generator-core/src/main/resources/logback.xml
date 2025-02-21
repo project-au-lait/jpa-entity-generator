@@ -20,7 +20,7 @@
   </appender>
 
   <logger name="org.postgresql" level="INFO" />
-  <logger name="org.thymeleaf" level="INFO" />
+  <logger name="freemarker" level="INFO" />
   <logger name="dev.aulait.jeg.core" level="${jeg.log.level:-INFO}" />
 
   <root level="INFO">

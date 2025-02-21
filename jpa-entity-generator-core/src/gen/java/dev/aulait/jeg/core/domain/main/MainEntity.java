@@ -78,7 +78,9 @@ public class MainEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "main_many_to_many_rel",
-      joinColumns = {@JoinColumn(name = "main_id", referencedColumnName = "id", nullable = false)},
+      joinColumns = {
+        @JoinColumn(name = "main_id", referencedColumnName = "id", nullable = false)
+      },
       inverseJoinColumns = {
         @JoinColumn(name = "many_to_many_id", referencedColumnName = "id", nullable = false)
       })

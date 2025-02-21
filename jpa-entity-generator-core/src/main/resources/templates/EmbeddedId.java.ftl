@@ -1,4 +1,4 @@
-package [(${root.pkg})];
+package ${root.pkg};
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Embeddable
-public class [(${root.name})] implements java.io.Serializable {
-[# th:each="field : ${root.fields}"]
-  [# th:if="${field.isId}"]@Id[/]
-  @Column(name="[(${field.columnName})]")
-  private [(${field.type})] [(${field.name})];
-[/]
+public class ${root.name} implements java.io.Serializable {
+<#list root.fields as field>
+
+  @Column(name = "${field.columnName}")
+  private ${field.type} ${field.name};
+</#list>
 }
