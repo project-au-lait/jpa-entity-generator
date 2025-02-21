@@ -9,5 +9,7 @@ public class EntityMetadataModel {
 
   private String className;
 
+  private String tableName;
+
   private List<FieldMetadataModel> fields;
 }

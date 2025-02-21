@@ -1,9 +1,11 @@
 {
   "packageName": "dev.aulait.jeg.core.domain.parentchild",
   "className": "ParentEntity",
+  "tableName": "parent",
   "fields": [
     {
       "fieldName": "id",
+      "columnName": "id",
       "javaType": "String",
       "multiple": false,
       "stringLength": 36,
@@ -12,6 +14,7 @@
     },
     {
       "fieldName": "name",
+      "columnName": "name",
       "javaType": "String",
       "multiple": false,
       "stringLength": 100,

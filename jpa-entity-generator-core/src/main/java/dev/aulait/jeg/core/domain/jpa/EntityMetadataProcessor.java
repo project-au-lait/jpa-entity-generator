@@ -20,6 +20,7 @@ public class EntityMetadataProcessor {
     EntityMetadataModel metadata = new EntityMetadataModel();
     metadata.setPackageName(entity.getPkg());
     metadata.setClassName(entity.getName());
+    metadata.setTableName(entity.getTableName());
 
     List<FieldMetadataModel> fields = new ArrayList<>();
 
@@ -41,6 +42,7 @@ public class EntityMetadataProcessor {
   FieldMetadataModel process(FieldModel field) {
     FieldMetadataModel metadata = new FieldMetadataModel();
     metadata.setFieldName(field.getName());
+    metadata.setColumnName(field.getColumnName());
     metadata.setJavaType(field.getType());
 
     ColumnModel column = field.getColumn();
