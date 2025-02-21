@@ -1,9 +1,11 @@
 {
   "packageName": "dev.aulait.jeg.core.domain.main",
   "className": "MainEntity",
+  "tableName": "main",
   "fields": [
     {
       "fieldName": "id",
+      "columnName": "id",
       "javaType": "String",
       "multiple": false,
       "stringLength": 36,
@@ -12,6 +14,7 @@
     },
     {
       "fieldName": "name",
+      "columnName": "name",
       "javaType": "String",
       "multiple": false,
       "stringLength": 100,
@@ -20,6 +23,7 @@
     },
     {
       "fieldName": "colChar",
+      "columnName": "col_char",
       "javaType": "String",
       "multiple": false,
       "stringLength": 1,
@@ -28,6 +32,7 @@
     },
     {
       "fieldName": "colDate",
+      "columnName": "col_date",
       "javaType": "java.time.LocalDate",
       "multiple": false,
       "id": false,
@@ -35,6 +40,7 @@
     },
     {
       "fieldName": "colTime",
+      "columnName": "col_time",
       "javaType": "java.time.LocalTime",
       "multiple": false,
       "id": false,
@@ -42,6 +48,7 @@
     },
     {
       "fieldName": "colTimestamp",
+      "columnName": "col_timestamp",
       "javaType": "java.time.LocalDateTime",
       "multiple": false,
       "id": false,
@@ -49,6 +56,7 @@
     },
     {
       "fieldName": "colBoolean",
+      "columnName": "col_boolean",
       "javaType": "Boolean",
       "multiple": false,
       "id": false,
@@ -56,6 +64,7 @@
     },
     {
       "fieldName": "colJson",
+      "columnName": "col_json",
       "javaType": "String",
       "multiple": false,
       "id": false,
@@ -63,6 +72,7 @@
     },
     {
       "fieldName": "sortKey",
+      "columnName": "sort_key",
       "javaType": "Integer",
       "multiple": false,
       "id": false,

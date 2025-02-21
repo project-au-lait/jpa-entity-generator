@@ -1,6 +1,7 @@
 {
   "packageName": "dev.aulait.jeg.core.domain.parentchild",
   "className": "ChildEntity",
+  "tableName": "child",
   "fields": [
     {
       "fieldName": "id",
@@ -11,6 +12,7 @@
     },
     {
       "fieldName": "name",
+      "columnName": "name",
       "javaType": "String",
       "multiple": false,
       "stringLength": 100,

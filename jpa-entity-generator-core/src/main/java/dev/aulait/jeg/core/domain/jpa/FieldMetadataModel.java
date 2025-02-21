@@ -7,6 +7,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FieldMetadataModel {
   private String fieldName;
+  private String columnName;
   private String javaType;
   private boolean multiple;
   private Integer stringLength;
