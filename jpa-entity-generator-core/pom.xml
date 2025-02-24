@@ -98,7 +98,7 @@
   <parent>
     <groupId>dev.aulait.jeg</groupId>
     <artifactId>jpa-entity-generator</artifactId>
-    <version>0.11-SNAPSHOT</version>
+    <version>0.11</version>
   </parent>
 
   <properties>
