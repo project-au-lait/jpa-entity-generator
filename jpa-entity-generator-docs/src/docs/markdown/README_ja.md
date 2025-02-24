@@ -18,9 +18,9 @@ jegは実行可能jar、及びMaven Pluginとして使用できます。
 jegを実行可能jarとして実行するには、Maven Centralからjegのjarファイルを取得し、javaコマンドで実行します。
 
 ```sh
-curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.10/jpa-entity-generator-core-0.10-all-deps.jar
+curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.11/jpa-entity-generator-core-0.11-all-deps.jar
 
-java -jar jpa-entity-generator-core-0.10-all-deps.jar -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
+java -jar jpa-entity-generator-core-0.11-all-deps.jar -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
 ```
 
 上記javaコマンド末尾の引数の仕様は[設定](#jeg-config)を参照してください。
@@ -34,7 +34,7 @@ jegをMaven Pluginとして実行するには、pom.xmlにjpa-entity-generator-m
   <plugin>
     <groupId>dev.aulait.jeg</groupId>
     <artifactId>jpa-entity-generator-maven-plugin</artifactId>
-    <version>0.10</version>
+    <version>0.11</version>
     <configuration>
       <configFilePath>./jeg-config.yml</configFilePath>
       <jdbcUrl>jdbc:postgresql://localhost:5432/postgres</jdbcUrl>
@@ -135,7 +135,7 @@ formatter: google
 - javaコマンドで実行する場合
 
 ```sh
-java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar jpa-entity-generator-core-0.10-all-deps.jar 
+java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar jpa-entity-generator-core-0.11-all-deps.jar 
 ```
 
 - Maven Pluginで実行する場合
