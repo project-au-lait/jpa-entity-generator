@@ -12,6 +12,9 @@
       "windows": {
         "command": ".\\mvnw"
       },
+      "linux": {
+        "command": "./mvnw"
+      },
       "args": ["-f", "jpa-entity-generator-db", "-P", "setup-db"],
       "problemMatcher": [],
       "runOptions": {
@@ -27,6 +30,9 @@
       "windows": {
         "command": ".\\mvnw"
       },
+      "linux": {
+        "command": "./mvnw"
+      },
       "args": ["-f", "jpa-entity-generator-db", "-P", "migrate-db"],
       "problemMatcher": []
     },
@@ -39,6 +45,9 @@
       "windows": {
         "command": ".\\mvnw"
       },
+      "linux": {
+        "command": "./mvnw"
+      },
       "args": ["-N", "-D", "ant.target=${input:ant.target}"],
       "problemMatcher": []
     },
@@ -50,6 +59,9 @@
       },
       "windows": {
         "command": ".\\mvnw"
+      },
+      "linux": {
+        "command": "./mvnw"
       },
       "args": ["-f", "jpa-entity-generator-docs"],
       "problemMatcher": []
