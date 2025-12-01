@@ -9,6 +9,8 @@ packages:
   dev.aulait.jeg.core.domain.mastertran:
     - master
     - transaction
+    - composite_master
+    - composite_transaction
   dev.aulait.jeg.core.domain.parentchild:
     - parent
     - child
@@ -34,6 +36,7 @@ baseClassDefs:
   - tables:
       - main_child
       - composite_main
+      - composite_master
     baseClass: dev.aulait.jeg.core.domain.CompositeBaseEntity
   - tables:
       - "*"
