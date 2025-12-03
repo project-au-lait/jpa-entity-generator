@@ -14,6 +14,8 @@ packages:
   dev.aulait.jeg.core.domain.parentchild:
     - parent
     - child
+    - composite_parent
+    - composite_child
   dev.aulait.jeg.core.domain.multifk:
     - multifk_parent
     - multifk_child
@@ -37,6 +39,8 @@ baseClassDefs:
       - main_child
       - composite_main
       - composite_master
+      - composite_parent
+      - composite_child
     baseClass: dev.aulait.jeg.core.domain.CompositeBaseEntity
   - tables:
       - "*"
