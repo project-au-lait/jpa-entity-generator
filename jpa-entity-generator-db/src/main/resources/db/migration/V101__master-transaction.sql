@@ -12,3 +12,22 @@ CREATE TABLE transaction (
   --${commonColumns},
   CONSTRAINT transaction_master_id_fkey FOREIGN KEY (master_id) REFERENCES master (id)
 );
+
+
+CREATE TABLE composite_master (
+  id_1 CHAR(36) NOT NULL,
+  id_2 CHAR(36) NOT NULL,
+  name VARCHAR(100),
+  --${commonColumns},
+  CONSTRAINT composite_master_pk PRIMARY KEY (id_1, id_2)
+);
+
+
+CREATE TABLE composite_transaction (
+  id CHAR(36) PRIMARY KEY,
+  master_id_1 CHAR(36),
+  master_id_2 CHAR(36),
+  name VARCHAR(100),
+  --${commonColumns},
+  CONSTRAINT composite_transaction_master_id_fkey FOREIGN KEY (master_id_1, master_id_2) REFERENCES composite_master (id_1, id_2)
+);
