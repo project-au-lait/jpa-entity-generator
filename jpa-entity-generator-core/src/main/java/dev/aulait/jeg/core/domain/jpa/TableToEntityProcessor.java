@@ -147,6 +147,8 @@ public class TableToEntityProcessor {
         return "java.time.LocalDateTime";
 
       case Types.BLOB:
+      case Types.BINARY:
+      case Types.VARBINARY:
         return "byte[]";
 
       // string

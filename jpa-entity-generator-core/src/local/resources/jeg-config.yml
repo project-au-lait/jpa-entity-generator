@@ -34,6 +34,8 @@ packages:
     - many_to_many
     - main_many_to_many_rel
     - composite_one_to_many
+  dev.aulait.jeg.core.domain.datatypes:
+    - data_types
 baseClassDefs:
   - tables:
       - main_child
