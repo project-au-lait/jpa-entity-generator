@@ -30,14 +30,6 @@ public class EntityGeneratorTests {
   @ParameterizedTest
   @ValueSource(
       strings = {
-        "/dev/aulait/jeg/core/domain/main/CompositeMainEntity.java",
-        "/dev/aulait/jeg/core/domain/main/CompositeMainEntityId.java",
-        "/dev/aulait/jeg/core/domain/rel/CompositeOneToManyEntity.java",
-        "/dev/aulait/jeg/core/domain/main/MainEntity.java",
-        "/dev/aulait/jeg/core/domain/rel/ManyToManyEntity.java",
-        "/dev/aulait/jeg/core/domain/rel/OneToManyEntity.java",
-        "/dev/aulait/jeg/core/domain/rel/OneToOneEntity.java",
-        "/dev/aulait/jeg/core/domain/main/SelfRefEntity.java",
         "/dev/aulait/jeg/core/domain/mastertran/MasterEntity.java",
         "/dev/aulait/jeg/core/domain/mastertran/TransactionEntity.java",
         "/dev/aulait/jeg/core/domain/mastertran/CompositeMasterEntity.java",

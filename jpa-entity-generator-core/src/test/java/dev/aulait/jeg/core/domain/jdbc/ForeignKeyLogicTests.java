@@ -26,8 +26,6 @@ public class ForeignKeyLogicTests {
   @CsvFileSource(resources = "ForeignKeyLogicTests.csv", numLinesToSkip = 1)
   void testRelation(
       String foreignKeyName,
-      boolean oneToOneExpected,
-      boolean manyToOneExpected,
       boolean parentChildExpected,
       boolean firstInPkExpected,
       boolean inRelationTableExpected) {
@@ -38,8 +36,6 @@ public class ForeignKeyLogicTests {
 
     ForeignKeyModel fk = findByName(meta.getTables(), foreignKeyName);
 
-    assertEquals(oneToOneExpected, logic.isOneToOne(fk), "isOneToOne(" + fk.getName() + ")");
-    assertEquals(manyToOneExpected, logic.isManyToOne(fk), "isManyToOne(" + fk.getName() + ")");
     assertEquals(
         parentChildExpected, logic.isParentChild(fk), "isParentChild(" + fk.getName() + ")");
     assertEquals(firstInPkExpected, logic.isFirstInPk(fk), "isFirstInPk(" + fk.getName() + ")");

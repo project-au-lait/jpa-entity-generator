@@ -22,24 +22,10 @@ packages:
   dev.aulait.jeg.core.domain.manytomany:
     - left
     - right
-  dev.aulait.jeg.core.domain.main:
-    - main
-    - composite_main
-    - self_ref
-  dev.aulait.jeg.core.domain.rel:
-    - one_to_one
-    - one_to_many
-    - main_child
-    - many_to_one
-    - many_to_many
-    - main_many_to_many_rel
-    - composite_one_to_many
   dev.aulait.jeg.core.domain.datatypes:
     - data_types
 baseClassDefs:
   - tables:
-      - main_child
-      - composite_main
       - composite_master
       - composite_parent
       - composite_child
@@ -54,23 +40,6 @@ annotationDefs:
       strategy: jakarta.persistence.GenerationType.UUID
   noEffect:
     type: lombok.Setter
-annotatedCols:
-  main.id:
-    - uuid
-  MainEntity.oneToOne:
-    - noEffect
-  MainEntity.oneToManies:
-    - noEffect
-  ManyToManyEntity.mains:
-    - noEffect
-  OneToManyEntity.main:
-    - noEffect
-cascades:
-  main:
-    one_to_many.main_id:
-      - ALL
-    one_to_one.id:
-      - ALL
 excludedTables:
   - flyway_schema_history
 excludedColmuns:

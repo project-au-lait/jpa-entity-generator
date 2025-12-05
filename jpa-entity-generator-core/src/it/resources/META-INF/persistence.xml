@@ -5,15 +5,6 @@
   <persistence-unit name="PERSISTENCE">
     <description>JPA Demo</description>
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>dev.aulait.jeg.core.domain.main.CompositeMainEntity</class>
-    <class>dev.aulait.jeg.core.domain.main.MainEntity</class>
-    <class>dev.aulait.jeg.core.domain.main.SelfRefEntity</class>
-    <class>dev.aulait.jeg.core.domain.rel.CompositeOneToManyEntity</class>
-    <class>dev.aulait.jeg.core.domain.rel.OneToManyEntity</class>
-    <class>dev.aulait.jeg.core.domain.rel.OneToOneEntity</class>
-    <class>dev.aulait.jeg.core.domain.rel.ManyToManyEntity</class>
-    <class>dev.aulait.jeg.core.domain.rel.MainChildEntity</class>
-
 
     <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
     <properties>
