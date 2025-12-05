@@ -12,12 +12,7 @@ class JpaExecIT {
     EntityManager em = emf.createEntityManager();
 
     Query query =
-        em.createQuery(
-            "SELECT m FROM MainEntity m "
-                + "JOIN FETCH m.oneToOne "
-                + "JOIN FETCH m.manyToManies "
-                + "JOIN FETCH m.mainChildren ",
-            Object.class);
+        em.createQuery("SELECT p FROM ParentEntity p JOIN FETCH p.children", Object.class);
 
     query.getResultList();
   }
