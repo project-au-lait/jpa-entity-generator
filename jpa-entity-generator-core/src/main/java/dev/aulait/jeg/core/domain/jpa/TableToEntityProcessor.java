@@ -6,6 +6,7 @@ import dev.aulait.jeg.core.infra.config.Config;
 import dev.aulait.jeg.core.infra.util.ModelUtils;
 import dev.aulait.jeg.core.infra.util.WordUtils;
 import java.nio.file.Path;
+import java.sql.DatabaseMetaData;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ClassUtils;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -97,7 +99,12 @@ public class TableToEntityProcessor {
     }
     field.setName(WordUtils.snakeToLowerCamel(column.getCOLUMN_NAME()));
     field.setColumn(column);
-    field.setType(dbtype2javatype(column.getDATA_TYPE()));
+
+    String type = dbtype2javatype(column.getDATA_TYPE());
+    if (column.getNULLABLE() == DatabaseMetaData.columnNoNulls) {
+      type = wrap2primitive(type);
+    }
+    field.setType(type);
 
     List<AnnotationModel> annotations =
         config.findAnnotations(column.getTABLE_NAME(), column.getCOLUMN_NAME()).stream()
@@ -126,15 +133,28 @@ public class TableToEntityProcessor {
 
   String dbtype2javatype(int dataType) {
     switch (dataType) {
+      // boolean
       case Types.BOOLEAN:
       case Types.BIT:
         return "Boolean";
 
       // numeric
       case Types.INTEGER:
+      case Types.TINYINT:
+      case Types.SMALLINT:
         return "Integer";
+
       case Types.BIGINT:
         return "Long";
+
+      case Types.REAL:
+        return "Float";
+
+      case Types.FLOAT:
+      case Types.DOUBLE:
+        return "Double";
+
+      case Types.DECIMAL:
       case Types.NUMERIC:
         return "java.math.BigDecimal";
 
@@ -145,7 +165,12 @@ public class TableToEntityProcessor {
         return "java.time.LocalTime";
       case Types.TIMESTAMP:
         return "java.time.LocalDateTime";
+      case Types.TIME_WITH_TIMEZONE:
+        return "java.time.OffsetTime";
+      case Types.TIMESTAMP_WITH_TIMEZONE:
+        return "java.time.OffsetDateTime";
 
+      // binary
       case Types.BLOB:
       case Types.BINARY:
       case Types.VARBINARY:
@@ -155,5 +180,18 @@ public class TableToEntityProcessor {
       default:
         return "String";
     }
+  }
+
+  String wrap2primitive(String className) {
+    try {
+      Class<?> clazz = Class.forName("java.lang." + className);
+
+      if (ClassUtils.isPrimitiveWrapper(clazz)) {
+        return ClassUtils.wrapperToPrimitive(clazz).getName();
+      }
+    } catch (ClassNotFoundException e) {
+      // ignore
+    }
+    return className;
   }
 }

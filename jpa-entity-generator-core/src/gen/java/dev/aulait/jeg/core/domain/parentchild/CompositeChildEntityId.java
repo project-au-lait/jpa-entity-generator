@@ -23,5 +23,5 @@ public class CompositeChildEntityId implements java.io.Serializable {
   private String parentId2;
 
   @Column(name = "seq_no")
-  private Integer seqNo;
+  private int seqNo;
 }

@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
-@Table(name = "data_types")
-public class DataTypesEntity extends dev.aulait.jeg.core.domain.BaseEntity
+@Table(name = "data_types_nonull")
+public class DataTypesNonullEntity extends dev.aulait.jeg.core.domain.BaseEntity
     implements java.io.Serializable {
 
   @EqualsAndHashCode.Include
@@ -28,28 +28,28 @@ public class DataTypesEntity extends dev.aulait.jeg.core.domain.BaseEntity
   private String id;
 
   @Column(name = "col_boolean")
-  private Boolean colBoolean;
+  private boolean colBoolean;
 
   @Column(name = "col_bit")
-  private Boolean colBit;
+  private boolean colBit;
 
   @Column(name = "col_integer")
-  private Integer colInteger;
+  private int colInteger;
 
   @Column(name = "col_tinyint")
-  private Integer colTinyint;
+  private int colTinyint;
 
   @Column(name = "col_bigint")
-  private Long colBigint;
+  private long colBigint;
 
   @Column(name = "col_real")
-  private Float colReal;
+  private float colReal;
 
   @Column(name = "col_float")
-  private Double colFloat;
+  private double colFloat;
 
   @Column(name = "col_double")
-  private Double colDouble;
+  private double colDouble;
 
   @Column(name = "col_decimal")
   private java.math.BigDecimal colDecimal;
