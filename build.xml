@@ -161,4 +161,13 @@
     </if>
   </target>
 
+  <target name="select-db">
+    <replaceregexp
+      file=".mvn/maven.config"
+      match="(?&lt;=^-D\sJEG_DB=).*"
+      replace="${dbName}"
+      flags="m"
+    />
+  </target>
+
 </project>
