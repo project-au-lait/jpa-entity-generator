@@ -24,6 +24,7 @@ packages:
     - right
   dev.aulait.jeg.core.domain.datatypes:
     - data_types
+    - data_types_nonull
 baseClassDefs:
   - tables:
       - composite_master

@@ -20,5 +20,5 @@ public class ChildEntityId implements java.io.Serializable {
   private String parentId;
 
   @Column(name = "seq_no")
-  private Integer seqNo;
+  private int seqNo;
 }

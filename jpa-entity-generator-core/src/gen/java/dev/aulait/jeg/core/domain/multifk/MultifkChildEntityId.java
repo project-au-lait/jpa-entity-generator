@@ -20,5 +20,5 @@ public class MultifkChildEntityId implements java.io.Serializable {
   private String id;
 
   @Column(name = "seq_no")
-  private Integer seqNo;
+  private int seqNo;
 }
