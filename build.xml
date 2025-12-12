@@ -161,4 +161,8 @@
     </if>
   </target>
 
+  <target name="select-db">
+    <echo file=".mvn/maven.config">-D JEG_DB=${dbName}</echo>
+  </target>
+
 </project>

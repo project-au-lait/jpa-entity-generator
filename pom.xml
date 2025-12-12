@@ -330,7 +330,7 @@
 
       <activation>
         <property>
-          <name>env.JEG_DBMS</name>
+          <name>JEG_DB</name>
           <value>h2</value>
         </property>
       </activation>

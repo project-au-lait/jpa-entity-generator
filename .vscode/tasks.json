@@ -65,6 +65,21 @@
       },
       "args": ["-f", "jpa-entity-generator-docs"],
       "problemMatcher": []
+    },
+    {
+      "label": "select-db",
+      "type": "shell",
+      "osx": {
+        "command": "./mvnw"
+      },
+      "windows": {
+        "command": ".\\mvnw"
+      },
+      "linux": {
+        "command": "./mvnw"
+      },
+      "args": ["-N", "-Dant.target=select-db", "-DdbName=${input:db.name}"],
+      "problemMatcher": []
     }
   ],
   "inputs": [
@@ -73,6 +88,12 @@
       "type": "pickString",
       "description": "Select ant task name",
       "options": ["test", "gen-docs"]
+    },
+    {
+      "id": "db.name",
+      "type": "pickString",
+      "description": "Select DB",
+      "options": ["postgres", "h2"]
     }
   ]
 }
