@@ -162,12 +162,7 @@
   </target>
 
   <target name="select-db">
-    <replaceregexp
-      file=".mvn/maven.config"
-      match="(?&lt;=^-D\sJEG_DB=).*"
-      replace="${dbName}"
-      flags="m"
-    />
+    <echo file=".mvn/maven.config">-D JEG_DB=${dbName}</echo>
   </target>
 
 </project>

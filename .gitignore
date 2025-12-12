@@ -1,4 +1,5 @@
 .dbms-h2
+.mvn/maven.config
 jeg.log
 jpa-entity-generator-db/.env
 jpa-entity-generator-db/schemaspy.properties
