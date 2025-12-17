@@ -31,3 +31,18 @@ CREATE TABLE composite_transaction (
   --${commonColumns},
   CONSTRAINT composite_transaction_master_id_fkey FOREIGN KEY (master_id_1, master_id_2) REFERENCES composite_master (id_1, id_2)
 );
+
+
+CREATE TABLE field_name_master (
+  id CHAR(36) PRIMARY KEY,
+  name VARCHAR(100),
+  --${commonColumns}
+);
+
+CREATE TABLE field_name_transaction (
+  id CHAR(36) PRIMARY KEY,
+  related_master_id CHAR(36),
+  name VARCHAR(100),
+  --${commonColumns},
+  CONSTRAINT field_name_transaction_master_id_fkey FOREIGN KEY (related_master_id) REFERENCES field_name_master (id)
+);
