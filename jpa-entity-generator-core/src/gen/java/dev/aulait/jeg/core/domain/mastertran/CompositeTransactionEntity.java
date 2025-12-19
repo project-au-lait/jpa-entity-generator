@@ -39,5 +39,5 @@ public class CompositeTransactionEntity extends dev.aulait.jeg.core.domain.BaseE
     @JoinColumn(name = "master_id_1", referencedColumnName = "id_1"),
     @JoinColumn(name = "master_id_2", referencedColumnName = "id_2")
   })
-  private CompositeMasterEntity compositeMaster;
+  private CompositeMasterEntity master;
 }

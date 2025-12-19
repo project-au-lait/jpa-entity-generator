@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import javax.annotation.processing.Generated;
@@ -30,10 +31,14 @@ public class FieldNameTransactionEntity extends dev.aulait.jeg.core.domain.BaseE
   @Column(name = "id")
   private String id;
 
-  @Column(name = "name")
-  private String name;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumns({
+    @JoinColumn(name = "comp_master_id_1", referencedColumnName = "id_1"),
+    @JoinColumn(name = "co_master_id_2", referencedColumnName = "id_2")
+  })
+  private CompositeMasterEntity compositeMaster;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "related_master_id", referencedColumnName = "id")
-  private FieldNameMasterEntity relatedMaster;
+  private MasterEntity relatedMaster;
 }
