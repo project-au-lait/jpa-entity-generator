@@ -88,7 +88,13 @@ public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseCla
   <#elseif manyToOne.joinColumns?size gt 1>
   @JoinColumns({
     <#list manyToOne.joinColumns as joinColumn>
-    @JoinColumn(name = "${joinColumn.name}", referencedColumnName = "${joinColumn.referencedColumnName}")<#if !joinColumn?is_last>,</#if>
+    <@common.compress_single_line>
+    @JoinColumn(
+      name = "${joinColumn.name}", referencedColumnName = "${joinColumn.referencedColumnName}"
+      <#if root.name == manyToOne.type && joinColumn.name == joinColumn.referencedColumnName>, insertable = false, updatable = false</#if>
+    )
+    <#if !joinColumn?is_last>,</#if>
+    </@common.compress_single_line>
     </#list>
   })
   </#if>

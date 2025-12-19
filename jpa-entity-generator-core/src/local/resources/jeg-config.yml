@@ -25,11 +25,15 @@ packages:
   dev.aulait.jeg.core.domain.datatypes:
     - data_types
     - data_types_nonull
+  dev.aulait.jeg.core.domain.selfref:
+    - self_reference
+    - composite_self_reference
 baseClassDefs:
   - tables:
       - composite_master
       - composite_parent
       - composite_child
+      - composite_self_reference
     baseClass: dev.aulait.jeg.core.domain.CompositeBaseEntity
   - tables:
       - "*"
