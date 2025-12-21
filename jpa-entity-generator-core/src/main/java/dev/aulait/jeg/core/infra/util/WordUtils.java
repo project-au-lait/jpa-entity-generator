@@ -21,4 +21,8 @@ public class WordUtils {
   public static String entityNameToPluralFieldName(String entityName, String entitySuffix) {
     return English.plural(entityNameToFieldName(entityName, entitySuffix));
   }
+
+  public static String fkColNameToFieldName(String fkColName, String pkColName) {
+    return snakeToLowerCamel(fkColName).replace(snakeToUpperCamel(pkColName), "");
+  }
 }

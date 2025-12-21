@@ -22,8 +22,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
-@Table(name = "composite_transaction")
-public class CompositeTransactionEntity extends dev.aulait.jeg.core.domain.BaseEntity
+@Table(name = "field_name_transaction")
+public class FieldNameTransactionEntity extends dev.aulait.jeg.core.domain.BaseEntity
     implements java.io.Serializable {
 
   @EqualsAndHashCode.Include
@@ -31,13 +31,14 @@ public class CompositeTransactionEntity extends dev.aulait.jeg.core.domain.BaseE
   @Column(name = "id")
   private String id;
 
-  @Column(name = "name")
-  private String name;
-
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumns({
-    @JoinColumn(name = "master_id_1", referencedColumnName = "id_1"),
-    @JoinColumn(name = "master_id_2", referencedColumnName = "id_2")
+    @JoinColumn(name = "comp_master_id_1", referencedColumnName = "id_1"),
+    @JoinColumn(name = "co_master_id_2", referencedColumnName = "id_2")
   })
-  private CompositeMasterEntity master;
+  private CompositeMasterEntity compositeMaster;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "related_master_id", referencedColumnName = "id")
+  private MasterEntity relatedMaster;
 }

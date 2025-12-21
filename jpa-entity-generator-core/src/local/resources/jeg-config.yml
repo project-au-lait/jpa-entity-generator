@@ -11,6 +11,7 @@ packages:
     - transaction
     - composite_master
     - composite_transaction
+    - field_name_transaction
   dev.aulait.jeg.core.domain.parentchild:
     - parent
     - child

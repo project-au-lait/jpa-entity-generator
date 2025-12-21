@@ -154,8 +154,17 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
     EntityModel oneEntity = entityMap.get(oneTable.getTABLE_NAME());
     ManyToOneModel manyToOne = new ManyToOneModel();
 
-    manyToOne.setFieldName(
-        WordUtils.entityNameToFieldName(oneEntity.getName(), config.getEntitySuffix()));
+    List<String> fkFieldNames =
+        fk.getKeys().stream()
+            .map(k -> WordUtils.fkColNameToFieldName(k.getFKCOLUMN_NAME(), k.getPKCOLUMN_NAME()))
+            .distinct()
+            .toList();
+    String fieldName =
+        fkFieldNames.size() == 1
+            ? fkFieldNames.get(0)
+            : WordUtils.entityNameToFieldName(oneEntity.getName(), config.getEntitySuffix());
+
+    manyToOne.setFieldName(fieldName);
     manyToOne.setEntity(oneEntity);
 
     for (KeyModel key : fk.getKeys()) {

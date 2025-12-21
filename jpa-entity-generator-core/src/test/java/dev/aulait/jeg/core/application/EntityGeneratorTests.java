@@ -35,6 +35,7 @@ public class EntityGeneratorTests {
         "/dev/aulait/jeg/core/domain/mastertran/CompositeMasterEntity.java",
         "/dev/aulait/jeg/core/domain/mastertran/CompositeMasterEntityId.java",
         "/dev/aulait/jeg/core/domain/mastertran/CompositeTransactionEntity.java",
+        "/dev/aulait/jeg/core/domain/mastertran/FieldNameTransactionEntity.java",
         "/dev/aulait/jeg/core/domain/parentchild/ParentEntity.java",
         "/dev/aulait/jeg/core/domain/parentchild/ChildEntity.java",
         "/dev/aulait/jeg/core/domain/parentchild/ChildEntityId.java",
