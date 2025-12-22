@@ -13,6 +13,7 @@ public class ManyToOneModel {
   private List<JoinColumnModel> joinColumns = new ArrayList<>();
   private List<AnnotationModel> annotations = new ArrayList<>();
   private ForeignKeyModel foreignKey;
+  private boolean readonly;
 
   @Getter(lazy = true)
   private final List<Type> imports = buildImports();
