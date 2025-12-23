@@ -148,10 +148,10 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
    * @param fk the ForeignKeyModel containing information about the foreign key relationship
    */
   protected void buildManyToOne(ForeignKeyModel fk) {
-    TableModel manyTable = fk.getFkTable();
-    TableModel oneTable = fk.getPkTable();
-    EntityModel manyEntity = entityMap.get(manyTable.getTABLE_NAME());
-    EntityModel oneEntity = entityMap.get(oneTable.getTABLE_NAME());
+    String manyTableName = fk.getFkTable().getTABLE_NAME();
+    String oneTableName = fk.getPkTable().getTABLE_NAME();
+    EntityModel manyEntity = entityMap.get(manyTableName);
+    EntityModel oneEntity = entityMap.get(oneTableName);
     ManyToOneModel manyToOne = new ManyToOneModel();
 
     List<String> fkFieldNames =
@@ -180,11 +180,18 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
 
     manyToOne.setForeignKey(fk);
 
+    manyToOne.setReadonly(
+        manyTableName.equals(oneTableName)
+            && fk.getKeys().stream()
+                .anyMatch(k -> k.getFKCOLUMN_NAME().equals(k.getPKCOLUMN_NAME())));
+
     manyEntity.getManyToOnes().add(manyToOne);
 
-    for (JoinColumnModel joinColumn : manyToOne.getJoinColumns()) {
-      FieldModel field = manyEntity.findFieldByColumnName(joinColumn.getName());
-      manyEntity.getFields().remove(field);
+    if (!manyToOne.isReadonly()) {
+      for (JoinColumnModel joinColumn : manyToOne.getJoinColumns()) {
+        FieldModel field = manyEntity.findFieldByColumnName(joinColumn.getName());
+        manyEntity.getFields().remove(field);
+      }
     }
   }
 
