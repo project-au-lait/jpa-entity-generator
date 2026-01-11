@@ -5,6 +5,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 
 public class EntityMetadataProcessor {
@@ -19,7 +20,7 @@ public class EntityMetadataProcessor {
 
   EntityMetadataModel process(EntityModel entity) {
     EntityMetadataModel metadata = new EntityMetadataModel();
-    metadata.setPackageName(entity.getPkg());
+    metadata.setPackageName(Objects.toString(entity.getPkg(), ""));
     metadata.setClassName(entity.getName());
     metadata.setTableName(entity.getTableName());
 
