@@ -6,6 +6,7 @@
     {
       "fieldName": "id",
       "javaType": "ChildEntityId",
+      "javaWrapperType": "ChildEntityId",
       "multiple": false,
       "id": true,
       "required": false,
@@ -15,6 +16,7 @@
       "fieldName": "name",
       "columnName": "name",
       "javaType": "String",
+      "javaWrapperType": "String",
       "multiple": false,
       "stringLength": 100,
       "id": false,

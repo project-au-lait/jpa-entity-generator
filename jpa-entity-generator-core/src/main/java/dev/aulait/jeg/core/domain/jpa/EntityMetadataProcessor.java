@@ -45,6 +45,7 @@ public class EntityMetadataProcessor {
     metadata.setFieldName(field.getName());
     metadata.setColumnName(field.getColumnName());
     metadata.setJavaType(field.getType());
+    metadata.setJavaWrapperType(toWrapperType(field.getType()));
 
     ColumnModel column = field.getColumn();
     if (column.getDATA_TYPE() == Types.VARCHAR || column.getDATA_TYPE() == Types.CHAR) {
@@ -61,6 +62,7 @@ public class EntityMetadataProcessor {
     FieldMetadataModel metadata = new FieldMetadataModel();
     metadata.setFieldName("id");
     metadata.setJavaType(embeddedId.getName());
+    metadata.setJavaWrapperType(metadata.getJavaType());
     metadata.setId(true);
 
     return metadata;
@@ -70,6 +72,7 @@ public class EntityMetadataProcessor {
     FieldMetadataModel metadata = new FieldMetadataModel();
     metadata.setFieldName(oneToOne.getFieldName());
     metadata.setJavaType(oneToOne.getEntity().getFqdn());
+    metadata.setJavaWrapperType(metadata.getJavaType());
 
     return metadata;
   }
@@ -78,6 +81,7 @@ public class EntityMetadataProcessor {
     FieldMetadataModel metadata = new FieldMetadataModel();
     metadata.setFieldName(oneToMany.getFieldName());
     metadata.setJavaType(oneToMany.getEntity().getFqdn());
+    metadata.setJavaWrapperType(metadata.getJavaType());
     metadata.setMultiple(true);
 
     return metadata;
@@ -87,6 +91,7 @@ public class EntityMetadataProcessor {
     FieldMetadataModel metadata = new FieldMetadataModel();
     metadata.setFieldName(manyToOne.getFieldName());
     metadata.setJavaType(manyToOne.getEntity().getFqdn());
+    metadata.setJavaWrapperType(metadata.getJavaType());
 
     return metadata;
   }
@@ -95,6 +100,7 @@ public class EntityMetadataProcessor {
     FieldMetadataModel metadata = new FieldMetadataModel();
     metadata.setFieldName(manyToMany.getFieldName());
     metadata.setJavaType(manyToMany.getEntity().getFqdn());
+    metadata.setJavaWrapperType(metadata.getJavaType());
     metadata.setMultiple(true);
 
     return metadata;
@@ -111,5 +117,19 @@ public class EntityMetadataProcessor {
     metadata.setFields(fields);
 
     return metadata;
+  }
+
+  private String toWrapperType(String javaType) {
+    return switch (javaType) {
+      case "int" -> "Integer";
+      case "long" -> "Long";
+      case "double" -> "Double";
+      case "float" -> "Float";
+      case "boolean" -> "Boolean";
+      case "char" -> "Character";
+      case "byte" -> "Byte";
+      case "short" -> "Short";
+      default -> javaType;
+    };
   }
 }
