@@ -5,6 +5,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 public class EntityMetadataProcessor {
 
@@ -51,6 +52,7 @@ public class EntityMetadataProcessor {
     }
     metadata.setRequired(column.getNULLABLE() == DatabaseMetaData.columnNoNulls);
     metadata.setId(field.isId());
+    metadata.setAutoIncrement(StringUtils.equalsIgnoreCase(column.getIS_AUTOINCREMENT(), "YES"));
 
     return metadata;
   }

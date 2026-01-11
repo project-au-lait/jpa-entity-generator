@@ -11,9 +11,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 @RequiredArgsConstructor
+@Slf4j
 public class EntityMetadataGenerator {
 
   static final String ENTITY_METADATA_FILE = "jeg-metadata.json";
@@ -37,6 +39,7 @@ public class EntityMetadataGenerator {
         entityMetadataProcessor.processEmbeddedIds(
             entities.stream().map(EntityModel::getEmbeddedId).filter(Objects::nonNull).toList()));
 
+    log.info("Generating entity metadata file: {}", outputFile.toAbsolutePath().normalize());
     jsonWriter.write(outputFile, metadatas);
 
     return Optional.of(outputFile);

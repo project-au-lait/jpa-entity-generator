@@ -29,6 +29,8 @@ packages:
   dev.aulait.jeg.core.domain.selfref:
     - self_reference
     - composite_self_reference
+  dev.aulait.jeg.core.domain.autoincrement:
+    - auto_increment
 baseClassDefs:
   - tables:
       - composite_master

@@ -13,4 +13,5 @@ public class FieldMetadataModel {
   private Integer stringLength;
   private boolean id;
   private boolean required;
+  private boolean autoIncrement;
 }

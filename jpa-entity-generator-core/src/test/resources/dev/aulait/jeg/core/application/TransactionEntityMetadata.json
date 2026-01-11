@@ -10,7 +10,8 @@
       "multiple": false,
       "stringLength": 36,
       "id": true,
-      "required": true
+      "required": true,
+      "autoIncrement": false
     },
     {
       "fieldName": "name",
@@ -19,14 +20,16 @@
       "multiple": false,
       "stringLength": 100,
       "id": false,
-      "required": false
+      "required": false,
+      "autoIncrement": false
     },
     {
       "fieldName": "master",
       "javaType": "dev.aulait.jeg.core.domain.mastertran.MasterEntity",
       "multiple": false,
       "id": false,
-      "required": false
+      "required": false,
+      "autoIncrement": false
     }
   ]
 }

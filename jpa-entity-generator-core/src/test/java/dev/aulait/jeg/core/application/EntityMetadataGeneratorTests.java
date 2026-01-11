@@ -33,7 +33,8 @@ class EntityMetadataGeneratorTests {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"ParentEntity", "ChildEntity", "TransactionEntity"})
+  @ValueSource(
+      strings = {"ParentEntity", "ChildEntity", "TransactionEntity", "AutoIncrementEntity"})
   void testExecute(String entityName) {
 
     EntityMetadataModel entity =

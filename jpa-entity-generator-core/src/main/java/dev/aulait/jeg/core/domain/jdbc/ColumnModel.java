@@ -18,6 +18,7 @@ public class ColumnModel {
   private String COLUMN_DEF;
   private int NULLABLE;
   private Integer KEY_SEQ;
+  private String IS_AUTOINCREMENT;
 
   @Getter(lazy = true)
   private final boolean pk = KEY_SEQ != null;

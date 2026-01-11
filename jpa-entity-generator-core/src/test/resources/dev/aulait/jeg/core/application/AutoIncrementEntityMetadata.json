@@ -1,22 +1,23 @@
 {
-  "packageName": "dev.aulait.jeg.core.domain.parentchild",
-  "className": "ChildEntity",
-  "tableName": "child",
+  "packageName": "dev.aulait.jeg.core.domain.autoincrement",
+  "className": "AutoIncrementEntity",
+  "tableName": "auto_increment",
   "fields": [
     {
       "fieldName": "id",
-      "javaType": "ChildEntityId",
+      "columnName": "id",
+      "javaType": "int",
       "multiple": false,
       "id": true,
-      "required": false,
-      "autoIncrement": false
+      "required": true,
+      "autoIncrement": true
     },
     {
       "fieldName": "name",
       "columnName": "name",
       "javaType": "String",
       "multiple": false,
-      "stringLength": 100,
+      "stringLength": 255,
       "id": false,
       "required": false,
       "autoIncrement": false
