@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "aprilandjan.ascii-tree-generator",
+    "asciidoctor.asciidoctor-vscode",
+    "josevseb.google-java-format-for-vs-code",
+    "mhutchie.git-graph",
+    "mtxr.sqltools-driver-pg",
+    "mtxr.sqltools",
+    "redhat.vscode-xml",
+    "redhat.vscode-yaml",
+    "sonarsource.sonarlint-vscode",
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-lombok"
+  ]
+}

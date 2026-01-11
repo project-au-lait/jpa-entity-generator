@@ -10,5 +10,18 @@
   },
   "editor.formatOnSave": true,
   "java.compile.nullAnalysis.mode": "automatic",
-  "java.debug.settings.onBuildFailureProceed": true
+  "java.debug.settings.onBuildFailureProceed": true,
+  "sqltools.connections": [
+    {
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5438,
+      "driver": "PostgreSQL",
+      "name": "jeg",
+      "database": "jeg",
+      "username": "jeg",
+      "password": "jeg"
+    }
+  ]
 }
