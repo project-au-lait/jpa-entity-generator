@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.StringUtils;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -100,7 +101,7 @@ public class TableToEntityProcessor {
     field.setName(WordUtils.snakeToLowerCamel(column.getCOLUMN_NAME()));
     field.setColumn(column);
 
-    String type = dbtype2javatype(column.getDATA_TYPE());
+    String type = dbtype2javatype(column.getDATA_TYPE(), column.getTYPE_NAME());
     if (column.getNULLABLE() == DatabaseMetaData.columnNoNulls) {
       type = wrap2primitive(type);
     }
@@ -131,17 +132,19 @@ public class TableToEntityProcessor {
     entity.setEmbeddedId(embeddedId);
   }
 
-  String dbtype2javatype(int dataType) {
+  String dbtype2javatype(int dataType, String typeName) {
+
+    if (StringUtils.equalsAnyIgnoreCase(typeName, "uuid", "uniqueidentifier")) {
+      return "java.util.UUID";
+    }
+
     switch (dataType) {
       // boolean
-      case Types.BOOLEAN:
-      case Types.BIT:
+      case Types.BOOLEAN, Types.BIT:
         return "Boolean";
 
       // numeric
-      case Types.INTEGER:
-      case Types.TINYINT:
-      case Types.SMALLINT:
+      case Types.INTEGER, Types.TINYINT, Types.SMALLINT:
         return "Integer";
 
       case Types.BIGINT:
@@ -150,12 +153,10 @@ public class TableToEntityProcessor {
       case Types.REAL:
         return "Float";
 
-      case Types.FLOAT:
-      case Types.DOUBLE:
+      case Types.FLOAT, Types.DOUBLE:
         return "Double";
 
-      case Types.DECIMAL:
-      case Types.NUMERIC:
+      case Types.DECIMAL, Types.NUMERIC:
         return "java.math.BigDecimal";
 
       // date
@@ -171,9 +172,7 @@ public class TableToEntityProcessor {
         return "java.time.OffsetDateTime";
 
       // binary
-      case Types.BLOB:
-      case Types.BINARY:
-      case Types.VARBINARY:
+      case Types.BLOB, Types.BINARY, Types.VARBINARY, Types.LONGVARBINARY:
         return "byte[]";
 
       // string

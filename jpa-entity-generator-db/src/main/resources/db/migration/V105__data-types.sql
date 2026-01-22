@@ -13,7 +13,8 @@ CREATE TABLE data_types (
   col_date DATE,
   col_time TIME,
   col_timestamp TIMESTAMP,
-  col_blob BYTEA
+  col_blob BYTEA,
+  col_uuid UUID
 );
 
 

@@ -68,4 +68,7 @@ public class DataTypesEntity extends dev.aulait.jeg.core.domain.BaseEntity
 
   @Column(name = "col_blob")
   private byte[] colBlob;
+
+  @Column(name = "col_uuid")
+  private java.util.UUID colUuid;
 }
