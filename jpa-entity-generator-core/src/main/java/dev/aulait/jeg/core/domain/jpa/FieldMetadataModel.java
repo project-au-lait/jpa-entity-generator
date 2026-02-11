@@ -11,7 +11,9 @@ public class FieldMetadataModel {
   private String javaType;
   private String javaWrapperType;
   private boolean multiple;
-  private Integer stringLength;
+  @Deprecated private Integer stringLength;
+  private Integer columnSize;
+  private Integer decimalDigits;
   private boolean id;
   private boolean required;
   private boolean autoIncrement;

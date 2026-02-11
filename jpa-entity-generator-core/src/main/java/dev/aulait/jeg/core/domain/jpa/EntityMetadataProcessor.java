@@ -52,6 +52,8 @@ public class EntityMetadataProcessor {
     if (column.getDATA_TYPE() == Types.VARCHAR || column.getDATA_TYPE() == Types.CHAR) {
       metadata.setStringLength(column.getCOLUMN_SIZE());
     }
+    metadata.setColumnSize(column.getCOLUMN_SIZE());
+    metadata.setDecimalDigits(column.getDECIMAL_DIGITS());
     metadata.setRequired(column.getNULLABLE() == DatabaseMetaData.columnNoNulls);
     metadata.setId(field.isId());
     metadata.setAutoIncrement(StringUtils.equalsIgnoreCase(column.getIS_AUTOINCREMENT(), "YES"));

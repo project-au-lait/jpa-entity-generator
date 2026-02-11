@@ -9,6 +9,8 @@
       "javaType": "int",
       "javaWrapperType": "Integer",
       "multiple": false,
+      "columnSize": 10,
+      "decimalDigits": 0,
       "id": true,
       "required": true,
       "autoIncrement": true
@@ -20,6 +22,8 @@
       "javaWrapperType": "String",
       "multiple": false,
       "stringLength": 255,
+      "columnSize": 255,
+      "decimalDigits": 0,
       "id": false,
       "required": false,
       "autoIncrement": false

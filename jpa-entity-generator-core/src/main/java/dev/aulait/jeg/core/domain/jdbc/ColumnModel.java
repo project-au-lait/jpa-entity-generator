@@ -13,8 +13,8 @@ public class ColumnModel {
   @EqualsAndHashCode.Include private String COLUMN_NAME;
   private int DATA_TYPE;
   private String TYPE_NAME;
-  private int COLUMN_SIZE;
-  private int DECIMAL_DIGITS;
+  private Integer COLUMN_SIZE;
+  private Integer DECIMAL_DIGITS;
   private String COLUMN_DEF;
   private int NULLABLE;
   private Integer KEY_SEQ;

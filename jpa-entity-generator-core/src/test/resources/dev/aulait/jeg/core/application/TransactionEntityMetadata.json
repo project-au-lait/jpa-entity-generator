@@ -10,6 +10,8 @@
       "javaWrapperType": "String",
       "multiple": false,
       "stringLength": 36,
+      "columnSize": 36,
+      "decimalDigits": 0,
       "id": true,
       "required": true,
       "autoIncrement": false
@@ -21,6 +23,8 @@
       "javaWrapperType": "String",
       "multiple": false,
       "stringLength": 100,
+      "columnSize": 100,
+      "decimalDigits": 0,
       "id": false,
       "required": false,
       "autoIncrement": false
