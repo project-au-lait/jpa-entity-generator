@@ -140,6 +140,8 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
         .addAll(annotationLogic.find(oneEntity.getName(), oneToMany.getFieldName()));
 
     oneEntity.getOneToManies().add(oneToMany);
+
+    manyEntity.setParentType(oneEntity.getFqdn());
   }
 
   /**

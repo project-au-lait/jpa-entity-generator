@@ -2,6 +2,7 @@
   "packageName": "dev.aulait.jeg.core.domain.autoincrement",
   "className": "AutoIncrementEntity",
   "tableName": "auto_increment",
+  "parentType": null,
   "fields": [
     {
       "fieldName": "id",
