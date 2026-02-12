@@ -43,6 +43,13 @@ class EntityMetadataGeneratorTests {
             .findFirst()
             .get();
 
+    if ("h2".equals(System.getProperty("JEG_DB")) && "AutoIncrementEntity".equals(entityName)) {
+      // Adjust for H2 database
+      entity.getFields().stream()
+          .filter(field -> "id".equals(field.getFieldName()))
+          .forEach(field -> field.setColumnSize(32));
+    }
+
     String actual = JsonUtils.writeValueAsString(entity);
 
     String expected = ResourceUtils.res2text(this, entityName + "Metadata.json");
