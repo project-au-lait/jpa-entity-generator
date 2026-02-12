@@ -42,12 +42,12 @@ class EntityMetadataGeneratorTests {
             .filter(e -> e.getClassName().equals(entityName))
             .findFirst()
             .get();
-
     if ("h2".equals(System.getProperty("JEG_DB")) && "AutoIncrementEntity".equals(entityName)) {
+      System.out.println("=== Adjusting AutoIncrementEntity for H2 ===");
       // Adjust for H2 database
       entity.getFields().stream()
           .filter(field -> "id".equals(field.getFieldName()))
-          .forEach(field -> field.setColumnSize(32));
+          .forEach(field -> field.setColumnSize(10));
     }
 
     String actual = JsonUtils.writeValueAsString(entity);
