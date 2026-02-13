@@ -28,7 +28,7 @@ public class EntityModel extends TemplateModel implements Type {
   private List<OneToManyModel> oneToManies = new ArrayList<>();
   private List<ManyToOneModel> manyToOnes = new ArrayList<>();
   private List<ManyToManyModel> manyToManies = new ArrayList<>();
-  private String parentType;
+  private List<String> parentTypes = new ArrayList<>();
 
   @Getter(lazy = true)
   private final String fqdn = pkg + "." + name;

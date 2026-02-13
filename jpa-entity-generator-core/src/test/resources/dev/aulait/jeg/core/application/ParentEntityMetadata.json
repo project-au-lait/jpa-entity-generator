@@ -2,7 +2,7 @@
   "packageName": "dev.aulait.jeg.core.domain.parentchild",
   "className": "ParentEntity",
   "tableName": "parent",
-  "parentType": null,
+  "parentTypes": [],
   "fields": [
     {
       "fieldName": "id",

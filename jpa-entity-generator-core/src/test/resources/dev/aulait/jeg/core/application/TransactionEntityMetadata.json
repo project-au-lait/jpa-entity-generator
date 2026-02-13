@@ -2,7 +2,7 @@
   "packageName": "dev.aulait.jeg.core.domain.mastertran",
   "className": "TransactionEntity",
   "tableName": "transaction",
-  "parentType": null,
+  "parentTypes": [],
   "fields": [
     {
       "fieldName": "id",

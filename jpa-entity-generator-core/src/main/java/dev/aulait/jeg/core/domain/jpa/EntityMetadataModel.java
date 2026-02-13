@@ -8,6 +8,6 @@ public class EntityMetadataModel {
   private String packageName;
   private String className;
   private String tableName;
-  private String parentType;
+  private List<String> parentTypes;
   private List<FieldMetadataModel> fields;
 }

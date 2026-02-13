@@ -141,7 +141,7 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
 
     oneEntity.getOneToManies().add(oneToMany);
 
-    manyEntity.setParentType(oneEntity.getFqdn());
+    manyEntity.getParentTypes().add(oneEntity.getFqdn());
   }
 
   /**

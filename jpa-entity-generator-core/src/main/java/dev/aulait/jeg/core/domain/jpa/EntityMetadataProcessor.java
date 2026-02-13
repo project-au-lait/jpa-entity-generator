@@ -23,7 +23,7 @@ public class EntityMetadataProcessor {
     metadata.setPackageName(Objects.toString(entity.getPkg(), ""));
     metadata.setClassName(entity.getName());
     metadata.setTableName(entity.getTableName());
-    metadata.setParentType(entity.getParentType());
+    metadata.setParentTypes(entity.getParentTypes());
 
     List<FieldMetadataModel> fields = new ArrayList<>();
 
