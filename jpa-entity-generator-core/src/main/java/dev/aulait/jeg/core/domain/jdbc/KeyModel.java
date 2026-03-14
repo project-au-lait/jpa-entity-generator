@@ -1,8 +1,14 @@
 package dev.aulait.jeg.core.domain.jdbc;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@Builder
 @Data
+@NoArgsConstructor
 public class KeyModel {
   private String PKTABLE_NAME;
   private String PKCOLUMN_NAME;

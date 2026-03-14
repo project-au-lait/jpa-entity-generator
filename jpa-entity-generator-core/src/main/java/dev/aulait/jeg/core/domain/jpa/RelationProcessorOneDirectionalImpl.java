@@ -31,12 +31,15 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
 
   AnnotationLogic annotationLogic;
 
+  NamingLogic namingLogic;
+
   // key: TABLE_NAME
   Map<String, EntityModel> entityMap;
 
   public RelationProcessorOneDirectionalImpl(Config config) {
     this.config = config;
     annotationLogic = new AnnotationLogic(config);
+    namingLogic = new NamingLogic(config);
   }
 
   @Override
@@ -156,15 +159,7 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
     EntityModel oneEntity = entityMap.get(oneTableName);
     ManyToOneModel manyToOne = new ManyToOneModel();
 
-    List<String> fkFieldNames =
-        fk.getKeys().stream()
-            .map(k -> WordUtils.fkColNameToFieldName(k.getFKCOLUMN_NAME(), k.getPKCOLUMN_NAME()))
-            .distinct()
-            .toList();
-    String fieldName =
-        fkFieldNames.size() == 1
-            ? fkFieldNames.get(0)
-            : WordUtils.entityNameToFieldName(oneEntity.getName(), config.getEntitySuffix());
+    String fieldName = namingLogic.toManyToOneFieldName(fk, oneEntity);
 
     manyToOne.setFieldName(fieldName);
     manyToOne.setEntity(oneEntity);

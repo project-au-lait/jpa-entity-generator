@@ -23,6 +23,8 @@ public class WordUtils {
   }
 
   public static String fkColNameToFieldName(String fkColName, String pkColName) {
-    return snakeToLowerCamel(fkColName).replace(snakeToUpperCamel(pkColName), "");
+    String fieldName = StringUtils.substringBefore(fkColName, pkColName);
+    fieldName = StringUtils.removeEnd(fieldName, "_");
+    return snakeToLowerCamel(fieldName);
   }
 }

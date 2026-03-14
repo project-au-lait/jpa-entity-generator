@@ -36,5 +36,5 @@ public class CompositeSelfReferenceEntity extends dev.aulait.jeg.core.domain.Com
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false),
     @JoinColumn(name = "self_ref_seq", referencedColumnName = "seq", insertable = false, updatable = false)
   })
-  private CompositeSelfReferenceEntity compositeSelfReference;
+  private CompositeSelfReferenceEntity selfRef;
 }
