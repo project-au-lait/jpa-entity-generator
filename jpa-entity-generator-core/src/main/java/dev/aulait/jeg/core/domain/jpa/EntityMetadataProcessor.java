@@ -55,9 +55,11 @@ public class EntityMetadataProcessor {
     }
     metadata.setColumnSize(column.getCOLUMN_SIZE());
     metadata.setDecimalDigits(column.getDECIMAL_DIGITS());
+    metadata.setColumnDef(column.getCOLUMN_DEF());
     metadata.setRequired(column.getNULLABLE() == DatabaseMetaData.columnNoNulls);
     metadata.setId(field.isId());
     metadata.setAutoIncrement(StringUtils.equalsIgnoreCase(column.getIS_AUTOINCREMENT(), "YES"));
+    metadata.setGenerated(StringUtils.equalsIgnoreCase(column.getIS_GENERATEDCOLUMN(), "YES"));
 
     return metadata;
   }

@@ -14,7 +14,9 @@ public class FieldMetadataModel {
   @Deprecated private Integer stringLength;
   private Integer columnSize;
   private Integer decimalDigits;
+  private String columnDef;
   private boolean id;
   private boolean required;
   private boolean autoIncrement;
+  private boolean generated;
 }

@@ -11,7 +11,8 @@
       "multiple": false,
       "id": true,
       "required": false,
-      "autoIncrement": false
+      "autoIncrement": false,
+      "generated": false
     },
     {
       "fieldName": "name",
@@ -24,7 +25,8 @@
       "decimalDigits": 0,
       "id": false,
       "required": false,
-      "autoIncrement": false
+      "autoIncrement": false,
+      "generated": false
     }
   ]
 }

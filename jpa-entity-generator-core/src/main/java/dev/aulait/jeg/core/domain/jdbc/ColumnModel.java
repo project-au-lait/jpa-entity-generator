@@ -19,6 +19,7 @@ public class ColumnModel {
   private int NULLABLE;
   private Integer KEY_SEQ;
   private String IS_AUTOINCREMENT;
+  private String IS_GENERATEDCOLUMN;
 
   @Getter(lazy = true)
   private final boolean pk = KEY_SEQ != null;
