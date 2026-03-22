@@ -37,7 +37,7 @@ public class DataTypesEntity extends dev.aulait.jeg.core.domain.BaseEntity
   private Integer colInteger;
 
   @Column(name = "col_tinyint")
-  private Integer colTinyint;
+  private Short colTinyint;
 
   @Column(name = "col_bigint")
   private Long colBigint;

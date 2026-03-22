@@ -144,7 +144,10 @@ public class TableToEntityProcessor {
         return "Boolean";
 
       // numeric
-      case Types.INTEGER, Types.TINYINT, Types.SMALLINT:
+      case Types.TINYINT, Types.SMALLINT:
+        return "Short";
+
+      case Types.INTEGER:
         return "Integer";
 
       case Types.BIGINT:
