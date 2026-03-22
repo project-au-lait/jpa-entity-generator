@@ -39,8 +39,8 @@ To run jeg as the Maven Plugin, add the jpa-entity-generator-maven-plugin settin
       <configFilePath>./jeg-config.yml</configFilePath>
       <jdbcUrl>jdbc:postgresql://localhost:5432/postgres</jdbcUrl>
       <jdbcUsername>postgres</jdbcUsername>
-      </jdbcPassword>postgres</jdbcPassword>
-      </outputDir>target</outputDir>
+      <jdbcPassword>postgres</jdbcPassword>
+      <outputDir>target</outputDir>
     </configuration>
   </plugin>
 </plugins>
