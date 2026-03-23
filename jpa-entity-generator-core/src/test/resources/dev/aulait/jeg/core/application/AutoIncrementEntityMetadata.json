@@ -7,7 +7,7 @@
     {
       "fieldName": "id",
       "columnName": "id",
-      "javaType": "int",
+      "javaType": "Integer",
       "javaWrapperType": "Integer",
       "multiple": false,
       "columnSize": 10,

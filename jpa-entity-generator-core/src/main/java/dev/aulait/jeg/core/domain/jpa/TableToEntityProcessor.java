@@ -102,7 +102,7 @@ public class TableToEntityProcessor {
     field.setColumn(column);
 
     String type = dbtype2javatype(column.getDATA_TYPE(), column.getTYPE_NAME());
-    if (column.getNULLABLE() == DatabaseMetaData.columnNoNulls) {
+    if (shouldBePrimitives(column)) {
       type = wrap2primitive(type);
     }
     field.setType(type);
@@ -195,5 +195,23 @@ public class TableToEntityProcessor {
       // ignore
     }
     return className;
+  }
+
+  /**
+   * カラムに対応するJavaの型がプリミティブ型になるべきか否かを判定する。 以下の条件を全て満たす場合は、プリミティブ型にする。
+   *
+   * <ul>
+   *   <li>カラムがNULL不可であること
+   *   <li>カラムがAUTOINCREMENTでないこと
+   *   <li>カラムがGENERATEDCOLUMNでないこと
+   * </ul>
+   *
+   * @param column
+   * @return
+   */
+  boolean shouldBePrimitives(ColumnModel column) {
+    return column.getNULLABLE() == DatabaseMetaData.columnNoNulls
+        && !StringUtils.equalsIgnoreCase(column.getIS_AUTOINCREMENT(), "YES")
+        && !StringUtils.equalsIgnoreCase(column.getIS_GENERATEDCOLUMN(), "YES");
   }
 }
