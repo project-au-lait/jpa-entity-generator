@@ -11,19 +11,22 @@ jegを使用するには以下のソフトウェアが必要です。
 
 ## 使用方法
 
-jegは実行可能jar、及びMaven Pluginとして使用できます。
+jegはスタンドアロンアプリケーション(クラスパス指定による実行)、及びMaven Pluginとして使用できます。
 
-### 実行可能jarとして使用する
+### スタンドアロンアプリケーションとして使用する（クラスパス指定）
 
-jegを実行可能jarとして実行するには、Maven Centralからjegのjarファイルを取得し、javaコマンドで実行します。
+jegをスタンドアロンアプリケーションとして実行するには、Maven Centralからjegのjarファイルを取得し、
+必要な依存関係（例：JDBCドライバ）とともに'lib'ディレクトリに配置します。
 
 ```sh
-curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.11.1/jpa-entity-generator-core-0.11.1-all-deps.jar
-
-java -jar jpa-entity-generator-core-0.11.1-all-deps.jar -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
+java -cp "lib/*" dev.aulait.jeg.core.interfaces.Main -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
 ```
 
 上記javaコマンド末尾の引数の仕様は[設定](#jeg-config)を参照してください。
+
+> **Note**
+> 本ツールはJDBCドライバなどの外部依存をjarに含んでいないため、`java -jar` では実行できません。
+> 実行時は必要なライブラリをクラスパスに含めてください。
 
 ### Maven Pluginとして使用する
 
@@ -39,8 +42,8 @@ jegをMaven Pluginとして実行するには、pom.xmlにjpa-entity-generator-m
       <configFilePath>./jeg-config.yml</configFilePath>
       <jdbcUrl>jdbc:postgresql://localhost:5432/postgres</jdbcUrl>
       <jdbcUsername>postgres</jdbcUsername>
-      </jdbcPassword>postgres</jdbcPassword>
-      </outputDir>target</outputDir>
+      <jdbcPassword>postgres</jdbcPassword>
+      <outputDir>target</outputDir>
     </configuration>
   </plugin>
 </plugins>
@@ -53,8 +56,8 @@ pom.xmlにPluginの設定後、以下のコマンドでjegを実行します。
 mvn jpa-entity-generator:reverse
 ```
 
-
 ### 設定
+
 <a name="jeg-config"></a>
 
 jegを実行する際のjavaコマンドの引数、またはMaven Plugnのconfiguraion項目の仕様は以下の通りです。
@@ -135,14 +138,14 @@ formatter: google
 - javaコマンドで実行する場合
 
 ```sh
-java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar jpa-entity-generator-core-0.11.1-all-deps.jar 
+java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -cp "lib/*" dev.aulait.jeg.core.interfaces.Main
 ```
 
 - Maven Pluginで実行する場合
 
 ```sh
-MAVEN_OPTS=--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+MAVEN_OPTS=--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.c
+ompiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
 ```
-
 
 参考: https://github.com/google/google-java-format?tab=readme-ov-file#as-a-library
