@@ -19,6 +19,8 @@ To run jeg as a standalone application, download the jar file from Maven Central
 
 Then run it with the following command:
 
+Example（PostgreSQL）:
+
 ```sh
 curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.11.1/jpa-entity-generator-core-0.11.1-all-deps.jar
 curl -O https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.2/postgresql-42.7.2.jar
