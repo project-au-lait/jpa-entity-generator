@@ -11,9 +11,9 @@ The following software is required to use jeg.
 
 ## Usage
 
-You can use jeg as a standalone application (classpath execution) or as a Maven Plugin.
+You can use jeg as a standalone application or as a Maven Plugin.
 
-### Use as a standalone application (classpath execution)
+### Use as a standalone application
 
 To run jeg as a standalone application, download the jar file from Maven Central.
 
@@ -21,22 +21,18 @@ Then run it with the following command:
 
 ```sh
 curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.11.1/jpa-entity-generator-core-0.11.1-all-deps.jar
+curl -O https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.2/postgresql-42.7.2.jar
 
-java -cp "<path-to-core-jar>;<path-to-jdbc-jar>" dev.aulait.jeg.core.interfaces.Main -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
+java -cp "./*" dev.aulait.jeg.core.interfaces.Main -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
 ```
 
-The classpath separator differs depending on the OS:
-
-- Windows: `;`
-- Linux / Mac: `:`
-
-Place the application jar and required dependencies (e.g. JDBC driver) in any directory.
+Place the application jar and required dependencies (e.g. JDBC driver) in the same directory.
 
 ---
 
 > **Note**
 > This tool cannot be executed with `java -jar` because external dependencies such as JDBC drivers are not bundled in the jar.
-> Please include all required libraries in the classpath when running.
+> Please place all required jar files in the same directory when running.
 
 Example (copy JDBC driver using Maven):
 
@@ -163,7 +159,7 @@ If you want to apply [google-java-format](https://github.com/google/google-java-
 
 ```sh
 java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -cp
-"<path-to-core-jar>;<path-to-jdbc-jar>" dev.aulait.jeg.core.interfaces.Main
+"./*" dev.aulait.jeg.core.interfaces.Main
 ```
 
 - When running with the Maven Plugin

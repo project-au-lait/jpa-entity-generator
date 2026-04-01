@@ -11,30 +11,26 @@ jegを使用するには以下のソフトウェアが必要です。
 
 ## 使用方法
 
-jegはスタンドアロンアプリケーション(クラスパス指定による実行)、及びMaven Pluginとして使用できます。
+jegはスタンドアロンアプリケーション及びMaven Pluginとして使用できます。
 
-### スタンドアロンアプリケーションとして使用する（クラスパス指定）
+### スタンドアロンアプリケーションとして使用する
 
 jegをスタンドアロンアプリケーションとして実行するには、Maven Centralからjegのjarファイルを取得し、
-必要な依存関係（例：JDBCドライバ、及び本ツールのjarファイル）を任意のディレクトリに配置します。
+必要な依存関係（例：JDBCドライバ、及び本ツールのjarファイル）を同一ディレクトリに配置します。
 
 ```sh
 curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.11.1/jpa-entity-generator-core-0.11.1-all-deps.jar
+curl -O https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.2/postgresql-42.7.2.jar
 
-java -cp "<path-to-core-jar>;<path-to-jdbc-jar>" dev.aulait.jeg.core.interfaces.Main -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
+java -cp "./*" dev.aulait.jeg.core.interfaces.Main -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
 
 ```
-
-※クラスパスの区切り文字はOSにより異なります。
-
-- Windows: `;`
-- Linux / Mac: `:`
 
 上記javaコマンド末尾の引数の仕様は[設定](#jeg-config)を参照してください。
 
 > **Note**
 > 本ツールは外部依存（JDBCドライバ等）をjarに含んでいないため、
-> 実行時に必要なライブラリをユーザー自身でクラスパスに含める必要があります。
+> 実行時は必要なjarファイルを同一ディレクトリに配置してください。
 
 ### Maven Pluginとして使用する
 
@@ -146,7 +142,7 @@ formatter: google
 - javaコマンドで実行する場合
 
 ```sh
-java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -cp "<path-to-core-jar>;<path-to-jdbc-jar>" dev.aulait.jeg.core.interfaces.Main
+java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -cp "./*" dev.aulait.jeg.core.interfaces.Main
 ```
 
 - Maven Pluginで実行する場合
