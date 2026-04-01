@@ -15,15 +15,22 @@ You can use jeg as a standalone application (classpath execution) or as a Maven 
 
 ### Use as a standalone application (classpath execution)
 
-To run jeg as a standalone application, download the jar from Maven Central.
+To run jeg as a standalone application, download the jar file from Maven Central.
 
-Then execute with classpath:
+Then run it with the following command:
 
 ```sh
-java -cp "lib/*" dev.aulait.jeg.core.interfaces.Main -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
+curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.11.1/jpa-entity-generator-core-0.11.1-all-deps.jar
+
+java -cp "<path-to-core-jar>;<path-to-jdbc-jar>" dev.aulait.jeg.core.interfaces.Main -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
 ```
 
-Place the application jar and required dependencies (e.g. JDBC driver) in the `lib` directory.
+The classpath separator differs depending on the OS:
+
+- Windows: `;`
+- Linux / Mac: `:`
+
+Place the application jar and required dependencies (e.g. JDBC driver) in any directory.
 
 ---
 
@@ -45,7 +52,7 @@ See Configuration (#jeg-config) for the specification of the arguments at the en
 
 ### Using as a Maven Plugin
 
-To run jeg as the Maven Plugin, add the jpa-entity-generator-maven-plugin setting to pom. xml.
+To use jeg as a Maven Plugin, add the following configuration to your pom.xml:
 
 ```xml
 <plugins>
@@ -156,7 +163,7 @@ If you want to apply [google-java-format](https://github.com/google/google-java-
 
 ```sh
 java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -cp
-"lib/*" dev.aulait.jeg.core.interfaces.Main
+"<path-to-core-jar>;<path-to-jdbc-jar>" dev.aulait.jeg.core.interfaces.Main
 ```
 
 - When running with the Maven Plugin
