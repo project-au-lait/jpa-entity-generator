@@ -11,23 +11,46 @@ The following software is required to use jeg.
 
 ## Usage
 
-You can use jeg as an executable jar and as a Maven Plugin.
+You can use jeg as a standalone application or as a Maven Plugin.
 
-### Use as an executable jar
+### Use as a standalone application
 
-To run jeg as an executable jar, get the jeg jar file from Maven Central and run it with the java command.
+To run jeg as a standalone application, download the jar file from Maven Central.
+
+Then run it with the following command:
+
+Example（PostgreSQL）:
 
 ```sh
 curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.11.1/jpa-entity-generator-core-0.11.1-all-deps.jar
+curl -O https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.2/postgresql-42.7.2.jar
 
-java -jar jpa-entity-generator-core-0.11.1-all-deps.jar -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
+java -cp "./*" dev.aulait.jeg.core.interfaces.Main -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
 ```
+
+Place the application jar and required dependencies (e.g. JDBC driver) in the same directory.
+
+---
+
+> **Note**
+> This tool cannot be executed with `java -jar` because external dependencies such as JDBC drivers are not bundled in the jar.
+> Please place all required jar files in the same directory when running.
+
+Example (copy JDBC driver using Maven):
+
+```sh
+mvn -N dependency:copy \
+  -Dartifact=<groupId>:<artifactId>:<version> \
+  -DoutputDirectory=lib
+```
+
+---
 
 See Configuration (#jeg-config) for the specification of the arguments at the end of the above java command.
 
 ### Using as a Maven Plugin
 
-To run jeg as the Maven Plugin, add the jpa-entity-generator-maven-plugin setting to pom. xml.
+To use jeg as a Maven Plugin, add the following configuration to your pom.xml:
 
 ```xml
 <plugins>
@@ -39,12 +62,14 @@ To run jeg as the Maven Plugin, add the jpa-entity-generator-maven-plugin settin
       <configFilePath>./jeg-config.yml</configFilePath>
       <jdbcUrl>jdbc:postgresql://localhost:5432/postgres</jdbcUrl>
       <jdbcUsername>postgres</jdbcUsername>
-      </jdbcPassword>postgres</jdbcPassword>
-      </outputDir>target</outputDir>
+      <jdbcPassword>postgres</jdbcPassword>
+      <outputDir>target</outputDir>
     </configuration>
   </plugin>
 </plugins>
 ```
+
+````
 
 See Configuration (#jeg-config) for configuration settings.
 After setting the Plugin in pom. xml, run jeg with the following command:
@@ -53,8 +78,8 @@ After setting the Plugin in pom. xml, run jeg with the following command:
 mvn jpa-entity-generator:reverse
 ```
 
-
 ### Settings
+
 <a name="jeg-config"></a>
 
 The java command argument or Maven Plugn configuration item specification for running jeg is as follows:
@@ -71,8 +96,8 @@ The jeg configuration file configures the generation behavior of the JPA Entity,
 How and where the jeg configuration file is specified is determined in the following order (lower number first):
 
 1.  The java command argument or the file specified in the Maven Plugin configuration.
-2.  ` jeg-config. yml ` directly under the directory where you want to run the java or Maven command
-3.  java command, or ` jeg-config. yml ` under the classpath of the Maven command
+2.  `jeg-config. yml` directly under the directory where you want to run the java or Maven command
+3.  java command, or `jeg-config. yml` under the classpath of the Maven command
 
 The jeg configuration file is created in YAML format.
 The specifications of the setting items are as follows.
@@ -135,7 +160,8 @@ If you want to apply [google-java-format](https://github.com/google/google-java-
 - When executed with the java command
 
 ```sh
-java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar jpa-entity-generator-core-0.11.1-all-deps.jar 
+java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -cp
+"./*" dev.aulait.jeg.core.interfaces.Main
 ```
 
 - When running with the Maven Plugin
@@ -144,5 +170,9 @@ java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-export
 MAVEN_OPTS=--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
 ```
 
-
 Source: https://github.com/google/google-java-format?tab=readme-ov-file#as-a-library
+
+```
+
+```
+````
