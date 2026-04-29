@@ -136,7 +136,11 @@
     </plugins>
   </build>
 
+  <!-- More Project Information -->
+  <name>JPA Entity Generator Core</name>
 
+
+  <!-- Environment Settings -->
   <profiles>
     <profile>
       <id>local-dev</id>

@@ -99,4 +99,8 @@
     </plugins>
   </build>
 
+
+  <!-- More Project Information -->
+  <name>JPA Entity Generator Maven Plugin</name>
+
 </project>
