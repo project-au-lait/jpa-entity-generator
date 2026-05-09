@@ -66,11 +66,21 @@ public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseCla
   )
   </@common.compress_single_line>
   <#if oneToMany.joinColumns?size == 1>
-  @JoinColumn(name = "${oneToMany.joinColumns[0].name}", referencedColumnName = "${oneToMany.joinColumns[0].referencedColumnName}", insertable = false, updatable = false)
+  <@common.compress_single_line>
+  @JoinColumn(
+      name = "${oneToMany.joinColumns[0].name}",
+      referencedColumnName = "${oneToMany.joinColumns[0].referencedColumnName}",
+      insertable = false,
+      updatable = false)
+  </@common.compress_single_line>
   <#elseif oneToMany.joinColumns?size gt 1>
   @JoinColumns({
     <#list oneToMany.joinColumns as joinColumn>
-    @JoinColumn(name = "${joinColumn.name}", referencedColumnName = "${joinColumn.referencedColumnName}", insertable = false, updatable = false)<#if !joinColumn?is_last>,</#if>
+    @JoinColumn(
+        name = "${joinColumn.name}",
+        referencedColumnName = "${joinColumn.referencedColumnName}",
+        insertable = false,
+        updatable = false)<#if !joinColumn?is_last>,</#if>
     </#list>
   })
   </#if>
@@ -84,16 +94,28 @@ public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseCla
 
   @ManyToOne(fetch = FetchType.LAZY)
   <#if manyToOne.joinColumns?size == 1>
-  @JoinColumn(name = "${manyToOne.joinColumns[0].name}", referencedColumnName = "${manyToOne.joinColumns[0].referencedColumnName}"<#if manyToOne.readonly>, insertable = false, updatable = false</#if>)
+  <@common.compress_single_line>
+  @JoinColumn(name = "${manyToOne.joinColumns[0].name}",
+      referencedColumnName = "${manyToOne.joinColumns[0].referencedColumnName}"<#if manyToOne.readonly>, insertable = false, updatable = false</#if>)
+  </@common.compress_single_line>
   <#elseif manyToOne.joinColumns?size gt 1>
   <#if manyToOne.readonly>
   @JoinColumns({
     <#list manyToOne.joinColumns as joinColumn>
+    <#if joinColumn.name == joinColumn.referencedColumnName>
+    <@common.compress_single_line>
+    @JoinColumn(name = "${joinColumn.name}",
+        referencedColumnName = "${joinColumn.referencedColumnName}",
+        insertable = false,
+        updatable = false)<#if !joinColumn?is_last>,</#if>
+    </@common.compress_single_line>
+    <#else>
     @JoinColumn(
         name = "${joinColumn.name}",
         referencedColumnName = "${joinColumn.referencedColumnName}",
         insertable = false,
         updatable = false)<#if !joinColumn?is_last>,</#if>
+    </#if>
     </#list>
   })
   <#else>

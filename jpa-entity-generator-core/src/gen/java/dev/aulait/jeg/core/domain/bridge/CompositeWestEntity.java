@@ -36,8 +36,16 @@ public class CompositeWestEntity extends dev.aulait.jeg.core.domain.BaseEntity
   @Builder.Default
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumns({
-    @JoinColumn(name = "west_id_1", referencedColumnName = "id_1", insertable = false, updatable = false),
-    @JoinColumn(name = "west_id_2", referencedColumnName = "id_2", insertable = false, updatable = false)
+    @JoinColumn(
+        name = "west_id_1",
+        referencedColumnName = "id_1",
+        insertable = false,
+        updatable = false),
+    @JoinColumn(
+        name = "west_id_2",
+        referencedColumnName = "id_2",
+        insertable = false,
+        updatable = false)
   })
   private Set<CompositeWestEastBridgeEntity> compositeWestEastBridges = new HashSet<>();
 }

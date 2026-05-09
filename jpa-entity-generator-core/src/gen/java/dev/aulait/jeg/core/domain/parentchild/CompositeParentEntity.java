@@ -36,8 +36,16 @@ public class CompositeParentEntity extends dev.aulait.jeg.core.domain.CompositeB
   @Builder.Default
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumns({
-    @JoinColumn(name = "parent_id_1", referencedColumnName = "id_1", insertable = false, updatable = false),
-    @JoinColumn(name = "parent_id_2", referencedColumnName = "id_2", insertable = false, updatable = false)
+    @JoinColumn(
+        name = "parent_id_1",
+        referencedColumnName = "id_1",
+        insertable = false,
+        updatable = false),
+    @JoinColumn(
+        name = "parent_id_2",
+        referencedColumnName = "id_2",
+        insertable = false,
+        updatable = false)
   })
   private Set<CompositeChildEntity> compositeChildren = new HashSet<>();
 }

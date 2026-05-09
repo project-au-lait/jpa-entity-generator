@@ -33,11 +33,7 @@ public class CompositeSelfReferenceEntity extends dev.aulait.jeg.core.domain.Com
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumns({
-    @JoinColumn(
-        name = "id",
-        referencedColumnName = "id",
-        insertable = false,
-        updatable = false),
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false),
     @JoinColumn(
         name = "self_ref_seq",
         referencedColumnName = "seq",
