@@ -50,6 +50,16 @@ public class EntityGeneratorTests {
         "/dev/aulait/jeg/core/domain/selfref/SelfReferenceEntity.java",
         "/dev/aulait/jeg/core/domain/selfref/CompositeSelfReferenceEntity.java",
         "/dev/aulait/jeg/core/domain/selfref/CompositeSelfReferenceEntityId.java",
+        "/dev/aulait/jeg/core/domain/bridge/EastEntity.java",
+        "/dev/aulait/jeg/core/domain/bridge/WestEntity.java",
+        "/dev/aulait/jeg/core/domain/bridge/WestEastBridgeEntity.java",
+        "/dev/aulait/jeg/core/domain/bridge/WestEastBridgeEntityId.java",
+        "/dev/aulait/jeg/core/domain/bridge/CompositeEastEntity.java",
+        "/dev/aulait/jeg/core/domain/bridge/CompositeEastEntityId.java",
+        "/dev/aulait/jeg/core/domain/bridge/CompositeWestEntity.java",
+        "/dev/aulait/jeg/core/domain/bridge/CompositeWestEntityId.java",
+        "/dev/aulait/jeg/core/domain/bridge/CompositeWestEastBridgeEntity.java",
+        "/dev/aulait/jeg/core/domain/bridge/CompositeWestEastBridgeEntityId.java",
       })
   void testExecute(String path) {
     Path fileName = Path.of(path).getFileName();

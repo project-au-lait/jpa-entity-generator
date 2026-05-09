@@ -1,4 +1,4 @@
-package dev.aulait.jeg.core.domain.selfref;
+package dev.aulait.jeg.core.domain.bridge;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -22,27 +22,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
-@Table(name = "composite_self_reference")
-public class CompositeSelfReferenceEntity extends dev.aulait.jeg.core.domain.CompositeBaseEntity
+@Table(name = "composite_west_east_bridge")
+public class CompositeWestEastBridgeEntity extends dev.aulait.jeg.core.domain.BaseEntity
     implements java.io.Serializable {
 
-  @EqualsAndHashCode.Include @EmbeddedId private CompositeSelfReferenceEntityId id;
+  @EqualsAndHashCode.Include @EmbeddedId private CompositeWestEastBridgeEntityId id;
 
-  @Column(name = "self_ref_seq")
-  private Integer selfRefSeq;
+  @Column(name = "extra")
+  private String extra;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumns({
     @JoinColumn(
-        name = "id",
-        referencedColumnName = "id",
+        name = "east_id_1",
+        referencedColumnName = "id_1",
         insertable = false,
         updatable = false),
     @JoinColumn(
-        name = "self_ref_seq",
-        referencedColumnName = "seq",
+        name = "east_id_2",
+        referencedColumnName = "id_2",
         insertable = false,
         updatable = false)
   })
-  private CompositeSelfReferenceEntity selfRef;
+  private CompositeEastEntity east;
 }

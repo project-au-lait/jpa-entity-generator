@@ -84,13 +84,25 @@ public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseCla
 
   @ManyToOne(fetch = FetchType.LAZY)
   <#if manyToOne.joinColumns?size == 1>
-  @JoinColumn(name = "${manyToOne.joinColumns[0].name}", referencedColumnName = "${manyToOne.joinColumns[0].referencedColumnName}")
+  @JoinColumn(name = "${manyToOne.joinColumns[0].name}", referencedColumnName = "${manyToOne.joinColumns[0].referencedColumnName}"<#if manyToOne.readonly>, insertable = false, updatable = false</#if>)
   <#elseif manyToOne.joinColumns?size gt 1>
+  <#if manyToOne.readonly>
   @JoinColumns({
     <#list manyToOne.joinColumns as joinColumn>
-    @JoinColumn(name = "${joinColumn.name}", referencedColumnName = "${joinColumn.referencedColumnName}"<#if manyToOne.readonly>, insertable = false, updatable = false</#if>)<#if !joinColumn?is_last>,</#if>
+    @JoinColumn(
+        name = "${joinColumn.name}",
+        referencedColumnName = "${joinColumn.referencedColumnName}",
+        insertable = false,
+        updatable = false)<#if !joinColumn?is_last>,</#if>
     </#list>
   })
+  <#else>
+  @JoinColumns({
+    <#list manyToOne.joinColumns as joinColumn>
+    @JoinColumn(name = "${joinColumn.name}", referencedColumnName = "${joinColumn.referencedColumnName}")<#if !joinColumn?is_last>,</#if>
+    </#list>
+  })
+  </#if>
   </#if>
   <#list manyToOne.annotations as annotation>
   @${annotation.type}(<#list annotation.attributes?keys as key>${key} = ${annotation.attributes[key]}</#list>)

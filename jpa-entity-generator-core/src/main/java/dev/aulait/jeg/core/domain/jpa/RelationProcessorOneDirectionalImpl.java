@@ -177,10 +177,13 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
 
     manyToOne.setForeignKey(fk);
 
-    manyToOne.setReadonly(
+    boolean isSelfRef =
         manyTableName.equals(oneTableName)
             && fk.getKeys().stream()
-                .anyMatch(k -> k.getFKCOLUMN_NAME().equals(k.getPKCOLUMN_NAME())));
+                .anyMatch(k -> k.getFKCOLUMN_NAME().equals(k.getPKCOLUMN_NAME()));
+    boolean isBridgeFk = logic.isBridgeFk(fk);
+
+    manyToOne.setReadonly(isSelfRef || isBridgeFk);
 
     manyEntity.getManyToOnes().add(manyToOne);
 

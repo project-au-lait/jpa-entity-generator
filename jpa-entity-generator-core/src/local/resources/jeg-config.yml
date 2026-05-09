@@ -31,6 +31,13 @@ packages:
     - composite_self_reference
   dev.aulait.jeg.core.domain.autoincrement:
     - auto_increment
+  dev.aulait.jeg.core.domain.bridge:
+    - west
+    - east
+    - west_east_bridge
+    - composite_west
+    - composite_east
+    - composite_west_east_bridge
 baseClassDefs:
   - tables:
       - composite_master

@@ -119,9 +119,52 @@ public class ForeignKeyLogic {
     }
 
     List<ColumnModel> childFkCols = fk.getKeys().stream().map(KeyModel::getFkColumn).toList();
+    List<ColumnModel> pkCols = fk.getFkTable().getPkColumns();
 
-    return fk.getFkTable().getPkColumns().size() > childFkCols.size()
-        && fk.getFkTable().getPkColumns().containsAll(childFkCols);
+    if (!(pkCols.size() > childFkCols.size() && pkCols.containsAll(childFkCols))) {
+      return false;
+    }
+
+    // When all PK columns of the table are FK columns (bridge-like table with extra non-PK
+    // columns), only the FK containing the first PK column generates a OneToMany relationship.
+    // The other FKs in such a table generate ManyToOne relationships instead.
+    List<ColumnModel> allFkCols =
+        fk.getFkTable().getForeignKeys().stream()
+            .flatMap(f -> f.getKeys().stream().map(KeyModel::getFkColumn))
+            .toList();
+    List<ColumnModel> remainingPkCols =
+        pkCols.stream().filter(c -> !childFkCols.contains(c)).toList();
+
+    if (allFkCols.containsAll(remainingPkCols)) {
+      return isFirstInPk(fk);
+    }
+
+    return true;
+  }
+
+  /**
+   * Checks if the given foreign key is a bridge FK. A bridge FK is one where the FK table's entire
+   * primary key is composed of foreign key columns (possibly with extra non-PK columns), and this
+   * specific FK's columns are part of that PK. Such a FK should generate a ManyToOne relationship
+   * on the bridge entity.
+   *
+   * @param fk the foreign key model to check
+   * @return true if this is a bridge FK, false otherwise
+   */
+  public boolean isBridgeFk(ForeignKeyModel fk) {
+    List<ColumnModel> thisFkCols = fk.getKeys().stream().map(KeyModel::getFkColumn).toList();
+    List<ColumnModel> pkCols = fk.getFkTable().getPkColumns();
+
+    if (!pkCols.containsAll(thisFkCols)) {
+      return false;
+    }
+
+    List<ColumnModel> allFkCols =
+        fk.getFkTable().getForeignKeys().stream()
+            .flatMap(f -> f.getKeys().stream().map(KeyModel::getFkColumn))
+            .toList();
+
+    return allFkCols.containsAll(pkCols);
   }
 
   /**
