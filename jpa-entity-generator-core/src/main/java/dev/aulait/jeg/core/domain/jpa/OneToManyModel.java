@@ -11,6 +11,7 @@ public class OneToManyModel {
   private String fieldName;
   private String mappedBy;
   private EntityModel entity;
+  private boolean orphanRemoval;
   private List<CascadeType> cascades = new ArrayList<>();
   private List<JoinColumnModel> joinColumns = new ArrayList<>();
   private List<AnnotationModel> annotations = new ArrayList<>();

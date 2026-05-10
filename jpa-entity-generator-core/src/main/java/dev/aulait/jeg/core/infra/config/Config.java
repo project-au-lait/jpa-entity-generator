@@ -29,6 +29,7 @@ public class Config {
   private List<String> excludedColumns = new ArrayList<>();
   private Map<String, AnnotationDef> annotationDefs = new HashMap<>();
   private String formatter;
+  private List<String> atomicAggregates = new ArrayList<>();
 
   /** key: table_name, value: Map {key: table_name.column_name, value : [CascadeType]} */
   private Map<String, Map<String, List<String>>> cascades = new HashMap<>();
@@ -75,6 +76,10 @@ public class Config {
     return annotationNames.stream().map(annotationDefs::get).filter(Objects::nonNull).toList();
   }
 
+  public boolean isAtomicAggregate(String rootTableName, String childTableName) {
+    return atomicAggregates.contains(rootTableName + "." + childTableName);
+  }
+
   public List<CascadeType> findCascades(
       String cascadingTableName, String cascadedTableName, String columnName) {
     Map<String, List<String>> cascadeMap = cascades.get(cascadingTableName);
@@ -85,13 +90,13 @@ public class Config {
     }
 
     String tableColumn = cascadedTableName + "." + columnName;
-    List<String> cascades = cascadeMap.get(tableColumn);
+    List<String> cascadeNames = cascadeMap.get(tableColumn);
 
-    if (cascades == null) {
+    if (cascadeNames == null) {
       log.trace("Cascaded table.column : {} is not found in : {}", tableColumn, cascadeMap);
       return Collections.emptyList();
     }
 
-    return cascades.stream().map(CascadeType::valueOf).toList();
+    return cascadeNames.stream().map(CascadeType::valueOf).toList();
   }
 }

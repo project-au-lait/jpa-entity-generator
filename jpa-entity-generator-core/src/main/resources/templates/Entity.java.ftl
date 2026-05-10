@@ -58,11 +58,16 @@ public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseCla
   @Builder.Default
   <@common.compress_single_line>
   @OneToMany(fetch = FetchType.LAZY
-    <#list oneToMany.cascades as cascade>
-      <#if cascade?is_first>, cascade = {</#if>
-      CascadeType.${cascade}
-      <#if cascade?is_last>}<#else>, </#if>
-    </#list>
+    <#if oneToMany.cascades?size == 1>
+      , cascade = CascadeType.${oneToMany.cascades[0]}
+    <#elseif oneToMany.cascades?size gt 1>
+      , cascade = {
+      <#list oneToMany.cascades as cascade>
+        CascadeType.${cascade}<#if !cascade?is_last>, </#if>
+      </#list>
+      }
+    </#if>
+    <#if oneToMany.orphanRemoval>, orphanRemoval = true</#if>
   )
   </@common.compress_single_line>
   <#if oneToMany.joinColumns?size == 1>
