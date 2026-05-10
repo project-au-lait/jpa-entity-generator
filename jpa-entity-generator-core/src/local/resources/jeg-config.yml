@@ -57,7 +57,7 @@ annotationDefs:
     type: lombok.Setter
 excludedTables:
   - flyway_schema_history
-excludedColmuns:
+excludedColumns:
   - version
   - created_by
   - created_date

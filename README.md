@@ -143,7 +143,7 @@ annotatedCols:
 excludedTables:
   - flyway_schema_history
 # Column names that will not be generated fields in JPA Entity
-excludedColmuns:
+excludedColumns:
   - version
   - created_by
   - created_date

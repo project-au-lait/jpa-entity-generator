@@ -26,7 +26,7 @@ public class Config {
   private List<BaseClassDef> baseClassDefs = new ArrayList<>();
   private String entitySuffix = "Entity";
   private List<String> excludedTables = new ArrayList<>();
-  private List<String> excludedColmuns = new ArrayList<>();
+  private List<String> excludedColumns = new ArrayList<>();
   private Map<String, AnnotationDef> annotationDefs = new HashMap<>();
   private String formatter;
 

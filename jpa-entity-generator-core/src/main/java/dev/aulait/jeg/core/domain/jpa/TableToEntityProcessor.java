@@ -85,7 +85,7 @@ public class TableToEntityProcessor {
   }
 
   FieldModel column2field(ColumnModel column) {
-    if (config.getExcludedColmuns().contains(column.getCOLUMN_NAME())) {
+    if (config.getExcludedColumns().contains(column.getCOLUMN_NAME())) {
       return null;
     }
 
