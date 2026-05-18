@@ -1,4 +1,4 @@
-package dev.aulait.jeg.core.domain.atomicaggregate;
+package dev.aulait.jeg.core.domain.cascadeonetomany;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class AtomicChildEntityId implements java.io.Serializable {
+public class CascadeOnetomanyChildEntityId implements java.io.Serializable {
 
   @Column(name = "parent_id")
   private String parentId;

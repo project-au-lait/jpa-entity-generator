@@ -29,7 +29,7 @@ public class Config {
   private List<String> excludedColumns = new ArrayList<>();
   private Map<String, AnnotationDef> annotationDefs = new HashMap<>();
   private String formatter;
-  private List<String> atomicAggregates = new ArrayList<>();
+  private List<String> cascadeOneToMany = new ArrayList<>();
 
   /** key: table_name, value: Map {key: table_name.column_name, value : [CascadeType]} */
   private Map<String, Map<String, List<String>>> cascades = new HashMap<>();
@@ -76,8 +76,8 @@ public class Config {
     return annotationNames.stream().map(annotationDefs::get).filter(Objects::nonNull).toList();
   }
 
-  public boolean isAtomicAggregate(String rootTableName, String childTableName) {
-    return atomicAggregates.contains(rootTableName + "." + childTableName);
+  public boolean isCascadeOneToMany(String rootTableName, String childTableName) {
+    return cascadeOneToMany.contains(rootTableName + "." + childTableName);
   }
 
   public List<CascadeType> findCascades(

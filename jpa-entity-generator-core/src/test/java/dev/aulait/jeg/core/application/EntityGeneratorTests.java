@@ -60,9 +60,9 @@ public class EntityGeneratorTests {
         "/dev/aulait/jeg/core/domain/bridge/CompositeWestEntityId.java",
         "/dev/aulait/jeg/core/domain/bridge/CompositeWestEastBridgeEntity.java",
         "/dev/aulait/jeg/core/domain/bridge/CompositeWestEastBridgeEntityId.java",
-        "/dev/aulait/jeg/core/domain/atomicaggregate/AtomicParentEntity.java",
-        "/dev/aulait/jeg/core/domain/atomicaggregate/AtomicChildEntity.java",
-        "/dev/aulait/jeg/core/domain/atomicaggregate/AtomicChildEntityId.java",
+        "/dev/aulait/jeg/core/domain/cascadeonetomany/CascadeOnetomanyParentEntity.java",
+        "/dev/aulait/jeg/core/domain/cascadeonetomany/CascadeOnetomanyChildEntity.java",
+        "/dev/aulait/jeg/core/domain/cascadeonetomany/CascadeOnetomanyChildEntityId.java",
       })
   void testExecute(String path) {
     Path fileName = Path.of(path).getFileName();

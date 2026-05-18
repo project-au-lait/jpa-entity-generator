@@ -1,4 +1,4 @@
-package dev.aulait.jeg.core.domain.atomicaggregate;
+package dev.aulait.jeg.core.domain.cascadeonetomany;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,8 +24,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
-@Table(name = "atomic_parent")
-public class AtomicParentEntity extends dev.aulait.jeg.core.domain.BaseEntity
+@Table(name = "cascade_onetomany_parent")
+public class CascadeOnetomanyParentEntity extends dev.aulait.jeg.core.domain.BaseEntity
     implements java.io.Serializable {
 
   @EqualsAndHashCode.Include
@@ -43,5 +43,5 @@ public class AtomicParentEntity extends dev.aulait.jeg.core.domain.BaseEntity
       referencedColumnName = "id",
       insertable = false,
       updatable = false)
-  private Set<AtomicChildEntity> atomicChildren = new HashSet<>();
+  private Set<CascadeOnetomanyChildEntity> cascadeOnetomanyChildren = new HashSet<>();
 }

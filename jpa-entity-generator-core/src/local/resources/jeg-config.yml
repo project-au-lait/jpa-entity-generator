@@ -38,9 +38,9 @@ packages:
     - composite_west
     - composite_east
     - composite_west_east_bridge
-  dev.aulait.jeg.core.domain.atomicaggregate:
-    - atomic_parent
-    - atomic_child
+  dev.aulait.jeg.core.domain.cascadeonetomany:
+    - cascade_onetomany_parent
+    - cascade_onetomany_child
 baseClassDefs:
   - tables:
       - composite_master
@@ -66,5 +66,5 @@ excludedColumns:
   - created_date
   - updated_by
   - updated_date
-atomicAggregates:
-  - atomic_parent.atomic_child
+cascadeOneToMany:
+  - cascade_onetomany_parent.cascade_onetomany_child

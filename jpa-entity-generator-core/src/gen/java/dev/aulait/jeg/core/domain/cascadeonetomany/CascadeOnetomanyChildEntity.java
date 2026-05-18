@@ -1,4 +1,4 @@
-package dev.aulait.jeg.core.domain.atomicaggregate;
+package dev.aulait.jeg.core.domain.cascadeonetomany;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -18,11 +18,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
-@Table(name = "atomic_child")
-public class AtomicChildEntity extends dev.aulait.jeg.core.domain.BaseEntity
+@Table(name = "cascade_onetomany_child")
+public class CascadeOnetomanyChildEntity extends dev.aulait.jeg.core.domain.BaseEntity
     implements java.io.Serializable {
 
-  @EqualsAndHashCode.Include @EmbeddedId private AtomicChildEntityId id;
+  @EqualsAndHashCode.Include @EmbeddedId private CascadeOnetomanyChildEntityId id;
 
   @Column(name = "name")
   private String name;
