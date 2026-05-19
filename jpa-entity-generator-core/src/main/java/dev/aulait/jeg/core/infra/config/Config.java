@@ -30,6 +30,7 @@ public class Config {
   private Map<String, AnnotationDef> annotationDefs = new HashMap<>();
   private String formatter;
   private List<String> cascadeOneToMany = new ArrayList<>();
+  private List<String> readonlyManyToOne = new ArrayList<>();
 
   /** key: table_name, value: Map {key: table_name.column_name, value : [CascadeType]} */
   private Map<String, Map<String, List<String>>> cascades = new HashMap<>();
@@ -78,6 +79,10 @@ public class Config {
 
   public boolean isCascadeOneToMany(String rootTableName, String childTableName) {
     return cascadeOneToMany.contains(rootTableName + "." + childTableName);
+  }
+
+  public boolean isReadonlyManyToOne(String fkTableName, String pkTableName) {
+    return readonlyManyToOne.contains(fkTableName + "." + pkTableName);
   }
 
   public List<CascadeType> findCascades(

@@ -188,7 +188,8 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
                 .anyMatch(k -> k.getFKCOLUMN_NAME().equals(k.getPKCOLUMN_NAME()));
     boolean isBridgeFk = logic.isBridgeFk(fk);
 
-    manyToOne.setReadonly(isSelfRef || isBridgeFk);
+    manyToOne.setReadonly(
+        isSelfRef || isBridgeFk || config.isReadonlyManyToOne(manyTableName, oneTableName));
 
     manyEntity.getManyToOnes().add(manyToOne);
 

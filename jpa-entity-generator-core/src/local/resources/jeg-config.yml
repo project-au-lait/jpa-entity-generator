@@ -41,12 +41,18 @@ packages:
   dev.aulait.jeg.core.domain.cascadeonetomany:
     - cascade_onetomany_parent
     - cascade_onetomany_child
+  dev.aulait.jeg.core.domain.readonlymanytoone:
+    - readonly_manytoone_master
+    - readonly_manytoone_transaction
+    - composite_readonly_manytoone_master
+    - composite_readonly_manytoone_transaction
 baseClassDefs:
   - tables:
       - composite_master
       - composite_parent
       - composite_child
       - composite_self_reference
+      - composite_readonly_manytoone_master
     baseClass: dev.aulait.jeg.core.domain.CompositeBaseEntity
   - tables:
       - "*"
@@ -68,3 +74,6 @@ excludedColumns:
   - updated_date
 cascadeOneToMany:
   - cascade_onetomany_parent.cascade_onetomany_child
+readonlyManyToOne:
+  - readonly_manytoone_transaction.readonly_manytoone_master
+  - composite_readonly_manytoone_transaction.composite_readonly_manytoone_master

@@ -14,8 +14,9 @@ import ${import};
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
 @Table(name = "${root.tableName}")
-public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseClass}</#if>
-    implements java.io.Serializable {
+<@common.auto_wrap>
+public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseClass}</#if> implements java.io.Serializable {
+</@common.auto_wrap>
 <#if root.embeddedId?has_content>
 
   @EqualsAndHashCode.Include @EmbeddedId private ${root.embeddedId.name} id;
@@ -100,8 +101,11 @@ public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseCla
   @ManyToOne(fetch = FetchType.LAZY)
   <#if manyToOne.joinColumns?size == 1>
   <@common.compress_single_line>
-  @JoinColumn(name = "${manyToOne.joinColumns[0].name}",
-      referencedColumnName = "${manyToOne.joinColumns[0].referencedColumnName}"<#if manyToOne.readonly>, insertable = false, updatable = false</#if>)
+  @JoinColumn(
+      name = "${manyToOne.joinColumns[0].name}",
+      referencedColumnName = "${manyToOne.joinColumns[0].referencedColumnName}"<#if manyToOne.readonly>,
+      insertable = false,
+      updatable = false</#if>)
   </@common.compress_single_line>
   <#elseif manyToOne.joinColumns?size gt 1>
   <#if manyToOne.readonly>

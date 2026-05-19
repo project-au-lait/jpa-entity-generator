@@ -63,6 +63,11 @@ public class EntityGeneratorTests {
         "/dev/aulait/jeg/core/domain/cascadeonetomany/CascadeOnetomanyParentEntity.java",
         "/dev/aulait/jeg/core/domain/cascadeonetomany/CascadeOnetomanyChildEntity.java",
         "/dev/aulait/jeg/core/domain/cascadeonetomany/CascadeOnetomanyChildEntityId.java",
+        "/dev/aulait/jeg/core/domain/readonlymanytoone/ReadonlyManytooneMasterEntity.java",
+        "/dev/aulait/jeg/core/domain/readonlymanytoone/ReadonlyManytooneTransactionEntity.java",
+        "/dev/aulait/jeg/core/domain/readonlymanytoone/CompositeReadonlyManytooneMasterEntity.java",
+        "/dev/aulait/jeg/core/domain/readonlymanytoone/CompositeReadonlyManytooneMasterEntityId.java",
+        "/dev/aulait/jeg/core/domain/readonlymanytoone/CompositeReadonlyManytooneTransactionEntity.java",
       })
   void testExecute(String path) {
     Path fileName = Path.of(path).getFileName();

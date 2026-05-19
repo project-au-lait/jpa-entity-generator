@@ -1,3 +1,30 @@
+<#macro auto_wrap maxLineLength=100>
+  <#local captured><#nested></#local>
+  <#local normalized = captured?replace("\\s+", " ", "r")?trim>
+  <#local implIdx = normalized?index_of(" implements ")>
+  <#if implIdx < 0>
+${normalized}
+  <#else>
+    <#local prefix = normalized?substring(0, implIdx)>
+    <#local suffix = normalized?substring(implIdx + 1)>
+    <#if prefix?length <= maxLineLength>
+${prefix}
+    ${suffix}
+    <#else>
+      <#local extendsIdx = prefix?index_of(" extends ")>
+      <#if extendsIdx < 0>
+${prefix}
+    ${suffix}
+      <#else>
+        <#local classNamePart = prefix?substring(0, extendsIdx)>
+        <#local extendsPart = prefix?substring(extendsIdx + 1)>
+${classNamePart}
+    ${extendsPart} ${suffix}
+      </#if>
+    </#if>
+  </#if>
+</#macro>
+
 <#macro compress_single_line maxLineLength=100>
   <#local captured><#nested></#local>
   <#local preserved = captured?replace("^\\s*\\r?\\n", "", "r")?replace("\\r?\\n\\s*$", "", "r")>
