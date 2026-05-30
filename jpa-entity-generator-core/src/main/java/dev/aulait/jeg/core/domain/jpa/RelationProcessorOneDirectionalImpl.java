@@ -142,7 +142,11 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
         .getAnnotations()
         .addAll(annotationLogic.find(oneEntity.getName(), oneToMany.getFieldName()));
 
-    if (config.isCascadeOneToMany(oneTable.getTABLE_NAME(), manyTable.getTABLE_NAME())) {
+    if (config.isCascadeOneToMany(
+        oneTable.getTABLE_NAME(),
+        manyTable.getTABLE_NAME(),
+        oneEntity.getName(),
+        oneToMany.getFieldName())) {
       oneToMany.getCascades().add(CascadeType.ALL);
       oneToMany.setOrphanRemoval(true);
     }

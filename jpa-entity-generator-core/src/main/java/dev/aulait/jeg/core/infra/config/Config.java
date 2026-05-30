@@ -77,8 +77,10 @@ public class Config {
     return annotationNames.stream().map(annotationDefs::get).filter(Objects::nonNull).toList();
   }
 
-  public boolean isCascadeOneToMany(String rootTableName, String childTableName) {
-    return cascadeOneToMany.contains(rootTableName + "." + childTableName);
+  public boolean isCascadeOneToMany(
+      String rootTableName, String childTableName, String entityName, String fieldName) {
+    return cascadeOneToMany.contains(rootTableName + "." + childTableName)
+        || cascadeOneToMany.contains(entityName + "." + fieldName);
   }
 
   public boolean isReadonlyManyToOne(String fkTableName, String pkTableName) {
