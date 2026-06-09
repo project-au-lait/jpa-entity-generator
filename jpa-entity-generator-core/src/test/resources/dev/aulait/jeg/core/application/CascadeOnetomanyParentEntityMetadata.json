@@ -1,0 +1,47 @@
+{
+  "packageName": "dev.aulait.jeg.core.domain.cascadeonetomany",
+  "className": "CascadeOnetomanyParentEntity",
+  "tableName": "cascade_onetomany_parent",
+  "parentTypes": [],
+  "fields": [
+    {
+      "fieldName": "id",
+      "columnName": "id",
+      "javaType": "String",
+      "javaWrapperType": "String",
+      "multiple": false,
+      "stringLength": 36,
+      "columnSize": 36,
+      "decimalDigits": 0,
+      "id": true,
+      "required": true,
+      "autoIncrement": false,
+      "generated": false
+    },
+    {
+      "fieldName": "name",
+      "columnName": "name",
+      "javaType": "String",
+      "javaWrapperType": "String",
+      "multiple": false,
+      "stringLength": 100,
+      "columnSize": 100,
+      "decimalDigits": 0,
+      "id": false,
+      "required": false,
+      "autoIncrement": false,
+      "generated": false
+    },
+    {
+      "fieldName": "cascadeOnetomanyChildren",
+      "javaType": "dev.aulait.jeg.core.domain.cascadeonetomany.CascadeOnetomanyChildEntity",
+      "javaWrapperType": "dev.aulait.jeg.core.domain.cascadeonetomany.CascadeOnetomanyChildEntity",
+      "multiple": true,
+      "id": false,
+      "required": false,
+      "autoIncrement": false,
+      "generated": false,
+      "cascadeOneToMany": true
+    }
+  ]
+}

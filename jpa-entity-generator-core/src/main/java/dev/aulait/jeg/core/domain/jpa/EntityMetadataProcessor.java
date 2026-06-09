@@ -89,6 +89,9 @@ public class EntityMetadataProcessor {
     metadata.setJavaType(oneToMany.getEntity().getFqdn());
     metadata.setJavaWrapperType(metadata.getJavaType());
     metadata.setMultiple(true);
+    if (!oneToMany.getCascades().isEmpty()) {
+      metadata.setCascadeOneToMany(true);
+    }
 
     return metadata;
   }

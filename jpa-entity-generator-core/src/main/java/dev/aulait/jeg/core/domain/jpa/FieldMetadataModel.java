@@ -19,4 +19,5 @@ public class FieldMetadataModel {
   private boolean required;
   private boolean autoIncrement;
   private boolean generated;
+  private Boolean cascadeOneToMany;
 }
