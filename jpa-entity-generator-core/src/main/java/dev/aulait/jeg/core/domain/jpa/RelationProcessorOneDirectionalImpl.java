@@ -6,6 +6,7 @@ import dev.aulait.jeg.core.domain.jdbc.KeyModel;
 import dev.aulait.jeg.core.domain.jdbc.TableModel;
 import dev.aulait.jeg.core.infra.config.Config;
 import dev.aulait.jeg.core.infra.util.WordUtils;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -154,6 +155,11 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
     oneEntity.getOneToManies().add(oneToMany);
 
     manyEntity.getParentTypes().add(oneEntity.getFqdn());
+
+    if (logic.isBridgeFk(fk) && fk.getKeys().size() > 1) {
+      String embeddedFieldName = namingLogic.toManyToOneFieldName(fk, oneEntity) + "Id";
+      restructureEmbeddedIdForBridgeFk(manyEntity, fk, embeddedFieldName, oneEntity);
+    }
   }
 
   /**
@@ -193,7 +199,15 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
     boolean isBridgeFk = logic.isBridgeFk(fk);
 
     manyToOne.setReadonly(
-        isSelfRef || isBridgeFk || config.isReadonlyManyToOne(manyTableName, oneTableName));
+        isSelfRef || config.isReadonlyManyToOne(manyTableName, oneTableName));
+
+    if (isBridgeFk) {
+      String mapsId = fieldName + "Id";
+      manyToOne.setMapsId(mapsId);
+      if (fk.getKeys().size() > 1) {
+        restructureEmbeddedIdForBridgeFk(manyEntity, fk, mapsId, oneEntity);
+      }
+    }
 
     manyEntity.getManyToOnes().add(manyToOne);
 
@@ -203,6 +217,39 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
         manyEntity.getFields().remove(field);
       }
     }
+  }
+
+  void restructureEmbeddedIdForBridgeFk(
+      EntityModel bridgeEntity, ForeignKeyModel fk, String embeddedFieldName, EntityModel pkEntity) {
+    EmbeddedIdModel embeddedId = bridgeEntity.getEmbeddedId();
+    if (embeddedId == null) {
+      return;
+    }
+
+    List<AttributeOverrideEntry> attributeOverrides = new ArrayList<>();
+    int minKeySeq = Integer.MAX_VALUE;
+    for (KeyModel key : fk.getKeys()) {
+      String attrName = WordUtils.snakeToLowerCamel(key.getPKCOLUMN_NAME());
+      attributeOverrides.add(new AttributeOverrideEntry(attrName, key.getFKCOLUMN_NAME()));
+      embeddedId.getFields().removeIf(f -> f.getColumnName().equals(key.getFKCOLUMN_NAME()));
+      if (key.getFkColumn().getKEY_SEQ() < minKeySeq) {
+        minKeySeq = key.getFkColumn().getKEY_SEQ();
+      }
+    }
+
+    EmbeddedFieldModel embeddedField = new EmbeddedFieldModel();
+    embeddedField.setFieldName(embeddedFieldName);
+    embeddedField.setType(pkEntity.getName() + "Id");
+    embeddedField.setAttributeOverrides(attributeOverrides);
+    embeddedField.setKeySeq(minKeySeq);
+
+    int insertPos = 0;
+    for (EmbeddedFieldModel existing : embeddedId.getEmbeddedFields()) {
+      if (existing.getKeySeq() < minKeySeq) {
+        insertPos++;
+      }
+    }
+    embeddedId.getEmbeddedFields().add(insertPos, embeddedField);
   }
 
   /**

@@ -14,6 +14,7 @@ public class ManyToOneModel {
   private List<AnnotationModel> annotations = new ArrayList<>();
   private ForeignKeyModel foreignKey;
   private boolean readonly;
+  private String mapsId;
 
   @Getter(lazy = true)
   private final List<Type> imports = buildImports();
@@ -24,6 +25,9 @@ public class ManyToOneModel {
 
   private List<Type> buildImports() {
     List<Type> imps = new ArrayList<>();
+    if (mapsId != null) {
+      imps.add(Types.MapsId);
+    }
     imps.add(Types.ManyToOne);
     imps.add(Types.FetchType);
     imps.add(Types.JoinColumn);

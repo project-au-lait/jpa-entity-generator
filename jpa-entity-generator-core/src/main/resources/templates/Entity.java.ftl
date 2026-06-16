@@ -97,8 +97,14 @@ public class ${root.name}<#if root.baseClass?has_content> extends ${root.baseCla
 </#list>
 <#-- -->
 <#list root.manyToOnes as manyToOne>
+<#if manyToOne.mapsId?has_content>
+
+  @MapsId("${manyToOne.mapsId}")
+  @ManyToOne(fetch = FetchType.LAZY)
+<#else>
 
   @ManyToOne(fetch = FetchType.LAZY)
+</#if>
   <#if manyToOne.joinColumns?size == 1>
   <@common.compress_single_line>
   @JoinColumn(

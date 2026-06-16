@@ -1,7 +1,10 @@
 package dev.aulait.jeg.core.domain.bridge;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
 import javax.annotation.processing.Generated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,15 +19,17 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class CompositeWestEastBridgeEntityId implements java.io.Serializable {
 
-  @Column(name = "west_id_1")
-  private String westId1;
+  @Embedded
+  @AttributeOverrides({
+    @AttributeOverride(name = "id1", column = @Column(name = "west_id_1")),
+    @AttributeOverride(name = "id2", column = @Column(name = "west_id_2"))
+  })
+  private CompositeWestEntityId westId;
 
-  @Column(name = "west_id_2")
-  private String westId2;
-
-  @Column(name = "east_id_1")
-  private String eastId1;
-
-  @Column(name = "east_id_2")
-  private String eastId2;
+  @Embedded
+  @AttributeOverrides({
+    @AttributeOverride(name = "id1", column = @Column(name = "east_id_1")),
+    @AttributeOverride(name = "id2", column = @Column(name = "east_id_2"))
+  })
+  private CompositeEastEntityId eastId;
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import javax.annotation.processing.Generated;
 import lombok.AllArgsConstructor;
@@ -31,18 +32,11 @@ public class CompositeWestEastBridgeEntity extends dev.aulait.jeg.core.domain.Ba
   @Column(name = "extra")
   private String extra;
 
+  @MapsId("eastId")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumns({
-    @JoinColumn(
-        name = "east_id_1",
-        referencedColumnName = "id_1",
-        insertable = false,
-        updatable = false),
-    @JoinColumn(
-        name = "east_id_2",
-        referencedColumnName = "id_2",
-        insertable = false,
-        updatable = false)
+    @JoinColumn(name = "east_id_1", referencedColumnName = "id_1"),
+    @JoinColumn(name = "east_id_2", referencedColumnName = "id_2")
   })
   private CompositeEastEntity east;
 }

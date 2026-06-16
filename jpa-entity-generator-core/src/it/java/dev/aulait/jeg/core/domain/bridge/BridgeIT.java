@@ -24,7 +24,6 @@ class BridgeIT {
     west.setName(RandomStringUtils.randomAlphanumeric(5));
 
     WestEastBridgeEntityId bridgeId = new WestEastBridgeEntityId();
-    bridgeId.setEastId(east.getId());
     bridgeId.setWestId(west.getId());
 
     WestEastBridgeEntity bridge = new WestEastBridgeEntity();
@@ -73,10 +72,7 @@ class BridgeIT {
     west.setName(RandomStringUtils.randomAlphanumeric(5));
 
     CompositeWestEastBridgeEntityId bridgeId = new CompositeWestEastBridgeEntityId();
-    bridgeId.setEastId1(east.getId().getId1());
-    bridgeId.setEastId2(east.getId().getId2());
-    bridgeId.setWestId1(west.getId().getId1());
-    bridgeId.setWestId2(west.getId().getId2());
+    bridgeId.setWestId(west.getId());
     CompositeWestEastBridgeEntity bridge = new CompositeWestEastBridgeEntity();
     bridge.setId(bridgeId);
     bridge.setEast(east);

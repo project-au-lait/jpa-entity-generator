@@ -1,12 +1,8 @@
 package ${root.pkg};
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import javax.annotation.processing.Generated;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+<#list root.importStrings as import>
+import ${import};
+</#list>
 
 @Generated("dev.aulait.jeg:jpa-entity-generator")
 @Data
@@ -19,5 +15,15 @@ public class ${root.name} implements java.io.Serializable {
 
   @Column(name = "${field.columnName}")
   private ${field.type} ${field.name};
+</#list>
+<#list root.embeddedFields as ef>
+
+  @Embedded
+  @AttributeOverrides({
+    <#list ef.attributeOverrides as ao>
+    @AttributeOverride(name = "${ao.name}", column = @Column(name = "${ao.column}"))<#if !ao?is_last>,</#if>
+    </#list>
+  })
+  private ${ef.type} ${ef.fieldName};
 </#list>
 }
