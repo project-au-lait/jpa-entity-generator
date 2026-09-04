@@ -55,6 +55,17 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
         process(fk);
       }
     }
+
+    validateCascadeOneToMany();
+  }
+
+  void validateCascadeOneToMany() {
+    if (!config.getCascadeOneToMany().isEmpty()) {
+      throw new IllegalArgumentException(
+          "Unresolved cascadeOneToMany entries: "
+              + config.getCascadeOneToMany()
+              + ". Use root_table.child_table or RootEntity.fieldName.");
+    }
   }
 
   void process(ForeignKeyModel fk) {
@@ -143,7 +154,7 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
         .getAnnotations()
         .addAll(annotationLogic.find(oneEntity.getName(), oneToMany.getFieldName()));
 
-    if (config.isCascadeOneToMany(
+    if (config.popCascadeOneToMany(
         oneTable.getTABLE_NAME(),
         manyTable.getTABLE_NAME(),
         oneEntity.getName(),
@@ -198,8 +209,7 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
                 .anyMatch(k -> k.getFKCOLUMN_NAME().equals(k.getPKCOLUMN_NAME()));
     boolean isBridgeFk = logic.isBridgeFk(fk);
 
-    manyToOne.setReadonly(
-        isSelfRef || config.isReadonlyManyToOne(manyTableName, oneTableName));
+    manyToOne.setReadonly(isSelfRef || config.isReadonlyManyToOne(manyTableName, oneTableName));
 
     if (isBridgeFk) {
       String mapsId = fieldName + "Id";
@@ -220,7 +230,10 @@ public class RelationProcessorOneDirectionalImpl implements RelationProcessor {
   }
 
   void restructureEmbeddedIdForBridgeFk(
-      EntityModel bridgeEntity, ForeignKeyModel fk, String embeddedFieldName, EntityModel pkEntity) {
+      EntityModel bridgeEntity,
+      ForeignKeyModel fk,
+      String embeddedFieldName,
+      EntityModel pkEntity) {
     EmbeddedIdModel embeddedId = bridgeEntity.getEmbeddedId();
     if (embeddedId == null) {
       return;
