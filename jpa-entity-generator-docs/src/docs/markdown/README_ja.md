@@ -21,7 +21,7 @@ jegをスタンドアロンアプリケーションとして実行するには�
 例（PostgreSQLの場合）:
 
 ```sh
-curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.12/jpa-entity-generator-core-0.12-all-deps.jar
+curl -O https://repo1.maven.org/maven2/dev/aulait/jeg/jpa-entity-generator-core/0.13/jpa-entity-generator-core-0.13-all-deps.jar
 curl -O https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.2/postgresql-42.7.2.jar
 
 java -cp "./*" dev.aulait.jeg.core.interfaces.Main -c=<configFilePath> -o=<outputDir> --jdbc-url=<jdbcUrl> --jdbc-username=<jdbcUsername> --jdbc-password=<jdbcPassword>
@@ -43,7 +43,7 @@ jegをMaven Pluginとして実行するには、pom.xmlにjpa-entity-generator-m
   <plugin>
     <groupId>dev.aulait.jeg</groupId>
     <artifactId>jpa-entity-generator-maven-plugin</artifactId>
-    <version>0.12</version>
+    <version>0.13</version>
     <configuration>
       <configFilePath>./jeg-config.yml</configFilePath>
       <jdbcUrl>jdbc:postgresql://localhost:5432/postgres</jdbcUrl>
