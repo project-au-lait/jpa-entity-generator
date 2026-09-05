@@ -23,5 +23,6 @@
       "username": "jeg",
       "password": "jeg"
     }
-  ]
+  ],
+  "java.configuration.updateBuildConfiguration": "automatic"
 }
