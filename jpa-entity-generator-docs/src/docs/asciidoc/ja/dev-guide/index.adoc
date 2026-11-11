@@ -12,7 +12,7 @@
 
 [source,sh]
 ----
-brew install --cask openjdk@17
+brew install --cask openjdk@25
 brew install --cask docker
 brew install --cask visual-studio-code
 ----
