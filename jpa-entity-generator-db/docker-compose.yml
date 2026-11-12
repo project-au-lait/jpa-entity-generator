@@ -14,7 +14,7 @@ services:
       - ${DB_PORT_HOST}:${DB_PORT_CONTAINER}
 
   schemaspy:
-    image: schemaspy/schemaspy
+    image: schemaspy/schemaspy:7.0.2
     volumes:
       - ./schemaspy.properties:/schemaspy.properties
       - ../docs/schemaspy:/output

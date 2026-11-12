@@ -56,7 +56,7 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>10.9.1</version>
+        <version>10.22.0</version>
         <configuration>
           <configFiles>src/main/resources/flyway.conf</configFiles>
           <cleanDisabled>false</cleanDisabled>
@@ -70,7 +70,7 @@
           <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-database-postgresql</artifactId>
-            <version>10.9.0</version>
+            <version>10.22.0</version>
           </dependency>
           <dependency>
             <groupId>${db.jdbc.groupId}</groupId>
@@ -105,7 +105,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>3.4.0</version>
+            <version>3.7.0</version>
             <configuration>
               <executable>docker</executable>
               <commandlineArgs>compose up -d --wait dbms</commandlineArgs>
@@ -159,7 +159,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>3.4.0</version>
+            <version>3.7.0</version>
             <configuration>
               <executable>docker</executable>
               <commandlineArgs>compose down --rmi local -v</commandlineArgs>
