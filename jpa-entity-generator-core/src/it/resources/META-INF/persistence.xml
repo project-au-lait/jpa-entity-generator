@@ -6,7 +6,36 @@
     <description>JPA Demo</description>
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-    <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
+    <class>dev.aulait.jeg.core.domain.bridge.CompositeEastEntity</class>
+    <class>dev.aulait.jeg.core.domain.bridge.CompositeWestEastBridgeEntity</class>
+    <class>dev.aulait.jeg.core.domain.bridge.CompositeWestEntity</class>
+    <class>dev.aulait.jeg.core.domain.bridge.EastEntity</class>
+    <class>dev.aulait.jeg.core.domain.bridge.WestEastBridgeEntity</class>
+    <class>dev.aulait.jeg.core.domain.bridge.WestEntity</class>
+    <class>dev.aulait.jeg.core.domain.cascadeonetomany.CascadeOnetomanyChildEntity</class>
+    <class>dev.aulait.jeg.core.domain.cascadeonetomany.CascadeOnetomanyParentEntity</class>
+    <class>dev.aulait.jeg.core.domain.datatypes.DataTypesEntity</class>
+    <class>dev.aulait.jeg.core.domain.datatypes.DataTypesNonullEntity</class>
+    <class>dev.aulait.jeg.core.domain.manytomany.LeftEntity</class>
+    <class>dev.aulait.jeg.core.domain.manytomany.RightEntity</class>
+    <class>dev.aulait.jeg.core.domain.mastertran.CompositeMasterEntity</class>
+    <class>dev.aulait.jeg.core.domain.mastertran.CompositeTransactionEntity</class>
+    <class>dev.aulait.jeg.core.domain.mastertran.FieldNameTransactionEntity</class>
+    <class>dev.aulait.jeg.core.domain.mastertran.MasterEntity</class>
+    <class>dev.aulait.jeg.core.domain.mastertran.TransactionEntity</class>
+    <class>dev.aulait.jeg.core.domain.multifk.MultifkChildEntity</class>
+    <class>dev.aulait.jeg.core.domain.multifk.MultifkParentEntity</class>
+    <class>dev.aulait.jeg.core.domain.parentchild.ChildEntity</class>
+    <class>dev.aulait.jeg.core.domain.parentchild.CompositeChildEntity</class>
+    <class>dev.aulait.jeg.core.domain.parentchild.CompositeParentEntity</class>
+    <class>dev.aulait.jeg.core.domain.parentchild.ParentEntity</class>
+    <class>dev.aulait.jeg.core.domain.readonlymanytoone.CompositeReadonlyManytooneMasterEntity</class>
+    <class>dev.aulait.jeg.core.domain.readonlymanytoone.CompositeReadonlyManytooneTransactionEntity</class>
+    <class>dev.aulait.jeg.core.domain.readonlymanytoone.ReadonlyManytooneMasterEntity</class>
+    <class>dev.aulait.jeg.core.domain.readonlymanytoone.ReadonlyManytooneTransactionEntity</class>
+    <class>dev.aulait.jeg.core.domain.selfref.CompositeSelfReferenceEntity</class>
+    <class>dev.aulait.jeg.core.domain.selfref.SelfReferenceEntity</class>
+
     <properties>
       <property name="jakarta.persistence.jdbc.url"
         value="${db.jdbc.url}" />
