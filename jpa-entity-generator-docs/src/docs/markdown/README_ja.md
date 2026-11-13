@@ -6,7 +6,7 @@ JPA Entity Generator (jeg) は、DB のテーブル定義を読み取り、そ�
 
 jegを使用するには以下のソフトウェアが必要です。
 
-- Java 17+
+- Java 25+
 - Maven (Maven Pluginとして使用する場合)
 
 ## 使用方法

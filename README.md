@@ -6,7 +6,7 @@ JPA Entity Generator (jeg) is a tool that reads DB table definitions and generat
 
 The following software is required to use jeg.
 
-- Java 17+
+- Java 25+
 - Maven (when used as the Maven Plugin)
 
 ## Usage
